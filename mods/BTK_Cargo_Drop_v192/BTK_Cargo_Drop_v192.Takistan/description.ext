@@ -1,0 +1,8 @@
+
+
+////  THIS FILE IS FOR THE DEMO MISSION ONLY !
+
+
+respawn = "BASE";
+respawndelay = 2;
+disabledAI = 1;

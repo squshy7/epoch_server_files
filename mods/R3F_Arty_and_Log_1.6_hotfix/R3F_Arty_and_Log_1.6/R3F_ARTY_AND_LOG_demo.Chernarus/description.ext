@@ -1,0 +1,10 @@
+Respawn = "BASE";
+RespawnDelay = 10;
+DisabledAI = true;
+
+#include "R3F_ARTY_AND_LOG\desc_include.h"
+
+class RscTitles
+{
+	#include "R3F_ARTY_AND_LOG\desc_rsct_include.h"
+};

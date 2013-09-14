@@ -1,0 +1,60 @@
+Installation Instructions for DZAI 1.4.0+
+Last Updated: 7:57 PM 8/23/2013
+
+What you need:
+----------------------------------------------------
+- cpbo (or any other PBO packing program). cpbo can be downloaded as part of the Arma Tools package at http://www.armaholic.com/page.php?id=411.
+- A text editor (Notepad++ is recommended).
+- Access to your dayz_server.pbo.
+- A downloaded copy of DZAI
+
+Basic Installation Guide:
+----------------------------------------------------
+
+1. Unpack your dayz_server.pbo. If using cpbo, right click dayz_server.pbo and click "Extract".
+2. Copy the downloaded DZAI folder inside your unpacked dayz_server folder.
+3. Edit server_monitor.sqf with a text editor. It is located in \dayz_server\system.
+4. Search for the line that says:
+
+		allowConnection = true;
+
+	Change the line to this:
+
+		call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
+		allowConnection = true;
+	
+6. If you do not wish to use DZAI's AI helicopter patrols, skip this step. Otherwise, continue reading.
+	
+	- Edit your server_cleanup.fsm located in dayz_server\system
+	- Search for this line: 
+	
+		"  	if(vehicle _x != _x && !(vehicle _x in _safety) && (typeOf vehicle _x) != ""ParachuteWest"") then {" \n
+		
+	- If you do not have the Animated HeliCrash addon installed, change the line to this:
+	
+		"  	if(vehicle _x != _x && !(vehicle _x in _safety) && (typeOf vehicle _x) != ""ParachuteWest"" && (vehicle _x getVariable [""DZAI"",0] != 1)) then {" \n
+	
+	- If you do have the Animated HeliCrash addon installed, change it to this:
+	
+		"  	if(vehicle _x != _x && !(vehicle _x in _safety) && (typeOf vehicle _x) != ""ParachuteWest"" && ((vehicle _x getVariable [""Sarge"",0] != 1) && (vehicle _x getVariable [""DZAI"",0] != 1))) then {" \n
+
+7. A small edit to your BattlEye filters is needed. Inside your BattlEye folder, edit your addmagazinecargo.txt. Locate the line that reads:
+	
+	"5=ItemRadio"
+	
+Edit it to this:
+
+	//"5=ItemRadio"
+
+If you cannot find this line, do not make any changes.
+
+8. Optionally, you may edit DZAI's settings in dayz_server\DZAI\init\dzai_variables.sqf
+
+9. Repack your dayz_server.pbo by right-clicking the unpacked folder, then click on "create PBO". If prompted to overwrite, click "Yes".
+
+Troubleshooting: A number of users have reported issues with entering the game after repacking their dayz_server.pbo. 
+If you encounter this problem, copy the $PBOPREFIX$ file inside the 'extras' folder and paste it inside the dayz_server folder and then repack it into pbo format. This should fix the connection problems.
+
+Note: You may store your custom settings changes in DZAI\DZAI_settings_override.sqf. This file is a convenient way to store and transfer your custom settings when upgrading to a newer version of DZAI. Further instructions are provided inside this file.
+	
+	
