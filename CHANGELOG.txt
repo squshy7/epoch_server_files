@@ -2,6 +2,6 @@ Mission File Changelog:
 dayz_mission.v.01- added in new vehicles to dynamic_vehicles.sqf
 dayz_mission.v.02- added in base BK Cargo Drop scripts  (needs tweaking)
 dayz_mission.v.03- added in base R3F Log scripts for towing/lifting (needs major tweaking)
-
+dayz_mission.v.04- added in self bloodbag script; added base for custom compiles and self actions
 Server File Changelog:
 dayz_server.v.01- added in base DZAI scripts (needs major tweaking)
