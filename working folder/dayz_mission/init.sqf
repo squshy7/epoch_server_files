@@ -112,3 +112,5 @@ if (!isDedicated) then {
 execVM "BTK\Cargo Drop\Start.sqf";
 //R3F towing
 execVM "R3F_ARTY_AND_LOG\init.sqf"
+
+_fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
