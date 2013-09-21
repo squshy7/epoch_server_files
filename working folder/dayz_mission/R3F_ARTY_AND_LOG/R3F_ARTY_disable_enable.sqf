@@ -7,5 +7,5 @@
  * (En plus de ça, vous pouvez supprimer le répertoire R3F_ARTY pour alléger votre mission. Plus de 340ko économisés.)
  * Pour activer le système d'artillerie, écrivez #define R3F_ARTY_enable sans les deux barres obliques.
  */
-
+//DISABLED
 //#define R3F_ARTY_enable

@@ -27,7 +27,7 @@ else
 	{
 		if (isNull (_objet getVariable "R3F_LOG_est_transporte_par") && (isNull (_objet getVariable "R3F_LOG_est_deplace_par") || (!alive (_objet getVariable "R3F_LOG_est_deplace_par")))) then
 		{
-			if (_objet distance _remorqueur <= 30) then
+			if (_objet distance _remorqueur <= 7) then
 			{
 				// On mémorise sur le réseau que le véhicule remorque quelque chose
 				_remorqueur setVariable ["R3F_LOG_remorque", _objet, true];
