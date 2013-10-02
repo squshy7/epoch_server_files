@@ -26,7 +26,7 @@ MaxDynamicDebris = 100; // Default = 100
 dayz_MapArea = 14000; // Default = 10000
 dayz_maxLocalZombies = 30; // Default = 30 
 
-EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"]];
+EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
 dayz_fullMoonNights = true;
 
 //Load in compiled functions
@@ -107,8 +107,8 @@ if (!isDedicated) then {
 	
 	//Lights
 	//[] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
+	//[17,6,true,false,true,true,72,242,600,10,[0.698, 0.556, 0.419],"Generator_DZ",208,"",0.5] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
 };
-#include "\z\addons\dayz_code\system\REsec.sqf"
 
 execVM "BTK\Cargo Drop\Start.sqf";
 //R3F towing

@@ -4,6 +4,11 @@
 private ["_object","_type","_objectID","_uid","_lastUpdate","_needUpdate","_object_position","_object_inventory","_object_damage","_isNotOk","_parachuteWest","_firstTime","_object_killed","_object_repair","_isbuildable"];
 
 _object = 	_this select 0;
+
+if(isNull(_object)) exitWith {
+	diag_log format["Skipping Null Object: %1", _object];
+};
+
 _type = 	_this select 1;
 _parachuteWest = typeOf _object == "ParachuteWest";
 _isbuildable = (typeOf _object) in dayz_allowedObjects;

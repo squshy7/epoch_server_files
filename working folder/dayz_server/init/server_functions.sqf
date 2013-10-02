@@ -14,6 +14,7 @@ server_updateObject =		compile preprocessFileLineNumbers "\z\addons\dayz_server\
 server_playerDied =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDied.sqf";
 server_publishObj = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";	//Creates the object in DB
 server_deleteObj =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_deleteObj.sqf"; 	//Removes the object from the DB
+server_swapObject =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_swapObject.sqf"; 
 server_publishVeh = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle.sqf"; // Custom to add vehicles
 server_publishVeh2 = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle2.sqf"; // Custom to add vehicles
 server_tradeObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_tradeObject.sqf";
@@ -305,7 +306,7 @@ spawn_vehicles = {
 };
 
 spawn_roadblocks = {
-	private ["_position","_veh","_num","_config","_itemType","_itemChance","_weights","_index","_iArray","_istoomany","_marker","_spawnloot","_nearby","_spawnveh","_WreckList"];
+	private ["_position","_veh","_istoomany","_marker","_spawnveh","_WreckList"];
 	_WreckList = ["SKODAWreck","HMMWVWreck","UralWreck","datsun01Wreck","hiluxWreck","datsun02Wreck","UAZWreck","Land_Misc_Garb_Heap_EP1","Fort_Barricade_EP1","Rubbish2"];
 	
 	waitUntil{!isNil "BIS_fnc_selectRandom"};
@@ -459,49 +460,12 @@ dayz_recordLogin = {
 	_key call server_hiveWrite;
 };
 
-// Cleanup flies
-server_cleanFlies = 
-{
-    private ["_sound","_newdayz_flyMonitor"];
-	
-	DZE_FlyWorkingSet = DZE_FlyWorkingSet+dayz_flyMonitor;
-	dayz_flyMonitor = [];
-
-	_newdayz_flyMonitor = [];
-	{
-		_sound = _x select 0;
-		_body = _x select 1;
-
-		// Remove flies
-		if (isNull _body) then {
-			deleteVehicle _sound;
-			[_body] call server_Delete;
-		} else {
-			_newdayz_flyMonitor set [count _newdayz_flyMonitor,_x];
-		};
-
-	} forEach DZE_FlyWorkingSet;
-	
-	DZE_FlyWorkingSet = _newdayz_flyMonitor;
-};
-
-server_cleanDead =
-{
+server_cleanDead = {
+	private ["_objectPos","_noPlayerNear"];
 	{
 		if (_x isKindOf "zZombie_Base") then
 		{
 			deleteVehicle _x;
-		}
-		else
-		{
-			_handled = _x getVariable ["handled",true];
-			if (_handled) then {
-				_x enableSimulation false;
-				_body removeAllEventHandlers "HandleDamage";
-				_body removeAllEventHandlers "Killed";
-				_body removeAllEventHandlers "Fired";
-				_body removeAllEventHandlers "FiredNear";
-			};
 		};
 	} forEach allDead;
 };
