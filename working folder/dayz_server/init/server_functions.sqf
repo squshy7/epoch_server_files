@@ -500,4 +500,6 @@ private ["_deletedLoot","_startTime","_looted","_objectPos","_noPlayerNear","_ne
 
 	diag_log (format["CLEANUP: DELETED %1 ITEMS, RUNTIME: %2",_deletedLoot,(_endTime - _startTime)]);
 };
+
 #include "AH.sqf";
+[] execVM "\z\addons\dayz_server\buildings\exec.sqf";
