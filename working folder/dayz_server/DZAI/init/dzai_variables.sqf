@@ -72,7 +72,7 @@ DZAI_zombieEnemy = true;
 --------------------------------------------------------------------------------------------------------------------*/	
 
 //Enable or disable static AI spawns. If enabled, AI spawn points will be generated in cities, towns, and other predefined areas. Does not include custom-defined spawns (Default: true).
-DZAI_staticAI = true;
+DZAI_staticAI = false;
 
 //Time to wait before respawning an AI group once all units have been eliminated. (Default: 300)										
 DZAI_respawnTime = 300;
