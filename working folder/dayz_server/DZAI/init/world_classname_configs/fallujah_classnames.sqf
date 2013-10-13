@@ -1,12 +1,17 @@
 /*
 	Fallujah Classname Configuration
 	
-	Last updated:
+	Last updated: 11:16 AM 9/14/2013
 	
 */
 
-private ["_modname"];
-_modname = toLower format ["%1",DZAI_modName];
-
-diag_log "Fallujah classnames loaded.";
- 
+switch (DZAI_modName) do {
+	case "epoch":
+	{
+		#include "epoch\dayz_epoch.sqf"
+	};
+	case default 
+	{
+		#include "fallujah\default.sqf"
+	};
+};

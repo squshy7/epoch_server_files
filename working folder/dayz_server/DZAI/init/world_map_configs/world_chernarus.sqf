@@ -213,30 +213,6 @@ if (DZAI_staticAI) then {
 	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [0,3,225,thisTrigger,[],2] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_64 = _this;
 
-	_this = createTrigger ["EmptyDetector", [4673.8091, 10449.009]];
-	_this setTriggerArea [600, 600, 0, false];
-	_this setTriggerActivation ["ANY", "PRESENT", true];
-	_this setTriggerTimeout [10, 15, 20, true];
-	_this setTriggerText "NWAF1";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [3,0,175,thisTrigger,[],3,2] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
-	_trigger_66 = _this;
-
-	_this = createTrigger ["EmptyDetector", [4760.895, 10160.055, 0.080749512]];
-	_this setTriggerArea [600, 600, 0, false];
-	_this setTriggerActivation ["ANY", "PRESENT", true];
-	_this setTriggerTimeout [10, 15, 20, true];
-	_this setTriggerText "NWAF2";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [3,1,175,thisTrigger,[],3,2] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
-	_trigger_68 = _this;
-
-	_this = createTrigger ["EmptyDetector", [4607.541, 9625.1084]];
-	_this setTriggerArea [600, 600, 0, false];
-	_this setTriggerActivation ["ANY", "PRESENT", true];
-	_this setTriggerTimeout [10, 15, 20, true];
-	_this setTriggerText "NWAF3";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [3,1,200,thisTrigger,[],3,2] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
-	_trigger_70 = _this;
-
 	_this = createTrigger ["EmptyDetector", [2743.1543, 9997.4131]];
 	_this setTriggerArea [600, 600, 0, false];
 	_this setTriggerActivation ["ANY", "PRESENT", true];
@@ -266,7 +242,7 @@ if (DZAI_staticAI) then {
 	_this setTriggerActivation ["ANY", "PRESENT", true];
 	_this setTriggerTimeout [10, 15, 20, true];
 	_this setTriggerText "Stary Sobor";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,225,thisTrigger,[],2,2] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,0,225,thisTrigger,[],2,2] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_78 = _this;
 
 	_this = createTrigger ["EmptyDetector", [7038.3643, 7669.3857]];
@@ -541,14 +517,6 @@ if (DZAI_staticAI) then {
 	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,200,thisTrigger,[],1] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_160 = _this;
 
-	_this = createTrigger ["EmptyDetector", [4308.2876, 10658.527]];
-	_this setTriggerArea [600, 600, 0, false];
-	_this setTriggerActivation ["ANY", "PRESENT", true];
-	_this setTriggerTimeout [10, 15, 20, true];
-	_this setTriggerText "NWAF4 (Markers)";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [3,2,300,thisTrigger,['NWAF4_1','NWAF4_2','NWAF4_3','NWAF4_4','NWAF4_5'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
-	_trigger_171 = _this;
-
 	_this = createTrigger ["EmptyDetector", [12248.675, 9573.2344, 9.5367432e-007]];
 	_this setTriggerArea [600, 600, 0, false];
 	_this setTriggerActivation ["ANY", "PRESENT", true];
@@ -557,38 +525,6 @@ if (DZAI_staticAI) then {
 	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,200,thisTrigger,[],1] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_177 = _this;
 
-	_this = createTrigger ["EmptyDetector", [4763.522, 10760.788, 0]];
-	_this setTriggerArea [600, 600, 0, false];
-	_this setTriggerActivation ["ANY", "PRESENT", true];
-	_this setTriggerTimeout [10, 15, 20, true];
-	_this setTriggerText "NWAF5 (Markers)";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [3,2,200,thisTrigger,['NWAF5_1','NWAF5_2','NWAF5_3','NWAF5_4'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
-	_trigger_179 = _this;
-
-	_this = createTrigger ["EmptyDetector", [4117.4473, 11175.042, 0]];
-	_this setTriggerArea [600, 600, 0, false];
-	_this setTriggerActivation ["ANY", "PRESENT", true];
-	_this setTriggerTimeout [10, 15, 20, true];
-	_this setTriggerText "NWAF6 (Markers)";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [3,2,200,thisTrigger,['NWAF6_1','NWAF6_2','NWAF6_3','NWAF6_4'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
-	_trigger_182 = _this;
-
-	_this = createTrigger ["EmptyDetector", [5222.3984, 9780.6406, 0]];
-	_this setTriggerArea [600, 600, 0, false];
-	_this setTriggerActivation ["ANY", "PRESENT", true];
-	_this setTriggerTimeout [10, 15, 20, true];
-	_this setTriggerText "NWAF8 (Markers)";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [3,2,200,thisTrigger,['NWAF8_1','NWAF8_2','NWAF8_3','NWAF8_4'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
-	_trigger_188 = _this;
-
-	_this = createTrigger ["EmptyDetector", [4147.1416, 10313.281, 0]];
-	_this setTriggerArea [600, 600, 0, false];
-	_this setTriggerActivation ["ANY", "PRESENT", true];
-	_this setTriggerTimeout [10, 15, 20, true];
-	_this setTriggerText "NWAF7 (Markers)";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [3,2,200,thisTrigger,['NWAF7_1','NWAF7_2','NWAF7_3','NWAF7_4'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
-	_trigger_195 = _this;
-
 	_this = createTrigger ["EmptyDetector", [13365.159, 12852.25]];
 	_this setTriggerArea [600, 600, 0, false];
 	_this setTriggerActivation ["ANY", "PRESENT", true];
@@ -596,68 +532,74 @@ if (DZAI_staticAI) then {
 	_this setTriggerText "Olsha";
 	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [0,1,200,thisTrigger,[]] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_197 = _this;
+	
+	_this = createTrigger ["EmptyDetector", [4673.8091, 10449.009]];
+	_this setTriggerArea [600, 600, 0, false];
+	_this setTriggerActivation ["ANY", "PRESENT", true];
+	_this setTriggerTimeout [10, 15, 20, true];
+	_this setTriggerText "NWAF1";
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,175,thisTrigger,[],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_trigger_66 = _this;
+
+	_this = createTrigger ["EmptyDetector", [4760.895, 10160.055, 0.080749512]];
+	_this setTriggerArea [600, 600, 0, false];
+	_this setTriggerActivation ["ANY", "PRESENT", true];
+	_this setTriggerTimeout [10, 15, 20, true];
+	_this setTriggerText "NWAF2";
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,175,thisTrigger,[],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_trigger_68 = _this;
+
+	_this = createTrigger ["EmptyDetector", [4607.541, 9625.1084]];
+	_this setTriggerArea [600, 600, 0, false];
+	_this setTriggerActivation ["ANY", "PRESENT", true];
+	_this setTriggerTimeout [10, 15, 20, true];
+	_this setTriggerText "NWAF3";
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,200,thisTrigger,[],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_trigger_70 = _this;
+ 
+	_this = createTrigger ["EmptyDetector", [4308.2876, 10658.527]];
+	_this setTriggerArea [600, 600, 0, false];
+	_this setTriggerActivation ["ANY", "PRESENT", true];
+	_this setTriggerTimeout [10, 15, 20, true];
+	_this setTriggerText "NWAF4 (Markers)";
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,300,thisTrigger,['NWAF4_1','NWAF4_2','NWAF4_3','NWAF4_4','NWAF4_5'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_trigger_171 = _this;
+ 
+	_this = createTrigger ["EmptyDetector", [4763.522, 10760.788, 0]];
+	_this setTriggerArea [600, 600, 0, false];
+	_this setTriggerActivation ["ANY", "PRESENT", true];
+	_this setTriggerTimeout [10, 15, 20, true];
+	_this setTriggerText "NWAF5 (Markers)";
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,200,thisTrigger,['NWAF5_1','NWAF5_2','NWAF5_3','NWAF5_4'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_trigger_179 = _this;
+ 
+	_this = createTrigger ["EmptyDetector", [4117.4473, 11175.042, 0]];
+	_this setTriggerArea [600, 600, 0, false];
+	_this setTriggerActivation ["ANY", "PRESENT", true];
+	_this setTriggerTimeout [10, 15, 20, true];
+	_this setTriggerText "NWAF6 (Markers)";
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,200,thisTrigger,['NWAF6_1','NWAF6_2','NWAF6_3','NWAF6_4'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_trigger_182 = _this;
+ 
+	_this = createTrigger ["EmptyDetector", [5222.3984, 9780.6406, 0]];
+	_this setTriggerArea [600, 600, 0, false];
+	_this setTriggerActivation ["ANY", "PRESENT", true];
+	_this setTriggerTimeout [10, 15, 20, true];
+	_this setTriggerText "NWAF8 (Markers)";
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,200,thisTrigger,['NWAF8_1','NWAF8_2','NWAF8_3','NWAF8_4'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_trigger_188 = _this;
+ 
+	_this = createTrigger ["EmptyDetector", [4147.1416, 10313.281, 0]];
+	_this setTriggerArea [600, 600, 0, false];
+	_this setTriggerActivation ["ANY", "PRESENT", true];
+	_this setTriggerTimeout [10, 15, 20, true];
+	_this setTriggerText "NWAF7 (Markers)";
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,1,200,thisTrigger,['NWAF7_1','NWAF7_2','NWAF7_3','NWAF7_4'],3] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_trigger_195 = _this;
 	//triggers end
 };
 
-/*
-	Custom Marker Requirements:
-	
-	1. Marker shape must be Ellipse (Could be rectangular but the function will consider the marker as elliptical regardless)
-	2. Marker should have identical x and y dimensions. If they are different, the smaller dimension will be used instead.
-		
-	The area covered by the marker will be used as the patrol and spawning area.
-	
-	Example Marker:
-	
-	_this = createMarker ["dzaicustomspawntest", [6650.9883, 9411.541, -6.1035156e-005]];
-	_this setMarkerShape "ELLIPSE";
-	_this setMarkerType "Empty";
-	_this setMarkerBrush "Solid";
-	_this setMarkerSize [200, 200];
-	_marker_15 = _this;
-	
-	Note: This marker will be used in the example further below.
-*/
-
-//----------------------------Add your custom markers here----------------------------
-
-
-//----------------------------End of custom markers----------------------------
-
-/*
-	DZAI_spawn format: [marker,number of AI to spawn,equip type (0-3)] call DZAI_spawn;
-	
-	Example: Using the above example marker to create a custom spawn area, an example would be:
-	
-	["dzaicustomspawntest",2,1] call DZAI_spawn; (to use default trigger activation timeout of 9/12/15 seconds [minimum, average, maximum])
-	
-	OR 
-	
-	["dzaicustomspawntest",2,1,[5,10,15]] call DZAI_spawn; (to use specified trigger activation timeouts. Do not forget the extra square brackets needed!)
-	
-	Explanation of DZAI_spawn:
-	
-	[
-		"dzaicustomspawntest",	//This is the marker name to be used as the patrol and spawning area.
-		2, 						//This trigger will spawn a group of 2 AI units.
-		1,						//AI spawned by this trigger will have Equip Type level 1 (see below for explanation of Equip Type)
-		[5,10,15]				//(OPTIONAL) - Custom trigger activation timeouts (minimum, average, maximum)
-	] call DZAI_spawn;
-	
-	Equip Type explanation:
-	
-	0: Approx 40% of maximum AI skill potential - weapon from Farm/Residential loot class.
-	1: Approx 55% of maximum AI skill potential - weapon from Farm/Residential/Military loot class.
-	2: Approx 70% of maximum AI skill potential - weapon from Farm/Residential/Military/MilitarySpecial/HeliCrash loot class
-	3: Approx 80% of maximum AI skill potential - weapon from Military/MilitarySpecial/HeliCrash loot class 
-	
-	Note: This trigger will create 2 respawning AI units with weapons from DayZ's farm, residential, or military loot table.
-	
-*/
-
-//----------------------------Add your custom spawn definitions here----------------------------
-
-
-//----------------------------End of custom spawn definitions----------------------------
+#include "custom_markers\cust_markers_chernarus.sqf"
+#include "custom_spawns\cust_spawns_chernarus.sqf"
 
 diag_log "Chernarus map configuration loaded.";

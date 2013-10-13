@@ -3,15 +3,18 @@
 	
 	Description:
 	
-	Last updated:	2:40 AM 8/18/2013
+	Last updated:	1:29 AM 9/29/2013
 	
 */
 
 if (DZAI_curHeliPatrols >= DZAI_maxHeliPatrols) exitWith {};
 
 for "_i" from 1 to (DZAI_maxHeliPatrols - DZAI_curHeliPatrols) do {
-	private ["_heliType","_startPos","_helicopter","_unitGroup","_pilot","_gunner1","_gunner2","_banditType"];
+	private ["_heliType","_startPos","_helicopter","_unitGroup","_pilot","_banditType","_turretCount","_crewCount"];
 	_heliType = DZAI_heliTypes call BIS_fnc_selectRandom2;
+	
+	//If chosen classname isn't an air-type vehicle, then use UH1H as default.
+	if !(_heliType isKindOf "Air") then {_heliType = "UH1H_DZ"};
 	_startPos = [(getMarkerPos "DZAI_centerMarker"),(600 + random((getMarkerSize "DZAI_centerMarker") select 0)),random(360),false] call SHK_pos;
 
 	//Create the patrol group
@@ -21,32 +24,55 @@ for "_i" from 1 to (DZAI_maxHeliPatrols - DZAI_curHeliPatrols) do {
 	//Create helicopter crew
 	_banditType = (DZAI_BanditTypes call BIS_fnc_selectRandom2);
 	_pilot = _unitGroup createUnit [_banditType, [0,0,0], [], 1, "NONE"];
-	_gunner1 = _unitGroup createUnit [_banditType, [0,0,0], [], 1, "NONE"];
-	_gunner2 = _unitGroup createUnit [_banditType, [0,0,0], [], 1, "NONE"];
-	[_pilot,_gunner1,_gunner2] joinSilent _unitGroup;
-
+	[_pilot] joinSilent _unitGroup;
+		
 	//Create the helicopter and set variables
 	_helicopter = createVehicle [_heliType, [_startPos select 0, _startPos select 1, 180], [], 0, "FLY"];
 	_helicopter setFuel 1;
 	_helicopter engineOn true;
+	if (_heliType isKindOf "Plane") then {
+		private ["_heliDir","_heliSpd"];
+		_heliDir = random 360;
+		_heliSpd = 120;
+		_helicopter setPos [_startPos select 0, _startPos select 1, 180];
+		_helicopter setDir _heliDir;
+		_helicopter setVelocity [(sin _heliDir * _heliSpd),(cos _heliDir * _heliSpd), 0];
+	};
 	_helicopter setVariable ["DZAI",1];
 	_helicopter setVariable ["ObjectID",""];
-	_helicopter setVehicleAmmo 1;
 	_helicopter setVariable ["unitGroup",_unitGroup];
-	if (DZAI_debugLevel > 0) then {diag_log format ["Spawned helicopter type %1 for group %2.",_heliType,_unitGroup];};
+	if (DZAI_debugLevel > 0) then {diag_log format ["Spawned helicopter type %1 for group %2 at %3.",_heliType,_unitGroup,mapGridPosition _helicopter];};
 
+	//Add helicopter pilot
+	_crewCount = 1;
+	_pilot assignAsDriver _helicopter;
+	_pilot action ["getInPilot",_helicopter];
+	
+	//Fill all available helicopter gunner seats.
+	_heliTurrets = configFile >> "CfgVehicles" >> _heliType >> "turrets";
+	if ((count _heliTurrets) > 0) then {
+		for "_i" from 0 to ((count _heliTurrets) - 1) do {
+			private["_gunner"];
+			_gunner = _unitGroup createUnit [_banditType, [0,0,0], [], 1, "NONE"];
+			_gunner assignAsGunner _helicopter;
+			_gunner action ["getInTurret",_helicopter,[_i]];
+			[_gunner] joinSilent _unitGroup;
+			_crewCount = _crewCount + 1;
+			//diag_log format ["DEBUG :: Assigned gunner %1 of %2 to AI %3.",(_i+1),(count _heliTurrets),_heliType];
+		};
+	} else {
+		if (((count (weapons _helicopter)) < 1) && (_heliType isKindOf "Plane")) then {
+			_helicopter addWeapon "M240_veh";
+			_helicopter addMagazine "100Rnd_762x51_M240";
+			diag_log format ["DEBUG :: Added weapon to AI plane %1.",_heliType];
+		};
+	};
 	//Add eventhandlers and init statement
 	_helicopter addEventHandler ["Killed",{_this spawn fnc_heliDespawn;}];					//Begin despawn process when heli is destroyed.
 	_helicopter addEventHandler ["LandedStopped",{(_this select 0) setFuel 0;(_this select 0) setDamage 1;}];			//Destroy helicopter if it is forced to land.
+	_helicopter setVariable ["crewCount",_crewCount];
+	_helicopter setVehicleAmmo 1;
 	[_helicopter] spawn fnc_heliResupply;
-
-	//Assign positions
-	_pilot assignAsDriver _helicopter;
-	_pilot action ["getInPilot",_helicopter];
-	_gunner1 assignAsGunner _helicopter;
-	_gunner1 action ["getInTurret",_helicopter,[0]];
-	_gunner2 assignAsGunner _helicopter;
-	_gunner2 action ["getInTurret",_helicopter,[1]];
 
 	{
 		0 = [_x,"helicrew"] spawn DZAI_setSkills;

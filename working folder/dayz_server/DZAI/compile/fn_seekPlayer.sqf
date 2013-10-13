@@ -3,7 +3,7 @@
 	
 	Description: Used for dynamically spawned AI. Creates a MOVE waypoint directing AI to a random player's position, then uses BIN_taskPatrol to create a circular patrol path around player's position.
 	
-	Last updated: 2:54 PM 8/10/2013
+	Last updated: 11:52 PM 9/24/2013
 */
 
 private ["_unitGroup","_spawnPos","_waypoint","_patrolDist","_statement","_targetPlayer","_patrolCenter","_smokeCover"];
@@ -29,10 +29,10 @@ _waypoint setWaypointStatements ["true","group this setCurrentWaypoint [group th
 _unitGroup setCurrentWaypoint _waypoint;
 
 if (_targetPlayer hasWeapon "ItemRadio") then {
-	[nil,_targetPlayer,"loc",rTITLETEXT,"[RADIO] A nearby bandit group is preparing an ambush.","PLAIN DOWN",0] call RE;
+	[nil,_targetPlayer,"loc",rTITLETEXT,"[RADIO] A bandit group is preparing an ambush...","PLAIN DOWN",0] call RE;
 };
 
-sleep 30;
+sleep 25;
 
 //Begin hunting phase
 while {(alive _targetPlayer) && !(isNull _targetPlayer) && (_targetPlayer isKindOf "Man") && ((_targetPlayer distance _spawnPos) < 300) && ((_unitGroup getVariable ["groupSize",0]) > 0)} do {
@@ -44,7 +44,9 @@ while {(alive _targetPlayer) && !(isNull _targetPlayer) && (_targetPlayer isKind
 		(units _unitGroup) doFire _targetPlayer;
 		//Warn player of AI bandit presence if they have a radio.
 		if (_targetPlayer hasWeapon "ItemRadio") then {
-			[nil,_targetPlayer,"loc",rTITLETEXT,"[RADIO] You are being followed by a bandit group.","PLAIN DOWN",0] call RE;
+			private ["_radioText"];
+			_radioText = format ["[RADIO] You are being followed by a bandit group. (Direction: %1, Distance: %2m)",round([_targetPlayer,(leader _unitGroup)] call BIS_fnc_dirTo),round(_targetPlayer distance (leader _unitGroup))];
+			[nil,_targetPlayer,"loc",rTITLETEXT,_radioText,"PLAIN DOWN",0] call RE;
 		};
 	};
 	sleep 30;

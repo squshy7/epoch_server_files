@@ -14,7 +14,7 @@
 	_weapongrade = _this select 1;
 
 	
-	if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: AI killed by player. Generating loot with weapongrade %1 (fn_banditAIKilled).",_weapongrade];};
+	if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: AI killed by player at %1. Generating loot with weapongrade %2 (fn_banditAIKilled).",mapGridPosition _unit,_weapongrade];};
 
 	if (_unit getVariable ["CanGivePistol",true]) then {
 		_pistols = switch (_weapongrade) do {

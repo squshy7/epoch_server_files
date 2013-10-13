@@ -17,11 +17,15 @@ if (DZAI_verifyTables) then {
 	waitUntil {sleep 0.1; !isNil "DZAI_weaponsInitialized"};	//Wait for DZAI to finish building weapon classname arrays.
 };
 
+if (DZAI_aiHeliPatrols) then {if ((count DZAI_heliTypes) < 1) then {DZAI_heliTypes = ["UH1H_DZ"]}; _nul = [] execVM '\z\addons\dayz_server\DZAI\scripts\setup_heli_patrol.sqf';};
+
 if (DZAI_dynAISpawns) then {
+	if (!(isNil "DZAI_newMap")) then {waitUntil {sleep 1; DZAI_locations_ready};};
 	_dynTriggers = [DZAI_dynTriggersMax] execVM '\z\addons\dayz_server\DZAI\scripts\spawnTriggers_random.sqf';
 	waitUntil {sleep 1; scriptDone _dynTriggers};
 	_randomizeCount = ceil(0.25*DZAI_dynTriggersMax);
 };
+
 sleep 3;
 
 diag_log "DZAI Scheduler will continue tasks in 15 minutes.";

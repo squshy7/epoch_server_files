@@ -1,5 +1,5 @@
 /*
-	DZAI Variables File
+	DZAI Configuration File
 	
 	Description: Contains all configurable settings of DZAI. Contains settings for debugging, customization of AI units, spawning, and loot.
 	
@@ -7,7 +7,7 @@
 */
 private["_worldname"];
 
-diag_log "[DZAI] Reading DZAI variables.";
+diag_log "[DZAI] Reading DZAI configuration file.";
 
 /*	DZAI Settings
 --------------------------------------------------------------------------------------------------------------------*/	
@@ -28,7 +28,8 @@ DZAI_monitorRate = 300;
 //If disabled, clients may crash upon looting AI bodies with invalid items. Disable ONLY if a previous scan shows no invalid classnames (Default: true).										
 DZAI_verifyTables = true;
 
-//(Experimental) Enable to have server spawn in objects/buildings normally spawned clientside by DayZ's CfgTownGenerator. Prevents AI from walking/shooting through clutter and other objects. (Default: false)									
+//Enable to have server spawn in objects/buildings normally spawned clientside by DayZ's CfgTownGenerator. Prevents AI from walking/shooting through clutter and other objects. (Default: false)	
+//If running DayZ Mod ("vanilla DayZ") or DayZ Overwatch, it is highly recommended to enable this option, as many added buildings are handled by the CfgTownGenerator.								
 DZAI_objPatch = false;
 
 //Minimum seconds to pass until a dead AI body can be cleaned up by DZAI's task scheduler. Affects both static and dynamic AI units (Default: 300).										
@@ -48,14 +49,15 @@ DZAI_cleanupDelay = 300;
 	
 */
 
-//(Optional) If the wrong DayZ mod is being detected, choose the correct one from the list above. In most cases it is unnecessary to edit this setting.
+//(Optional) In most cases it is unnecessary to edit this setting. If the wrong DayZ mod is being detected, choose the correct one from the list above. 
 DZAI_modName = "";
 
 
 /*	AI Unit Variables
 --------------------------------------------------------------------------------------------------------------------*/		
 
-//AI weapon noise multiplier for zombie aggro purposes. No effect if DZAI_zombieEnemy is set to false. Note: AI cannot be attacked or damaged by zombies.(Default: 0.00. Player equivalent: 1.00)		
+//AI weapon noise multiplier for zombie aggro purposes. No effect if DZAI_zombieEnemy is set to false. Enabling this option may impact server performance
+//Note: AI cannot be attacked or damaged by zombies.(Default: 0.00. Player equivalent: 1.00)		
 DZAI_weaponNoise = 0.00;
 
 //Amount of time in seconds between AI ammo refresh and zombie check. Decreasing this value may impact server performance. (Default: 15)											
@@ -74,11 +76,11 @@ DZAI_zombieEnemy = true;
 //Enable or disable static AI spawns. If enabled, AI spawn points will be generated in cities, towns, and other predefined areas. Does not include custom-defined spawns (Default: true).
 DZAI_staticAI = false;
 
-//Time to wait before respawning an AI group once all units have been eliminated. (Default: 300)										
-DZAI_respawnTime = 300;
+//Time to wait before respawning an AI group once all units have been eliminated. (Default: 600)										
+DZAI_respawnTime = 600;
 
 //Time to allow spawned AI units to exist in seconds before being despawned when no players are present in a trigger area. (Default: 120)										
-DZAI_despawnWait = 60;										
+DZAI_despawnWait = 120;										
 
 
 /*Dynamic Trigger Settings (Dynamic AI spawns)
@@ -94,11 +96,15 @@ DZAI_dynAISpawns = true;
 DZAI_dynRemoveDeadWait = 300;
 
 //Time to wait before despawning all AI units in dynamic trigger area when no players are present, and delay time before force-despawning trigger area after all spawned units have been killed. (Default: 120)
-DZAI_dynDespawnWait = 120;									
+DZAI_dynDespawnWait = 120;
 
+//List of marker-defined areas where dynamic AI spawns should NOT be created. These markers may be of any shape (rectangular or circular).
+//Markers can be defined in /world_map_configs/custom_markers/cust_markers_(mapname).sqf (Default: [])
+DZAI_dynBlacklist = [];									
 
 /*	AI Helicopter patrol settings
 IMPORTANT: Before enabling AI helicopter patrols, make sure you have properly edited your server_cleanup.fsm file. Otherwise, the helicopters will explode after spawning.
+For instructions, consult Step 5 of the Installation Instructions on the DZAI Github page: https://github.com/dayzai/DayZBanditAI
 --------------------------------------------------------------------------------------------------------------------*/		
 
 //Enable or disable AI helicopter patrols. (Default: false)
@@ -107,8 +113,9 @@ DZAI_aiHeliPatrols = true;
 //Maximum number of active AI helicopters patrols. (Default: 0).							
 DZAI_maxHeliPatrols = 5;
 
-//Classnames of helicopter types to use. Helicopter types must have at least 2 gunner seats (Default: "UH1H_DZ").									
-DZAI_heliTypes = ["Mi17_UN_CDF_EP1"];	
+//Classnames of helicopter types to use. Helicopter types must have at least 2 gunner seats (Default: "UH1H_DZ").
+//As of version 1.6.0, plane-type air vehicles can also be added. Planes that are normally unarmed will have an M240 weapon added to the vehicle.									
+DZAI_heliTypes = ["Mi17_UN_CDF_EP1"];
 
 //Enable or disable loot generation on destroying AI helicopter. Dead crew members carrying loot will be parachuted out after helicopter is destroyed (Default: true)							
 DZAI_heliLoot = true;										
@@ -124,7 +131,7 @@ DZAI_findKiller = true;
 DZAI_tempNVGs = false;	
 
 //Amount of humanity to reward player for killing an AI unit (Default: 0)									
-DZAI_humanityGain = 150;										
+DZAI_humanityGain = 200;										
 
 
 /*	Dynamic weapon list settings
@@ -208,12 +215,12 @@ DZAI_gradeChancesDyn = [0.25,0.60,0.12,0.03];
 
 //AI skill settings level 0 (Skill, Minimum skill, Maximum bonus amount).
 DZAI_skill0 = [	
-	["aimingAccuracy",0.10,0.10],
+	["aimingAccuracy",0.10,0.05],
 	["aimingShake",0.55,0.10],
 	["aimingSpeed",0.40,0.10],
 	["endurance",0.40,0.20],
-	["spotDistance",0.30,0.20],
-	["spotTime",0.40,0.20],
+	["spotDistance",0.30,0.15],
+	["spotTime",0.35,0.20],
 	["courage",0.40,0.20],
 	["reloadSpeed",0.40,0.20],
 	["commanding",0.40,0.20],
@@ -222,12 +229,12 @@ DZAI_skill0 = [
 
 //AI skill settings level 1 (Skill, Minimum skill, Maximum bonus amount).
 DZAI_skill1 = [	
-	["aimingAccuracy",0.10,0.10],
+	["aimingAccuracy",0.10,0.05],
 	["aimingShake",0.65,0.10],
 	["aimingSpeed",0.55,0.10],
 	["endurance",0.55,0.20],
-	["spotDistance",0.45,0.20],
-	["spotTime",0.55,0.20],
+	["spotDistance",0.45,0.15],
+	["spotTime",0.50,0.20],
 	["courage",0.55,0.20],
 	["reloadSpeed",0.55,0.20],
 	["commanding",0.55,0.20],
@@ -236,12 +243,12 @@ DZAI_skill1 = [
 
 //AI skill settings level 2 (Skill, Minimum skill, Maximum bonus amount).
 DZAI_skill2 = [	
-	["aimingAccuracy",0.15,0.10],
+	["aimingAccuracy",0.15,0.05],
 	["aimingShake",0.75,0.10],
 	["aimingSpeed",0.70,0.10],
 	["endurance",0.70,0.20],
-	["spotDistance",0.60,0.20],
-	["spotTime",0.70,0.20],
+	["spotDistance",0.60,0.15],
+	["spotTime",0.65,0.20],
 	["courage",0.70,0.20],
 	["reloadSpeed",0.70,0.20],
 	["commanding",0.70,0.20],
@@ -250,12 +257,12 @@ DZAI_skill2 = [
 
 //AI skill settings level 3 (Skill, Minimum skill, Maximum bonus amount).
 DZAI_skill3 = [	
-	["aimingAccuracy",0.20,0.10],
+	["aimingAccuracy",0.20,0.05],
 	["aimingShake",0.85,0.10],
 	["aimingSpeed",0.80,0.10],
 	["endurance",0.80,0.20],
-	["spotDistance",0.75,0.20],
-	["spotTime",0.80,0.20],
+	["spotDistance",0.70,0.15],
+	["spotTime",0.75,0.20],
 	["courage",0.80,0.20],
 	["reloadSpeed",0.80,0.20],
 	["commanding",0.80,0.20],
@@ -264,7 +271,7 @@ DZAI_skill3 = [
 
 //AI skill settings level 4 (Skill, Minimum skill, Maximum bonus amount).
 DZAI_heliCrewSkills = [	
-	["aimingAccuracy",0.45,0.10],
+	["aimingAccuracy",0.50,0.00],
 	["aimingShake",0.85,0.10],
 	["aimingSpeed",0.85,0.10],
 	["endurance",0.60,0.20],
@@ -281,19 +288,5 @@ DZAI_heliCrewSkills = [
 
 //Load custom DZAI settings file.
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\DZAI_settings_override.sqf";
-
-//Internal Use Variables: DO NOT EDIT THESE  - Support will not be given if these variables are edited.
-DZAI_weaponGrades = [0,1,2,3];								//All possible weapon grades. A "weapon grade" is a tiered classification of gear. 0: Civilian, 1: Military, 2: MilitarySpecial, 3: Heli Crash. Weapon grade also influences the general skill level of the AI unit.
-DZAI_numAIUnits = 0;										//Tracks current number of currently active AI units, including dead units waiting for respawn.
-DZAI_actDynTrigs = 0;										//Tracks current number of active dynamically-spawned triggers
-DZAI_curDynTrigs = 0;										//Tracks current number of inactive dynamically-spawned triggers.
-DZAI_actTrigs = 0;											//Tracks current number of active static triggers.	
-DZAI_dynTriggerArray = [];									//List of all generated dynamic triggers.
-DZAI_respawnQueue = [];										//Queue of AI groups that require respawning. Group ID is removed from queue after it is respawned.
-DZAI_respawnActive = false;									//Tracks activity status of respawn queue. Prevents creation of multiple respawn queues.
-DZAI_dmgFactors = [0.3375,0.50625,0.3375,1,1];				//AI health settings.
-DZAI_curHeliPatrols = 0;									//Tracks current number of active AI heli patrols.
-DZAI_locations = [];										//List of positions for cities, towns, and other locations.
-//DZAI_actHeliGroups = [];									//List of active heli patrol groups
 
 diag_log "[DZAI] DZAI Variables loaded.";

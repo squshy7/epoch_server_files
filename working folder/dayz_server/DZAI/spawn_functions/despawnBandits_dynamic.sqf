@@ -10,7 +10,7 @@
 */
 #include "\z\addons\dayz_server\DZAI\init\dyn_trigger_configs\dyn_trigger_defs.hpp"
 
-private ["_trigger","_grpArray","_isCleaning","_grpCount","_waitTime","_newPos","_forceDespawn","_attempts"];
+private ["_trigger","_grpArray","_isCleaning","_grpCount","_waitTime","_newPos","_forceDespawn","_attempts","_oldPos"];
 if (!isServer) exitWith {};										//Execute script only on server.
 
 _trigger = _this select 0;										//Get the trigger object
@@ -72,6 +72,7 @@ if ((triggerActivated _trigger) && (!_forceDespawn)) exitWith {
 
 //Restore original trigger statements
 _trigger setTriggerStatements [DYNTRIG_STATEMENTS_INACTIVE];
+_oldPos = mapGridPosition _trigger;
 
 //Relocate trigger
 _newPos = _trigger call DZAI_relocDynTrigger;
@@ -93,6 +94,6 @@ _trigger setVariable ["gradeChances",nil,false];
 _trigger setVariable ["forceDespawn",nil,false];
 
 DZAI_actDynTrigs = (DZAI_actDynTrigs - 1);
-if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Despawned AI in dynamic trigger area. Trigger relocated to %1.",_newPos];};
+if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Despawned AI in dynamic trigger area at %1. Trigger relocated to %2.",_oldPos,(mapGridPosition _trigger)];};
 
 true

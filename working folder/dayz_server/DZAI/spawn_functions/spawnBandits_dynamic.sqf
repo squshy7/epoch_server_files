@@ -116,7 +116,7 @@ if (_findPlayer) then {
 	0 = [_unitGroup,_spawnPos,_patrolDist,DZAI_debugMarkers] spawn fnc_BIN_taskPatrol;
 	//diag_log "DEBUG :: Beginning patrol.";
 };
-if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Spawned 1 new AI groups of %1 units each in %2 seconds (spawnBandits_dynamic).",_totalAI,(diag_tickTime - _startTime)];};
+if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Spawned 1 new AI groups of %1 units each in %2 seconds at %3 (spawnBandits_dynamic).",_totalAI,(diag_tickTime - _startTime),(mapGridPosition _trigger)];};
 
 0 = [_trigger,[_unitGroup]] call fnc_initTrigger;
 //diag_log format ["DEBUG :: _trigger %1, groupArray %2, _total AI %3.",_trigger,_grpArray,_totalAI];

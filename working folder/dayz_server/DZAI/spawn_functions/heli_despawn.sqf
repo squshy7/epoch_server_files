@@ -9,10 +9,11 @@
 
 if (!isServer) exitWith {};
 
-private ["_helicopter","_unitGroup","_deleteQueue","_cleanupTime"];
+private ["_helicopter","_unitGroup","_deleteQueue","_cleanupTime","_crewCount"];
 
 _helicopter = _this select 0;
 _unitGroup = _helicopter getVariable "unitGroup";
+_crewCount = _helicopter getVariable ["crewCount",1];
 
 {
 	deleteVehicle _x;
@@ -21,14 +22,14 @@ sleep 0.1;
 deleteGroup _unitGroup;
 
 DZAI_curHeliPatrols = DZAI_curHeliPatrols - 1;
-
+//DZAI_helisToRespawn set [count DZAI_helisToRespawn,time];
 _deleteQueue = [_helicopter];
 
 if (DZAI_heliLoot) then {
 	private ["_heliPos"];
 	_heliPos = getPosATL _helicopter;
 	if (!(surfaceIsWater _heliPos)) then {
-		for "_i" from 1 to 3 do {
+		for "_i" from 1 to _crewCount do {
 			private ["_dropPos","_agentType","_weapongrade","_agent","_parachute"];
 			_agentType = (DZAI_BanditTypes call BIS_fnc_selectRandom2);
 			_weapongrade = [DZAI_weaponGrades,DZAI_gradeChances3] call fnc_selectRandomWeighted;

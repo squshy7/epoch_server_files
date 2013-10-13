@@ -53,7 +53,7 @@ while {(count DZAI_respawnQueue) > 0} do {
 				private["_maxUnits","_respawn"];
 				_maxUnits = _trigger getVariable "maxUnits";
 				_respawn = [_unitGroup,_trigger,_maxUnits] call fnc_respawnBandits;
-				if (!_respawn) then {if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: No units were respawned for group %1 at %2. Group %1 reinserted into respawn queue.",_unitGroup,(triggerText _trigger)];};};
+				if (!_respawn) then {if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: No units were respawned for group %1 at %2. Group %1 reinserted into respawn queue.",_unitGroup,(mapGridPosition _trigger)];};};
 			};
 			DZAI_respawnQueue set [_i,objNull];
 			sleep PROCESSING_WAIT_TIME;

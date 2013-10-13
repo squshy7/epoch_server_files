@@ -9,11 +9,11 @@ diag_log "[DZAI] Compiling DZAI functions.";
 // [] call BIS_fnc_help;
 //Compile general functions.
 if (isNil "SHK_pos_getPos") then {call compile preprocessFile "\z\addons\dayz_server\DZAI\SHK_pos\shk_pos_init.sqf";};
-BIS_fnc_selectRandom2 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\fn_selectRandom.sqf";	//Altered version
+BIS_fnc_selectRandom2 = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\fn_selectRandom.sqf";	//Altered version
 fnc_unitLoadout = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\fn_unitLoadout.sqf";
 fnc_addLoot = 					compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\fn_addLoot.sqf";
 if (DZAI_zombieEnemy && (DZAI_weaponNoise > 0)) then { // Optional Zed-to-AI aggro functions
-	ai_fired = 					compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\ai_fired.sqf";	//Calculates weapon noise of AI unit
+	ai_fired = 					compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\ai_fired.sqf";		//Calculates weapon noise of AI unit
 	ai_alertzombies = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\ai_alertzombies.sqf"; //AI weapon noise attracts zombie attention
 };
 fnc_banditAIKilled = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\fn_banditAIKilled.sqf";
@@ -43,13 +43,11 @@ fnc_spawnBandits_dynamic = 		compile preprocessFileLineNumbers "\z\addons\dayz_s
 fnc_despawnBandits_dynamic = 	compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\spawn_functions\despawnBandits_dynamic.sqf";
 
 //Helicopter patrol scripts
-fnc_heliDespawn =				compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\heli_despawn.sqf";
+fnc_heliDespawn =				compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\spawn_functions\heli_despawn.sqf";
 if (DZAI_debugMarkers < 1) then {
-	fnc_heliResupply = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\heli_resupply.sqf";
-} else {
-	fnc_heliResupply =			compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\heli_resupply_debug.sqf";
-};
-fnc_spawnHeliPatrol	=			compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\spawn_heliPatrol.sqf";
+	fnc_heliResupply = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\heli_resupply.sqf";} else {
+	fnc_heliResupply =			compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\compile\heli_resupply_debug.sqf";};
+fnc_spawnHeliPatrol	=			compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\spawn_functions\spawn_heliPatrol.sqf";
 
 //DZAI custom spawns function.
 DZAI_spawn = {
@@ -205,6 +203,7 @@ DZAI_unconscious = {
 	sleep 10;
 
 	_nul = [objNull, _unit, rSWITCHMOVE, "amovppnemrunsnonwnondf"] call RE;
+	sleep 0.1;
 	_unit switchMove "amovppnemrunsnonwnondf";
 	//diag_log "DEBUG :: AI unit is conscious.";
 	_unit setVariable ["unconscious",false];
@@ -319,9 +318,10 @@ DZAI_relocDynTrigger = {
 	private ["_newPos","_attempts"];
 
 	_attempts = 0;
-	while {_newPos = [(getMarkerPos "DZAI_centerMarker"),300 + random((getMarkerSize "DZAI_centerMarker") select 0),random(360),false,[1,300]] call SHK_pos; (_attempts < 5)&&(({([_newPos select 0,_newPos select 1] distance _x) < (2*(DZAI_dynTriggerRadius - (DZAI_dynTriggerRadius*DZAI_dynOverlap)))} count DZAI_dynTriggerArray) > 0)} do {	
-		_attempts = _attempts +1;
-		if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Calculated trigger position intersects with at least 1 other trigger (attempt %1/5).",_attempts];};
+	//while {_newPos = [(getMarkerPos "DZAI_centerMarker"),300 + random((getMarkerSize "DZAI_centerMarker") select 0),random(360),false,[1,300]] call SHK_pos; (_attempts < 4)&&(({([_newPos select 0,_newPos select 1] distance _x) < (2*(DZAI_dynTriggerRadius - (DZAI_dynTriggerRadius*DZAI_dynOverlap)))} count DZAI_dynTriggerArray) > 0)} do {	
+	while {_newPos = ["DZAI_centerMarker",false,DZAI_dynBlacklist] call SHK_pos; (_attempts < 4)&&(({([_newPos select 0,_newPos select 1] distance _x) < (2*(DZAI_dynTriggerRadius - (DZAI_dynTriggerRadius*DZAI_dynOverlap)))} count DZAI_dynTriggerArray) > 0)} do {
+	_attempts = _attempts +1;
+		if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Calculated trigger position intersects with at least 1 other trigger (attempt %1/4).",_attempts];};
 	};
 	if (DZAI_debugMarkers > 0) then {
 		private["_marker"];
@@ -338,7 +338,7 @@ DZAI_relocDynTrigger = {
 //Creates static spawn trigger (in development)
 /*Syntax: 	[
 				_spawnMarker, 		//Circular marker defining patrol radius.
-				[_minAI,_addAI],	//Minimum and maximum bonus amount of AI units per group.
+				[_minAI,_addAI],	//(Optiona, default [1,1]) Minimum and maximum bonus amount of AI units per group.
 				_positionArray,		//(Optional, default []): Array of markers defining possible spawn points. If omitted or left empty, nearby buildings within 250m radius will be used as spawn points.
 				_equipType,			//(Optional, default 1): Number between 0-3. Defines AI weapon selection and skill parameters.
 				_numGroups			//(Optional, default 1): Number of AI groups to spawn using the above parameters.			
@@ -373,16 +373,6 @@ DZAI_static_spawn = {
 	_trigger setTriggerStatements ["{isPlayer _x} count thisList > 0;",_trigStatements,"_nul = [thisTrigger] spawn fnc_despawnBandits;"];
 	
 	true
-};
-
-DZAI_plusMinus = {
-	private ["_baseValue","_variance"];
-	_baseValue = _this select 0;
-	_variance = _this select 1;
-	
-	_baseValue = _baseValue + (random _variance) - (random _variance);
-	
-	_baseValue
 };
 
 DZAI_findLootPile = {

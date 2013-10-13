@@ -3,7 +3,7 @@
 	
 	Description: If an AI unit is killed, surviving members of their group will aggressively pursue the killer for a set amount of time. After this amount of time has passed, the group will return to their patrol state.
 	
-	Last updated: 6:42 PM 8/20/2013
+	Last updated: 11:52 PM 9/24/2013
 */
 private ["_killerPos","_unitGroup","_victim","_killer","_inPursuit","_trigger","_detectRange","_chaseDist"];
 
@@ -33,7 +33,7 @@ if (((_victim distance _killer) < _detectRange) && (_killer isKindOf "Man")) the
 	_unitGroup setVariable ["inPursuit",true];
 	
 	//Calculate maximum pursuit range, using victim's location as origin.
-	_chaseDist = (400 + (random 100)); //Min: 400, Max: 500
+	_chaseDist = (350 + (random 100)); //Min: 350, Max: 450
 	
 	//Temporarily cancel patrol state.
 	_unitGroup lockWP true;
@@ -46,7 +46,9 @@ if (((_victim distance _killer) < _detectRange) && (_killer isKindOf "Man")) the
 		(units _unitGroup) doMove _killerPos;
 		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: AI group %3 in pursuit state. Time: %1/%2.",time,_endTime,_unitGroup];};
 		if (_killer hasWeapon "ItemRadio") then {
-			[nil,_killer,"loc",rTITLETEXT,"[RADIO] A nearby bandit group is aware of your presence.","PLAIN DOWN",0] call RE;
+			private ["_radioText"];
+			_radioText = format ["[RADIO] You are being pursued by a bandit group. (Direction: %1. Distance: %2m)",round([_killer,(leader _unitGroup)] call BIS_fnc_dirTo),round(_killer distance (leader _unitGroup))];
+			[nil,_killer,"loc",rTITLETEXT,_radioText,"PLAIN DOWN",0] call RE;
 		};
 		sleep 15;
 	};

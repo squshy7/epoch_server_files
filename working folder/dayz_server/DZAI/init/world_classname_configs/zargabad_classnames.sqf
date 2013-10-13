@@ -1,20 +1,18 @@
 /*
 	Zargabad Classname Configuration
 	
-	Last updated:
+	Last updated: 11:22 AM 9/14/2013
 	
 */
-
-private ["_modname"];
-_modname = toLower format ["%1",DZAI_modName];
 
 switch (DZAI_modName) do {
 	case "epoch":
 	{
-		#include "mod_configs\epoch_classnames.sqf"
+		#include "epoch\dayz_epoch.sqf"
 	};
-	case default {
-		diag_log "Zargabad classnames loaded.";
+	case default 
+	{
+		#include "zargabad\default.sqf"
 	};
 };
 

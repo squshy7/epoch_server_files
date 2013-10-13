@@ -1,11 +1,17 @@
 /*
 	Panthera Classname Configuration
 	
-	Last updated:
+	Last updated: 11:22 AM 9/14/2013
 	
 */
 
-private ["_modname"];
-_modname = toLower format ["%1",DZAI_modName];
-
-diag_log "Panthera classnames loaded.";
+switch (DZAI_modName) do {
+	case "epoch":
+	{
+		#include "epoch\dayz_epoch.sqf"
+	};
+	case default 
+	{
+		#include "panthera\default.sqf"
+	};
+};

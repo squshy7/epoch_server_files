@@ -30,8 +30,7 @@ if (_totalAI == 0) exitWith {
 };
 
 //Select spawn position
-//_spawnPos = _spawnPositions call BIS_fnc_selectRandom2;
-_spawnPos = _spawnPositions call DZAI_findSpawnPos;
+_spawnPos = if ((count _spawnPositions) > 0) then {_spawnPositions call DZAI_findSpawnPos} else {[(getPosATL _trigger),20 + random(200),random(360),false] call SHK_pos};
 
 //Respawn the group
 _aiGroup = [_totalAI,_unitGroup,_spawnPos,_trigger,_gradeChances] call fnc_createGroup;

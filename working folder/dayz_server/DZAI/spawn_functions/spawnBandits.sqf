@@ -11,7 +11,7 @@
 		- A number between 0-1 specifiying probability of reading the marker array in reverse order. (Default: 0.50)
 		- Example: [['marker1','marker2','marker3'],0.50,0.50]
 	
-	Last updated: 12:36 PM 8/6/2013
+	Last updated: 7:14 PM 10/2/2013
 */
 
 private ["_minAI","_addAI","_patrolDist","_trigger","_equipType","_numGroups","_grpArray","_triggerPos","_gradeChances","_totalAI","_spawnPositions","_spawnCount","_positionArray","_locationArray","_startTime","_tMarker"];
@@ -48,17 +48,19 @@ if ((count _locationArray) == 0) then {
 	};
 	//If no markers specified in position array, then generate spawn points using building positions (search for buildings within 250m. generate a maximum of 100 positions).
 	if ((count _positionArray) == 0) then {
-		private["_nearbldgs","_nearbldgCount"];
+		private["_nearbldgs","_nearbldgCount","_spawnPoints"];
+		_spawnPoints = 0;
 		_nearbldgs = nearestObjects [_triggerPos,["HouseBase"],250];
 		_nearbldgCount = count _nearbldgs;
 		if (_nearbldgCount > 0) then {
-			if (_nearbldgCount > 100) then {_nearbldgs resize 100;};
 			{
-				_spawnPositions set [(count _spawnPositions),(getPosATL _x)];
+				if (isClass (configFile >> "CfgBuildingLoot" >> (typeOf _x))) then {
+					_spawnPositions set [(count _spawnPositions),(getPosATL _x)];
+					_spawnPoints = _spawnPoints + 1;
+				};
+				if (_spawnPoints >= 100) exitWith {};
 			} forEach _nearbldgs;
-		} else {
-			_spawnPositions = [_triggerPos]; //If no buildings are nearby, use trigger position as backup spawn location.
-		};	
+		};
 		if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Spawning AI from building positions (spawnBandits).";};
 	} else {
 		if (typeName (_positionArray select 0) == "STRING") then {
@@ -96,8 +98,7 @@ for "_j" from 1 to _numGroups do {
 	_totalAI = (_minAI + round(random _addAI));
 	if (_totalAI > 0) then {
 		//Select spawn location
-		//_spawnPos = _spawnPositions call BIS_fnc_selectRandom2;
-		_spawnPos = _spawnPositions call DZAI_findSpawnPos;
+		_spawnPos = if ((count _spawnPositions) > 0) then {_spawnPositions call DZAI_findSpawnPos} else {[(getPosATL _trigger),20 + random(200),random(360),false] call SHK_pos};
 		
 		//Spawn units
 		_unitGroup = [_totalAI,grpNull,_spawnPos,_trigger,_gradeChances] call fnc_createGroup;

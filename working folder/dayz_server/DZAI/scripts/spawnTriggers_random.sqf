@@ -21,9 +21,10 @@ if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Spawning %1 dynamic 
 for "_i" from 1 to _numTriggers do {
 	private ["_trigger","_trigPos","_attempts"];
 	_attempts = 0;
-	while {_trigPos = [(getMarkerPos "DZAI_centerMarker"),300 + random((getMarkerSize "DZAI_centerMarker") select 0),random(360),false,[1,300]] call SHK_pos;(({([_trigPos select 0,_trigPos select 1] distance _x) < (2*(DZAI_dynTriggerRadius - (DZAI_dynTriggerRadius*DZAI_dynOverlap)))} count DZAI_dynTriggerArray) > 0)&&(_attempts < 5)} do {
-		_attempts = _attempts +1;
-		if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Calculated trigger position intersects with at least 1 other trigger (attempt %1/5).",_attempts];};
+	//while {_trigPos = [(getMarkerPos "DZAI_centerMarker"),300 + random((getMarkerSize "DZAI_centerMarker") select 0),random(360),false,[1,300]] call SHK_pos;(({([_trigPos select 0,_trigPos select 1] distance _x) < (2*(DZAI_dynTriggerRadius - (DZAI_dynTriggerRadius*DZAI_dynOverlap)))} count DZAI_dynTriggerArray) > 0)&&(_attempts < 4)} do {
+	while {_trigPos = ["DZAI_centerMarker",false,DZAI_dynBlacklist] call SHK_pos;(({([_trigPos select 0,_trigPos select 1] distance _x) < (2*(DZAI_dynTriggerRadius - (DZAI_dynTriggerRadius*DZAI_dynOverlap)))} count DZAI_dynTriggerArray) > 0)&&(_attempts < 4)} do {
+	_attempts = _attempts +1;
+		if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Calculated trigger position intersects with at least 1 other trigger (attempt %1/4).",_attempts];};
 		sleep 0.5;
 	};
 	_trigger = createTrigger ["EmptyDetector",_trigPos];
