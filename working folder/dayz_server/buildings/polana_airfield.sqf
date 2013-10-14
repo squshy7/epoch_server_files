@@ -972,15 +972,6 @@ if (true) then
   _this setPos [11387.562, 7807.2295];
 };
 
-_unit_1 = objNull;
-if (true) then
-{
-  _this = _group_0 createUnit ["DZ_Pastor", [11511.242, 7754.96], [], 0, "CAN_COLLIDE"];
-  _unit_1 = _this;
-  _this setUnitAbility 0.60000002;
-  if (false) then {_group_0 selectLeader _this;};
-};
-
 _vehicle_270 = objNull;
 if (true) then
 {
