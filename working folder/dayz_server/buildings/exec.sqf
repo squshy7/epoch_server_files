@@ -9,3 +9,5 @@
 [] ExecVM "\z\addons\dayz_server\buildings\NWAF.sqf";
 
 [] ExecVM "\z\addons\dayz_server\buildings\zele.sqf";
+
+[] ExecVM "\z\addons\dayz_server\buildings\polana_airfield.sqf";
