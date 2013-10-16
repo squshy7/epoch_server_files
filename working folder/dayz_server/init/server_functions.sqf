@@ -172,7 +172,6 @@ spawn_vehicles = {
 	private ["_weights","_isOverLimit","_isAbort","_counter","_index","_vehicle","_velimit","_qty","_isAir","_isShip","_position","_dir","_istoomany","_veh","_objPosition","_marker","_iClass","_itemTypes","_cntWeights","_itemType","_num","_allCfgLoots"];
 	
 	if (isDedicated) then {
-		waituntil {!isnil "fnc_buildWeightedArray"};
 		
 		_isOverLimit = true;
 		_isAbort = false;
@@ -215,12 +214,12 @@ spawn_vehicles = {
 			if(_isShip || _isAir) then {
 				if(_isShip) then {
 					// Spawn anywhere on coast on water
-					waitUntil{!isNil "BIS_fnc_selectRandom"};
+					waitUntil{!isNil "BIS_fnc_findSafePos"};
 					_position = [MarkerPosition,0,DynamicVehicleArea,10,1,2000,1] call BIS_fnc_findSafePos;
 					//diag_log("DEBUG: spawning boat near coast " + str(_position));
 				} else {
 					// Spawn air anywhere that is flat
-					waitUntil{!isNil "BIS_fnc_selectRandom"};
+					waitUntil{!isNil "BIS_fnc_findSafePos"};
 					_position = [MarkerPosition,0,DynamicVehicleArea,10,0,2000,0] call BIS_fnc_findSafePos;
 					//diag_log("DEBUG: spawning air anywhere flat " + str(_position));
 				};
@@ -279,6 +278,7 @@ spawn_vehicles = {
 			
 				clearWeaponCargoGlobal  _veh;
 				clearMagazineCargoGlobal  _veh;
+				// _veh setVehicleAmmo DZE_vehicleAmmo;
 
 				// Add 0-3 loots to vehicle using random cfgloots 
 				_num = floor(random 4);
@@ -305,6 +305,40 @@ spawn_vehicles = {
 	};
 };
 
+spawn_ammosupply = {
+	private ["_position","_veh","_istoomany","_marker","_spawnveh","_WreckList"];
+	if (isDedicated) then {
+		_WreckList = ["Supply_Crate_DZE"];
+		waitUntil{!isNil "BIS_fnc_selectRandom"};
+		_position = RoadList call BIS_fnc_selectRandom;
+		_position = _position modelToWorld [0,0,0];
+		waitUntil{!isNil "BIS_fnc_findSafePos"};
+		_position = [_position,5,20,5,0,2000,0] call BIS_fnc_findSafePos;
+		if ((count _position) == 2) then {
+
+			_istoomany = _position nearObjects ["All",5];
+			
+			if((count _istoomany) > 0) exitWith { diag_log("DEBUG VEIN: Too many at " + str(_position)); };
+			
+			_spawnveh = _WreckList call BIS_fnc_selectRandom;
+
+			if(DZEdebug) then {
+				_marker = createMarker [str(_position) , _position];
+				_marker setMarkerShape "ICON";
+				_marker setMarkerType "DOT";
+				_marker setMarkerText str(_spawnveh);
+			};
+			
+			_veh = createVehicle [_spawnveh,_position, [], 0, "CAN_COLLIDE"];
+			_veh enableSimulation false;
+			_veh setDir round(random 360);
+			_veh setpos _position;
+			_veh setVariable ["ObjectID","1",true];
+		};
+	};
+};
+
+
 spawn_roadblocks = {
 	private ["_position","_veh","_istoomany","_marker","_spawnveh","_WreckList"];
 	_WreckList = ["SKODAWreck","HMMWVWreck","UralWreck","datsun01Wreck","hiluxWreck","datsun02Wreck","UAZWreck","Land_Misc_Garb_Heap_EP1","Fort_Barricade_EP1","Rubbish2"];
@@ -326,20 +360,16 @@ spawn_roadblocks = {
 		
 			if((count _istoomany) > 0) exitWith { diag_log("DEBUG: Too many at " + str(_position)); };
 			
+			waitUntil{!isNil "BIS_fnc_selectRandom"};
+			_spawnveh = _WreckList call BIS_fnc_selectRandom;
+
 			if(DZEdebug) then {
 				_marker = createMarker [str(_position) , _position];
 				_marker setMarkerShape "ICON";
 				_marker setMarkerType "DOT";
+				_marker setMarkerText str(_spawnveh);
 			};
 			
-			waitUntil{!isNil "BIS_fnc_selectRandom"};
-			_spawnveh = _WreckList call BIS_fnc_selectRandom;
-			_spawnloot =  "DynamicDebris";
-
-			if((_spawnveh == "HMMWVWreck") or (_spawnveh == "UralWreck") or (_spawnveh == "UAZWreck")) then {
-				_spawnloot = "DynamicDebrisMilitary";
-			};
-		
 			//diag_log("DEBUG: Spawning a crashed " + _spawnveh + " with " + _spawnloot + " at " + str(_position));
 			_veh = createVehicle [_spawnveh,_position, [], 0, "CAN_COLLIDE"];
 			_veh enableSimulation false;
@@ -353,6 +383,51 @@ spawn_roadblocks = {
 	
 	};
 	
+};
+
+spawn_mineveins = {
+	private ["_position","_veh","_istoomany","_marker","_spawnveh","_positions"];
+
+	if (isDedicated) then {
+		
+		_position = [getMarkerPos "center",0,(HeliCrashArea*0.75),10,0,2000,0] call BIS_fnc_findSafePos;
+
+		if ((count _position) == 2) then {
+			
+			_positions = selectBestPlaces [_position, 500, "(1 + forest) * (1 + hills) * (1 - houses) * (1 - sea)", 10, 5];
+
+			_position = (_positions call BIS_fnc_selectRandom) select 0;
+
+			// Get position with ground
+			
+			_istoomany = _position nearObjects ["All",10];
+		
+			if((count _istoomany) > 0) exitWith { diag_log("DEBUG VEIN: Too many objects at " + str(_position)); };
+
+			if(isOnRoad _position) exitWith { diag_log("DEBUG VEIN: on road " + str(_position)); };
+			
+			_spawnveh = ["Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Silver_Vein_DZE","Silver_Vein_DZE","Gold_Vein_DZE"] call BIS_fnc_selectRandom;
+
+			if(DZEdebug) then {
+				_marker = createMarker [str(_position) , _position];
+				_marker setMarkerShape "ICON";
+				_marker setMarkerType "DOT";
+				_marker setMarkerText str(_spawnveh);
+			};
+			
+			//diag_log("DEBUG: Spawning a crashed " + _spawnveh + " with " + _spawnloot + " at " + str(_position));
+			_veh = createVehicle [_spawnveh,_position, [], 0, "CAN_COLLIDE"];
+			_veh enableSimulation false;
+
+			// Randomize placement a bit
+			_veh setDir round(random 360);
+			_veh setpos _position;
+
+			_veh setVariable ["ObjectID","1",true];
+
+		
+		};
+	};
 };
 
 if(isnil "DynamicVehicleDamageLow") then {
@@ -463,13 +538,17 @@ dayz_recordLogin = {
 server_cleanDead = {
 	private ["_objectPos","_noPlayerNear"];
 	{
-		if (_x isKindOf "zZombie_Base") then
+		_objectPos = getPosATL _x;
+		_noPlayerNear = {isPlayer _x} count (_objectPos nearEntities ["CAManBase",35]) == 0;
+		if (_noPlayerNear) then
 		{
-			deleteVehicle _x;
+			if (_x isKindOf "zZombie_Base") then
+			{
+				deleteVehicle _x;
+			};
 		};
 	} forEach allDead;
 };
-
 server_cleanLoot =
 {
 private ["_deletedLoot","_startTime","_looted","_objectPos","_noPlayerNear","_nearObj"];

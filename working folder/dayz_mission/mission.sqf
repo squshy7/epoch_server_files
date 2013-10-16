@@ -675,17 +675,6 @@ if (true) then
   _this setPos [4075.2336, 11678.565, 0.00012207031];
 };
 
-_vehicle_379 = objNull;
-if (true) then
-{
-  _this = createVehicle ["sigisolda6", [10158.258, 1686.7931, 0.0062988698], [], 0, "CAN_COLLIDE"];
-  _vehicle_379 = _this;
-  _this setDir -80.566795;
-  _this setVehicleArmor 0.44294706;
-  _this setVehicleLock "LOCKED";
-  _this setPos [10158.258, 1686.7931, 0.0062988698];
-};
-
 _unit_73 = objNull;
 if (true) then
 {
@@ -1498,10 +1487,10 @@ if (true) then
 _vehicle_755 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_Castle_Stairs_A", [11435.725, 11352.75, 0.011208216], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_A_Castle_Stairs_A", [11435.725, 11352.75, -0.82129258], [], 0, "CAN_COLLIDE"];
   _vehicle_755 = _this;
   _this setDir 31.414593;
-  _this setPos [11435.725, 11352.75, 0.011208216];
+  _this setPos [11435.725, 11352.75, -0.82129258];
 };
 
 _vehicle_761 = objNull;

@@ -1,4 +1,4 @@
-private ["_result","_pos","_wsDone","_dir","_block","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_date","_script","_key","_outcome","_vehLimit","_hiveResponse","_objectCount","_codeCount","_objectArray","_year","_month","_day","_hour","_minute","_data","_status","_val","_traderid","_retrader","_traderData","_id"];
+private ["_result","_pos","_wsDone","_dir","_block","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_date","_script","_key","_outcome","_vehLimit","_hiveResponse","_objectCount","_codeCount","_objectArray","_hour","_minute","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0"];
 []execVM "\z\addons\dayz_server\system\s_fps.sqf"; //server monitor FPS (writes each ~181s diag_fps+181s diag_fpsmin*)
 
 dayz_versionNo = 		getText(configFile >> "CfgMods" >> "DayZ" >> "version");
@@ -25,20 +25,20 @@ if(_outcome == "PASS") then {
 		
 	if(dayz_fullMoonNights) then {
 		//date setup
-		_year = _date select 0;
-		_month = _date select 1;
-		_day = _date select 2;
+		//_year = _date select 0;
+		//_month = _date select 1;
+		//_day = _date select 2;
 		_hour = _date select 3;
 		_minute = _date select 4;
 		
 		//Force full moon nights
-		_date = [2012,6,6,_hour,_minute];
+		_date = [2013,8,3,_hour,_minute];
 	};
 		
 	if(isDedicated) then {
 		setDate _date;
-		dayzSetDate = _date;
-		publicVariable "dayzSetDate";
+		PVDZE_plr_SetDate = _date;
+		publicVariable "PVDZE_plr_SetDate";
 	};
 
 	diag_log ("HIVE: Local Time set to " + str(_date));
@@ -54,6 +54,12 @@ if(isnil "MaxHeliCrashes") then {
 };
 if(isnil "MaxDynamicDebris") then {
 	MaxDynamicDebris = 100;
+};
+if(isnil "MaxAmmoBoxes") then {
+	MaxAmmoBoxes = 3;
+};
+if(isnil "MaxMineVeins") then {
+	MaxMineVeins = 50;
 };
 // Custon Configs End
 
@@ -164,6 +170,7 @@ if (isServer and isNil "sm_done") then {
 			
 			clearWeaponCargoGlobal  _object;
 			clearMagazineCargoGlobal  _object;
+			// _object setVehicleAmmo DZE_vehicleAmmo;
 			
 			if ((typeOf _object) in dayz_allowedObjects) then {
 				_object addMPEventHandler ["MPKilled",{_this call object_handleServerKilled;}];
@@ -174,7 +181,7 @@ if (isServer and isNil "sm_done") then {
 			};
 			
 			_object setdir _dir;
-			_object setpos _pos;
+			_object setposATL _pos;
 			_object setDamage _damage;
 
 			if (count _intentory > 0) then {
@@ -190,7 +197,9 @@ if (isServer and isNil "sm_done") then {
 					_objWpnQty = (_intentory select 0) select 1;
 					_countr = 0;					
 					{
-						if (_x == "Crossbow") then { _x = "Crossbow_DZ" }; // Convert Crossbow to Crossbow_DZ
+						if(_x in (DZE_REPLACE_WEAPONS select 0)) then {
+							_x = (DZE_REPLACE_WEAPONS select 1) select ((DZE_REPLACE_WEAPONS select 0) find _x);
+						};
 						_isOK = 	isClass(configFile >> "CfgWeapons" >> _x);
 						if (_isOK) then {
 							_block = 	getNumber(configFile >> "CfgWeapons" >> _x >> "stopThis") == 1;
@@ -247,10 +256,10 @@ if (isServer and isNil "sm_done") then {
 
 				if (!((typeOf _object) in dayz_allowedObjects)) then {
 					
-					_object setvelocity [0,0,1];
+					//_object setvelocity [0,0,1];
 					_object call fnc_veh_ResetEH;		
 					
-					if(_ownerID != "0") then {
+					if(_ownerID != "0" and !(_object isKindOf "Bicycle")) then {
 						_object setvehiclelock "locked";
 					};
 					
@@ -262,7 +271,7 @@ if (isServer and isNil "sm_done") then {
 			};
 
 			//Monitor the object
-			dayz_serverObjectMonitor set [count dayz_serverObjectMonitor,_object];
+			PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_object];
 		};
 	} forEach _objectArray;
 	// # END OF STREAMING #
@@ -318,6 +327,16 @@ if (isServer and isNil "sm_done") then {
 	for "_x" from 1 to MaxDynamicDebris do {
 		[] spawn spawn_roadblocks;
 	};
+	//  spawn_ammosupply at server start 1% of roadblocks
+	diag_log ("HIVE: Spawning # of Ammo Boxes: " + str(MaxAmmoBoxes));
+	for "_x" from 1 to MaxAmmoBoxes do {
+		[] spawn spawn_ammosupply;
+	};
+	// call spawning mining veins
+	diag_log ("HIVE: Spawning # of Veins: " + str(MaxMineVeins));
+	for "_x" from 1 to MaxMineVeins do {
+		[] spawn spawn_mineveins;
+	};
 
 	if(isnil "dayz_MapArea") then {
 		dayz_MapArea = 10000;
@@ -342,9 +361,14 @@ if (isServer and isNil "sm_done") then {
 		_id = [] spawn server_spawnEvents;
 		// server cleanup
 		_id = [] execFSM "\z\addons\dayz_server\system\server_cleanup.fsm";
+
+		// spawn debug box
+		_debugMarkerPosition = getMarkerPos "respawn_west";
+		_debugMarkerPosition = [(_debugMarkerPosition select 0),(_debugMarkerPosition select 1),1];
+		_vehicle_0 = createVehicle ["DebugBox_DZ", _debugMarkerPosition, [], 0, "CAN_COLLIDE"];
+		_vehicle_0 setPos _debugMarkerPosition;
 	};
 
-	
 	sm_done = true;
 	publicVariable "sm_done";
 };
