@@ -984,7 +984,7 @@ if (true) then
 _vehicle_272 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_Barracks_i", [11251.295, 7805.4507, 0.49540964], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_Barracks_i", [11251.295, 7805.4507, 0.49540964], [], 0, "CAN_COLLIDE"];
   _vehicle_272 = _this;
   _this setDir 294.40826;
   _this setPos [11251.295, 7805.4507, 0.49540964];
@@ -993,7 +993,7 @@ if (true) then
 _vehicle_274 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_Barracks_i", [11259.765, 7801.5884, 0.53959048], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_Barracks_i", [11259.765, 7801.5884, 0.53959048], [], 0, "CAN_COLLIDE"];
   _vehicle_274 = _this;
   _this setDir 293.88165;
   _this setPos [11259.765, 7801.5884, 0.53959048];
@@ -1002,7 +1002,7 @@ if (true) then
 _vehicle_275 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_ControlTower", [11133.17, 7882.6504, 0.35903609], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_ControlTower_EP1", [11133.17, 7882.6504, 0.35903609], [], 0, "CAN_COLLIDE"];
   _vehicle_275 = _this;
   _this setDir 113.72939;
   _this setPos [11133.17, 7882.6504, 0.35903609];
@@ -1029,7 +1029,7 @@ if (true) then
 _vehicle_290 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_House", [11108.022, 7899.833, 0.21771914], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_House", [11108.022, 7899.833, 0.21771914], [], 0, "CAN_COLLIDE"];
   _vehicle_290 = _this;
   _this setDir 25.567242;
   _this setPos [11108.022, 7899.833, 0.21771914];
