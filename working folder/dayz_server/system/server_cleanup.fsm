@@ -300,7 +300,7 @@ class FSM
        "//		(vehicle _x) setDamage 1;" \n
        "//		_x setDamage 1;" \n
        "//	 };" \n
-       " } forEach allUnits;" \n
+       "// } forEach allUnits;" \n
        "" \n
        "PVDZE_serverObjectMonitor = _safety;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
