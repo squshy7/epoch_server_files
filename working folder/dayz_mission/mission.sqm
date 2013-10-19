@@ -1173,7 +1173,7 @@ class Mission
 	};
 	class Markers
 	{
-		items=17;
+		items=18;
 		class Item0
 		{
 			position[]={7839.6055,381.33774,8414.7324};
@@ -1295,6 +1295,14 @@ class Mission
 			text="Hero Camp";
 			type="mil_dot";
 			colorName="ColorBlue";
+		};
+		class Item17
+		{
+			position[]={11100,290,8060};
+			name="PolanaAirfield";
+			text="Polana Airfield";
+			type="mil_circle";
+			colorName="ColorGreen";
 		};
 	};
 	class Sensors
