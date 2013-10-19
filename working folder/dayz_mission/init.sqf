@@ -43,6 +43,10 @@ call compile preprocessFileLineNumbers "server_traders.sqf";				//Compile trader
 call compile preprocessFileLineNumbers "dayz_code\init\compiles.sqf"; //Compile custom compiles
 progressLoadingScreen 1.0;
 
+DefaultMagazines = ["ItemPainkiller","FoodCanBakedBeans","7Rnd_45ACP_1911","7Rnd_45ACP_1911","ItemBandage","ItemBandage","ItemWaterbottle"];
+DefaultWeapons = ["Colt1911","ItemCompass","ItemFlashlight","Binocular","ItemMap"]; 
+DefaultBackpack = "US_Assault_Pack_EP1";
+
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
 /* BIS_Effects_* fixes from Dwarden */
