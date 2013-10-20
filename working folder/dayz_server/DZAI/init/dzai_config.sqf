@@ -111,7 +111,7 @@ For instructions, consult Step 5 of the Installation Instructions on the DZAI Gi
 DZAI_aiHeliPatrols = true;		
 
 //Maximum number of active AI helicopters patrols. (Default: 0).							
-DZAI_maxHeliPatrols = 5;
+DZAI_maxHeliPatrols = 2;
 
 //Classnames of helicopter types to use. Helicopter types must have at least 2 gunner seats (Default: "UH1H_DZ").
 //As of version 1.6.0, plane-type air vehicles can also be added. Planes that are normally unarmed will have an M240 weapon added to the vehicle.									
