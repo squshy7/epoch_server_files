@@ -111,7 +111,7 @@ if (!isDedicated) then {
 	_void = [] execVM "R3F_Realism\R3F_Realism_Init.sqf";
 	
 	//Lights
-	//[0,0,true,true,true,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
+	[0,0,true,true,false,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
 };
 
 execVM "BTK\Cargo Drop\Start.sqf";
