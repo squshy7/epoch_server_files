@@ -125,7 +125,7 @@ Set 0 if its a internal command and 1 if its a external *.bat or *.cmd script.
 	<!-- Schedular to be shown all days in the week. -->
 	<!-- show text ingame every 20 min -->
 	<job id="0">
-		<time>001000</time>
+		<time>040000</time>
 		<delay>000000</delay>
 		<day>1,2,3,4,5,6,7</day>
 		<loop>1</loop> 
@@ -545,6 +545,104 @@ Set 0 if its a internal command and 1 if its a external *.bat or *.cmd script.
 		<loop>0</loop> 
 		<cmd>C:\Users\Dayz_server\Desktop\Restarter.bat</cmd>
 		<cmdtype>1</cmdtype>		
+	</job>
+	<!-- Static messages -->
+	<job id="50">
+		<time>000500</time>
+		<delay>000000</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>0</loop> 
+		<cmd>say -1 During this testing phase, you'll find trucks full of base building materials scattered throughout the map. Grab as much as you can, and please build as much as you can!</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>
+	<job id="51">
+		<time>001000</time>
+		<delay>000000</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>0</loop> 
+		<cmd>say -1 NOTE: this server's database WILL BE WIPED after our testing phase. However, the first 10 players that have joined our server will have a permanent custom starting loadout, and EVERY player who joined during testing week will receive 1 safe at a time of their choosing.</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>
+	<job id="52">
+		<time>002000</time>
+		<delay>000000</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>0</loop> 
+		<cmd>say -1 Admins wear the [SIR] tag, and do NOT PvP while using admin tools. Respect them. Excessive arguing/accusing/trolling the admins or the server will result in swift kicks and 24hr bans!</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>
+	<job id="53">
+		<time>003000</time>
+		<delay>000000</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>0</loop> 
+		<cmd>say -1 NOTE: Our server runs on a dynamic IP. Should the server ever disappear from your favorites list, refresh your server list and search for Knights of Nom!</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>
+	<job id="54">
+		<time>004000</time>
+		<delay>000000</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>0</loop> 
+		<cmd>say -1 This server's AI spawns dynamically; they can pop up at any time, and always wear UN skins! Also, they patrol the skies in UN helis. Shoot them down for a chance at high-end loot!</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>
+	<job id="55">
+		<time>005000</time>
+		<delay>000000</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>0</loop> 
+		<cmd>say -1 Did you know c130's can be towed? I know right?!?</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>	
+	<!-- Rolling messages with delay -->
+	<job id="56">
+		<time>006000</time>
+		<delay>000100</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>1</loop> 
+		<cmd>say -1 During this testing phase, you'll find trucks full of base building materials scattered throughout the map. Grab as much as you can, and please build as much as you can!</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>	
+	<job id="57">
+		<time>006000</time>
+		<delay>000800</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>1</loop> 
+		<cmd>say -1 NOTE: this server's database WILL BE WIPED after our testing phase. However, the first 10 players that have joined our server will have a permanent custom starting loadout, and EVERY player who joined during testing week will receive 1 safe at a time of their choosing.</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>		
+		<job id="58">
+		<time>006000</time>
+		<delay>001800</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>1</loop> 
+		<cmd>say -1 Admins wear the [SIR] tag, and do NOT PvP while using admin tools. Respect them. Excessive arguing/accusing/trolling the admins or the server will result in swift kicks and 24hr bans!</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>
+	<job id="59">
+		<time>006000</time>
+		<delay>002800</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>1</loop> 
+		<cmd>say -1 NOTE: Our server runs on a dynamic IP. Should the server ever disappear from your favorites list, refresh your server list and search for Knights of Nom!</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>
+	<job id="60">
+		<time>006000</time>
+		<delay>003800</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>1</loop> 
+		<cmd>say -1 This server's AI spawns dynamically; they can pop up at any time, and always wear UN skins! Also, they patrol the skies in UN helis. Shoot them down for a chance at high-end loot!</cmd>	
+		<cmdtype>0</cmdtype>
+	</job>
+	<job id="61">
+		<time>006000</time>
+		<delay>004800</delay>
+		<day>1,2,3,4,5,6,7</day>
+		<loop>1</loop> 
+		<cmd>say -1 Did you know c130's can be towed? I know right?!?</cmd>	
+		<cmdtype>0</cmdtype>
 	</job>
 	
 	<!-- This is for when we get events going and such.  until then it is commented out.  Make sure to put the comments back after the days of the week to cmmnt them when this is changed.
