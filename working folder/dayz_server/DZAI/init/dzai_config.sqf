@@ -77,7 +77,7 @@ DZAI_zombieEnemy = true;
 DZAI_staticAI = false;
 
 //Time to wait before respawning an AI group once all units have been eliminated. (Default: 600)										
-DZAI_respawnTime = 600;
+DZAI_respawnTime = 1200;
 
 //Time to allow spawned AI units to exist in seconds before being despawned when no players are present in a trigger area. (Default: 120)										
 DZAI_despawnWait = 120;										
