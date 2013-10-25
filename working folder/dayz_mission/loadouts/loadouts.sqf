@@ -1,0 +1,1 @@
+[] ExecVM "loadouts\founders.sqf";
