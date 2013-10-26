@@ -43,9 +43,10 @@ call compile preprocessFileLineNumbers "server_traders.sqf";				//Compile trader
 call compile preprocessFileLineNumbers "dayz_code\init\compiles.sqf"; //Compile custom compiles
 progressLoadingScreen 1.0;
 
-DefaultMagazines = ["ItemPainkiller","FoodCanBakedBeans","7Rnd_45ACP_1911","7Rnd_45ACP_1911","ItemBandage","ItemBandage","ItemWaterbottle"];
-DefaultWeapons = ["Colt1911","ItemCompass","ItemFlashlight","Binocular","ItemMap"]; 
-DefaultBackpack = "US_Assault_Pack_EP1";
+// comment this out because using loadout.sqf
+// DefaultMagazines = ["ItemPainkiller","FoodCanBakedBeans","7Rnd_45ACP_1911","7Rnd_45ACP_1911","ItemBandage","ItemBandage","ItemWaterbottle"];
+// DefaultWeapons = ["Colt1911","ItemCompass","ItemFlashlight","Binocular","ItemMap"]; 
+// DefaultBackpack = "US_Assault_Pack_EP1";
 
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
@@ -103,6 +104,9 @@ if (!isDedicated) then {
 	0 fadeSound 0;
 	waitUntil {!isNil "dayz_loadScreenMsg"};
 	dayz_loadScreenMsg = (localize "STR_AUTHENTICATING");
+	
+	//Custom Loadout
+	[] execVM "custom_loadout\loadout.sqf";
 	
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
