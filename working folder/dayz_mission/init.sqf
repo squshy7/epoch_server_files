@@ -114,9 +114,6 @@ if (!isDedicated) then {
 	[0,0,true,true,false,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
 };
 
-//loadouts
-[] ExecVM "loadouts\loadouts.sqf";
-
 execVM "BTK\Cargo Drop\Start.sqf";
 //R3F towing
 execVM "R3F_ARTY_AND_LOG\init.sqf"
