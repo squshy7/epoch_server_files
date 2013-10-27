@@ -1,12 +1,12 @@
 switch true do {
-    case ((getPlayerUID player) in ["17061521","39658331","10646734"])  :  //Admins: 
+    case ((getPlayerUID player) in ["114320838","114331270","113806150"])  :  //Admins: 
         {
         DefaultMagazines = ["ItemBandage","ItemBandage","ItemBandage","ItemBandage","17Rnd_9x19_glock17","17Rnd_9x19_glock17","ItemMorphine","ItemPainkiller","ItemBloodbag","ItemWaterbottleBoiled","ItemWaterbottleBoiled","FoodSteakCooked","20Rnd_B_AA12_74Slug","20Rnd_B_AA12_74Slug","20Rnd_B_AA12_Pellets","ItemGoldBar10oz"];
         DefaultWeapons = ["glock17_EP1","AA12_PMC","Binocular_Vector","NVGoggles","ItemMap","ItemCompass","ItemGPS","ItemWatch","ItemKnife","Itemtoolbox","ItemCrowbar","Itemetool","ItemHatchet"];
         DefaultBackpack = "DZ_LargeGunBag_EP1";
         DefaultBackpackWeapon = "";
         };
-    case ((getPlayerUID player) in ["125624940","63905682"])  : //Moderators: 
+    case ((getPlayerUID player) in ["123456780"])  : //Moderators: 
         {
         DefaultMagazines = ["ItemBandage","ItemBandage","ItemBandage","ItemBandage","17Rnd_9x19_glock17","17Rnd_9x19_glock17","ItemMorphine","ItemPainkiller","ItemBloodbag","ItemWaterbottleBoiled","ItemWaterbottleBoiled","FoodSteakCooked","8Rnd_B_Saiga12_74Slug","8Rnd_B_Saiga12_74Slug","8Rnd_B_Saiga12_Pellets","ItemGoldBar10oz"];
         DefaultWeapons = ["glock17_EP1","Saiga12K","Binocular_Vector","NVGoggles","ItemMap","Itemtoolbox"];
@@ -20,11 +20,11 @@ switch true do {
         DefaultBackpack = "DZ_Patrol_Pack_EP1";
         DefaultBackpackWeapon = "";
         };
-    case ((getPlayerUID player) in ["114331271"])  : //Donators:
+    case ((getPlayerUID player) in ["128082886","137861638","128750150","105449222","7440708","104158214","152882950","152250246","153017734","67053062","75474118"])  : //Founders:
         {
         DefaultMagazines = ["ItemPainkiller","FoodbeefCooked","17Rnd_9x19_glock17","17Rnd_9x19_glock17","17Rnd_9x19_glock17","15Rnd_W1866_Slug","15Rnd_W1866_Slug","ItemBandage","ItemBandage","ItemBandage","ItemSodaMdew","ItemWaterbottle"];
 		DefaultWeapons = ["Winchester1866","glock17_EP1","ItemCompass","ItemToolbox","ItemFlashlight"]; 
-		DefaultBackpack = ["US_Assault_Pack_EP1"];
+		DefaultBackpack = "US_Assault_Pack_EP1";
 		DefaultBackpackWeapon = "";
         };
     default  //Default Loadout
