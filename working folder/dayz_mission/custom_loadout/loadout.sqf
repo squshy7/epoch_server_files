@@ -1,15 +1,15 @@
 switch true do {
     case ((getPlayerUID player) in ["114320838","114331270","113806150"])  :  //Admins: 
         {
-        DefaultMagazines = ["ItemBandage","ItemBandage","ItemBandage","ItemBandage","17Rnd_9x19_glock17","17Rnd_9x19_glock17","ItemMorphine","ItemPainkiller","ItemBloodbag","ItemWaterbottleBoiled","ItemWaterbottleBoiled","FoodSteakCooked","20Rnd_B_AA12_74Slug","20Rnd_B_AA12_74Slug","20Rnd_B_AA12_Pellets","ItemGoldBar10oz"];
-        DefaultWeapons = ["glock17_EP1","AA12_PMC","Binocular_Vector","NVGoggles","ItemMap","ItemCompass","ItemGPS","ItemWatch","ItemKnife","Itemtoolbox","ItemCrowbar","Itemetool","ItemHatchet"];
+        DefaultMagazines = ["ItemBandage","ItemBandage","ItemBandage","ItemBandage","30Rnd_9x19_UZI_SD","30Rnd_9x19_UZI_SD","ItemMorphine","ItemPainkiller","ItemBloodbag","ItemWaterbottleBoiled","FoodSteakCooked","20Rnd_762x51_SB_SCAR","20Rnd_762x51_SB_SCAR","20Rnd_762x51_SB_SCAR","20Rnd_762x51_SB_SCAR","ItemBriefcase100oz"];
+        DefaultWeapons = ["SCAR_H_LNG_Sniper_SD","M9SD","Binocular_Vector","NVGoggles","ItemMap","ItemCompass","ItemGPS","ItemWatch","ItemKnife","ItemToolbox","ItemCrowbar","ItemEtool","ItemHatchet"];
         DefaultBackpack = "DZ_LargeGunBag_EP1";
         DefaultBackpackWeapon = "";
         };
     case ((getPlayerUID player) in ["123456780"])  : //Moderators: 
         {
         DefaultMagazines = ["ItemBandage","ItemBandage","ItemBandage","ItemBandage","17Rnd_9x19_glock17","17Rnd_9x19_glock17","ItemMorphine","ItemPainkiller","ItemBloodbag","ItemWaterbottleBoiled","ItemWaterbottleBoiled","FoodSteakCooked","8Rnd_B_Saiga12_74Slug","8Rnd_B_Saiga12_74Slug","8Rnd_B_Saiga12_Pellets","ItemGoldBar10oz"];
-        DefaultWeapons = ["glock17_EP1","Saiga12K","Binocular_Vector","NVGoggles","ItemMap","Itemtoolbox"];
+        DefaultWeapons = ["glock17_EP1","Saiga12K","Binocular_Vector","NVGoggles","ItemMap","ItemToolbox"];
         DefaultBackpack = "DZ_GunBag_EP1";
         DefaultBackpackWeapon = "";
         };
