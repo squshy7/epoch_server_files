@@ -4,7 +4,7 @@ scriptName "Functions\misc\fn_selfActions.sqf";
 	- Function
 	- [] call fnc_usec_selfActions;
 ************************************************************/
-private ["_isWreckBuilding","_temp_keys","_magazinesPlayer","_isPZombie","_vehicle","_inVehicle","_hasFuelE","_hasRawMeat","_hasKnife","_hasToolbox","_onLadder","_nearLight","_canPickLight","_canDo","_text","_isHarvested","_isVehicle","_isVehicletype","_isMan","_traderType","_ownerID","_isAnimal","_isDog","_isZombie","_isDestructable","_isTent","_isFuel","_isAlive","_Unlock","_lock","_buy","_dogHandle","_lieDown","_warn","_hastinitem","_allowedDistance","_menu","_menu1","_humanity_logic","_low_high","_cancel","_metals_trader","_traderMenu","_isWreck","_isRemovable","_isDisallowRepair","_rawmeat","_humanity","_speed","_dog","_hasbottleitem","_isAir","_isShip","_playersNear","_findNearestGens","_findNearestGen","_IsNearRunningGen","_cursorTarget","_isnewstorage","_itemsPlayer","_ownerKeyId","_typeOfCursorTarget","_hasKey","_oldOwner","_combi","_key_colors","_player_deleteBuild","_player_flipveh","_player_lockUnlock_crtl","_player_butcher","_player_studybody","_player_cook","_player_boil","_hasFuelBarrelE"];
+private ["_isWreckBuilding","_temp_keys","_magazinesPlayer","_isPZombie","_vehicle","_inVehicle","_hasFuelE","_hasRawMeat","_hasKnife","_hasToolbox","_onLadder","_nearLight","_canPickLight","_canDo","_text","_isHarvested","_isVehicle","_isVehicletype","_isMan","_traderType","_ownerID","_isAnimal","_isDog","_isZombie","_isDestructable","_isTent","_isFuel","_isAlive","_Unlock","_lock","_buy","_dogHandle","_lieDown","_warn","_hastinitem","_allowedDistance","_menu","_menu1","_humanity_logic","_low_high","_cancel","_metals_trader","_traderMenu","_isWreck","_isRemovable","_isDisallowRepair","_rawmeat","_humanity","_speed","_dog","_hasbottleitem","_isAir","_isShip","_playersNear","_findNearestGens","_findNearestGen","_IsNearRunningGen","_cursorTarget","_isnewstorage","_itemsPlayer","_ownerKeyId","_typeOfCursorTarget","_hasKey","_oldOwner","_combi","_key_colors","_player_deleteBuild","_player_flipveh","_player_lockUnlock_crtl","_player_butcher","_player_studybody","_player_cook","_player_boil","_hasFuelBarrelE","_hasHotwireKit"];
 
 if (TradeInprogress) exitWith {}; // Do not allow if any script is running.
 
@@ -53,9 +53,16 @@ if (_canPickLight and !dayz_hasLight and !_isPZombie) then {
 	s_player_removeflare = -1;
 };
 
-if (s_player_showname < 0 and !_isPZombie) then {
-	s_player_showname = player addAction ["Display Name (Yes)", "\z\addons\dayz_code\actions\display_name.sqf",true, 0, true, false, "",""];
-	s_player_showname1 = player addAction ["Display Name (No)", "\z\addons\dayz_code\actions\display_name.sqf",false, 0, true, false, "",""];
+if (!DZE_ForceNameTagsOff) then {
+	if (s_player_showname < 0 and !_isPZombie) then {
+		if (DZE_ForceNameTags) then {
+			s_player_showname = 1;
+			player setVariable["DZE_display_name",true,true];
+		} else {
+			s_player_showname = player addAction ["Display Name (Yes)", "\z\addons\dayz_code\actions\display_name.sqf",true, 0, true, false, "",""];
+			s_player_showname1 = player addAction ["Display Name (No)", "\z\addons\dayz_code\actions\display_name.sqf",false, 0, true, false, "",""];
+		};
+	};
 };
 
 if(_isPZombie) then {
@@ -576,7 +583,8 @@ if (!isNull cursorTarget and !_inVehicle and !_isPZombie and (player distance cu
 	};
 
 	//Towing with tow truck
-	if(_typeOfCursorTarget == "VIL_asistvan_DZE") then {
+	/*
+	if(_typeOfCursorTarget == "TOW_DZE") then {
 		if (s_player_towing < 0) then {
 			if(!(_cursorTarget getVariable ["DZEinTow", false])) then {
 				s_player_towing = player addAction ["Attach Straps", "\z\addons\dayz_code\actions\tow_AttachStraps.sqf",_cursorTarget, 0, false, true, "",""];				
@@ -588,6 +596,7 @@ if (!isNull cursorTarget and !_inVehicle and !_isPZombie and (player distance cu
 		player removeAction s_player_towing;
 		s_player_towing = -1;
 	};
+	*/
 
 
     //Sleep
