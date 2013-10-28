@@ -1,4 +1,4 @@
-private ["_characterID","_minutes","_newObject","_playerID","_playerName","_infected","_victim","_victimName","_killer","_killerName","_weapon","_distance","_message","_loc_message","_key","_death_record","_sound"];
+private ["_characterID","_minutes","_newObject","_playerID","_playerName","_infected","_victim","_victimName","_killer","_killerName","_weapon","_distance","_message","_loc_message","_key","_death_record"];
 //[unit, weapon, muzzle, mode, ammo, magazine, projectile]
 _characterID = 	_this select 0;
 _minutes =		_this select 1;
@@ -74,11 +74,13 @@ if (_killerName != "nil") then
 };
 
 // Might not be the best way...
+/*
 if (isnil "dayz_disco") then {
 	dayz_disco = [];
 };
+*/
 
-dayz_disco = dayz_disco - [_playerID];
+// dayz_disco = dayz_disco - [_playerID];
 _newObject setVariable["processedDeath",time];
 
 if (typeName _minutes == "STRING") then 

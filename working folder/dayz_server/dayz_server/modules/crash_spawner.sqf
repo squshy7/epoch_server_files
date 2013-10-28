@@ -1,4 +1,4 @@
-private ["_guaranteedLoot","_randomizedLoot","_spawnChance","_spawnMarker","_spawnRadius","_spawnFire","_fadeFire","_crashModel","_lootTable","_crashName","_spawnRoll","_position","_crash","_config","_hasAdjustment","_newHeight","_adjustedPos","_num","_itemTypes","_index","_weights","_cntWeights","_nearby","_itemType"];
+private ["_guaranteedLoot","_randomizedLoot","_spawnChance","_spawnMarker","_spawnRadius","_spawnFire","_fadeFire","_crashModel","_lootTable","_crashName","_spawnRoll","_position","_crash","_config","_hasAdjustment","_newHeight","_adjustedPos","_num","_itemTypes","_index","_weights","_cntWeights","_nearby","_itemType","_needsrelocated","_istoomany"];
 
 _guaranteedLoot = 3;
 _randomizedLoot = 4;
@@ -21,8 +21,14 @@ if (_spawnRoll <= _spawnChance) then {
 	};
 
 	_crashName	= getText (configFile >> "CfgVehicles" >> _crashModel >> "displayName");
-
-	_position = [getMarkerPos _spawnMarker,0,_spawnRadius,10,0,2000,0] call BIS_fnc_findSafePos;
+	
+	// Loop for a new location without any vehicles
+	_needsrelocated = true;
+	while {_needsrelocated} do {
+		_position = [getMarkerPos _spawnMarker,0,_spawnRadius,10,0,2000,0] call BIS_fnc_findSafePos;
+		_istoomany = _position nearObjects ["AllVehicles",10];
+		if((count _istoomany) == 0) then { _needsrelocated = false; };
+	};
 
 	//diag_log(format["CRASHSPAWNER: Spawning '%1' with loot table '%2' NOW! (%3) at: %4", _crashName, _lootTable, time, str(_position)]);
 
