@@ -36,6 +36,7 @@ DynamicVehicleDamageHigh = 100; // Default: 100
 EpochEvents = [["any","any","any","any",30,"crash_spawner"],["any","any","any","any",0,"crash_spawner"],["any","any","any","any",15,"supply_drop"]];
 dayz_fullMoonNights = true;
 DZE_BackpackGuard = false;
+dayz_sellDistance = 30;
 
 //Load in compiled functions
 call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\variables.sqf";				//Initilize the Variables (IMPORTANT: Must happen very early)
@@ -54,6 +55,7 @@ progressLoadingScreen 1.0;
 // DefaultMagazines = ["ItemPainkiller","FoodCanBakedBeans","7Rnd_45ACP_1911","7Rnd_45ACP_1911","ItemBandage","ItemBandage","ItemWaterbottle"];
 // DefaultWeapons = ["Colt1911","ItemCompass","ItemFlashlight","Binocular","ItemMap"]; 
 // DefaultBackpack = "US_Assault_Pack_EP1";
+
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
 /* BIS_Effects_* fixes from Dwarden */
@@ -113,6 +115,7 @@ if (!isDedicated) then {
 	
 	//Custom Loadout
 	[] execVM "custom_loadout\loadout.sqf";
+	
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	

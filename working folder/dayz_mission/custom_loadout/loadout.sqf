@@ -2,7 +2,7 @@ switch true do {
     case ((getPlayerUID player) in ["114320838","114331270","113806150"])  :  //Admins: 
         {
         DefaultMagazines = ["ItemBandage","ItemBandage","ItemBandage","ItemBandage","15Rnd_9x19_M9SD","15Rnd_9x19_M9SD","ItemMorphine","ItemPainkiller","ItemBloodbag","ItemWaterbottleBoiled","FoodSteakCooked","20Rnd_762x51_SB_SCAR","20Rnd_762x51_SB_SCAR","20Rnd_762x51_SB_SCAR","20Rnd_762x51_SB_SCAR","ItemBriefcase100oz","Skin_CZ_Soldier_Sniper_EP1_DZ"];
-        DefaultWeapons = ["SCAR_H_LNG_Sniper_SD","M9SD","Binocular_Vector","NVGoggles","ItemMap","ItemCompass","ItemGPS","ItemWatch","ItemKnife","ItemToolbox","ItemCrowbar","ItemEtool","ItemHatchet"];
+        DefaultWeapons = ["SCAR_H_LNG_Sniper_SD","M9SD","Binocular_Vector","NVGoggles","ItemMap","ItemCompass","ItemGPS","ItemWatch","ItemKnife","ItemToolbox","ItemCrowbar","ItemEtool","ItemHatchet_DZE"];
         DefaultBackpack = "DZ_LargeGunBag_EP1";
         DefaultBackpackWeapon = "";
         };
@@ -16,7 +16,7 @@ switch true do {
     case ((getPlayerUID player) in ["123456789"])  : //Pro-Donators:
         {
         DefaultMagazines = ["ItemBandage","ItemBandage","ItemMorphine","ItemPainkiller","ItemGoldBar"];
-        DefaultWeapons = ["ItemMap","ItemFlashlight","ItemHatchet"];
+        DefaultWeapons = ["ItemMap","ItemFlashlight","ItemHatchet_DZE"];
         DefaultBackpack = "DZ_Patrol_Pack_EP1";
         DefaultBackpackWeapon = "";
         };
