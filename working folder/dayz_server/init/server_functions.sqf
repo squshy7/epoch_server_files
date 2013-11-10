@@ -1,3 +1,5 @@
+[] spawn {[] execVM "\z\addons\dayz_server\init\AH.sqf";}; // (AT THE VERY TOP OF server_functions.sqf ABOVE EVERYTHING ELSE!)
+
 waituntil {!isnil "bis_fnc_init"};
 
 BIS_MPF_remoteExecutionServer = {
@@ -580,5 +582,4 @@ private ["_deletedLoot","_startTime","_looted","_objectPos","_noPlayerNear","_ne
 	diag_log (format["CLEANUP: DELETED %1 ITEMS, RUNTIME: %2",_deletedLoot,(_endTime - _startTime)]);
 };
 
-#include "AH.sqf";
 [] execVM "\z\addons\dayz_server\buildings\exec.sqf";
