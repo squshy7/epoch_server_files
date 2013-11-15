@@ -1,9 +1,7 @@
-Mission File Changelog:
-dayz_mission.v.01- added in new vehicles to dynamic_vehicles.sqf
-dayz_mission.v.02- added in base BK Cargo Drop scripts  (needs tweaking)
-dayz_mission.v.03- added in base R3F Log scripts for towing/lifting (needs major tweaking)
-dayz_mission.v.04- added in self bloodbag script; added base for custom compiles and self actions
-dayz_mission.v.04.1- fixed dynamic_vehicles.sqf; UAZs and V3S's had their 3's changed to 1's somehow
-Server File Changelog:
-dayz_server.v.01- added in base DZAI scripts (needs major tweaking)
-dayz_server.v.01.1- edited DZAI classnames and helis, should all be UN now
+**Starting new log at Epoch version 1.0.2.5**
+	Version 1.0.2.5 (old)
+
+# updated all files up to current version of epoch
+# updated antihack and AHConfig files
+# added DZE items to loadout list (founders, admin)
+# updated fn_selfActions for mission pbo
