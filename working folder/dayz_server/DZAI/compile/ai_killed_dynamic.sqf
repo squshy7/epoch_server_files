@@ -20,7 +20,7 @@ _unitsAlive = {alive _x} count (units _unitGroup);
 if (_unitsAlive == 0) then {
 	if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: All units in group %1 are dead. Spawning temporary dummy unit for group. (fnc_dynAIDeath).",_unitGroup];};
 
-	_dummy = _unitGroup createUnit ["Survivor2_DZ",[0,0,0],[],0,"FORM"];
+	_dummy = _unitGroup createUnit ["Survivor1_DZ",[0,0,0],[],0,"FORM"];
 	[_dummy] joinSilent _unitGroup;
 	_dummy setVehicleInit "this hideObject true;this allowDamage false;this enableSimulation false;"; processInitCommands;
 	_dummy disableAI "FSM";
@@ -35,3 +35,6 @@ if (_unitsAlive == 0) then {
 };
 
 if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: AI group %1 killed, %2 units left alive in group. (fnc_dynAIDeath).",_unitGroup,_unitsAlive];};
+
+sleep 3;
+_victim enableSimulation false;

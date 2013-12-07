@@ -1,16 +1,15 @@
 /*
 	despawnBandits_dynamic
 
-	Description: Deletes all AI units spawned by a trigger once all players leave the trigger area, then moves the trigger to a random location. Adapted from Sarge AI.
+	Description:
 	
-	Usage: Called by a dynamic trigger when all players have left the trigger area, or if all AI units spawned by the trigger have been killed.
+	Usage:
 
-	Last updated: 3:26 PM 6/26/2013
+	Last updated: 7:42 PM 10/20/2013
 	
 */
-#include "\z\addons\dayz_server\DZAI\init\dyn_trigger_configs\dyn_trigger_defs.hpp"
 
-private ["_trigger","_grpArray","_isCleaning","_grpCount","_waitTime","_newPos","_forceDespawn","_attempts","_oldPos"];
+private ["_trigger","_grpArray","_isCleaning","_grpCount","_waitTime","_forceDespawn"];
 if (!isServer) exitWith {};										//Execute script only on server.
 
 _trigger = _this select 0;										//Get the trigger object
@@ -20,11 +19,7 @@ _isCleaning = _trigger getVariable ["isCleaning",nil];			//Find whether or not t
 _forceDespawn = _trigger getVariable ["forceDespawn",false];	//Check whether to run despawn script even if players are present in the trigger area.
 if (isNil "_forceDespawn") then {_forceDespawn = false;};
 
-if (_forceDespawn) then {
-	_waitTime = DZAI_dynRemoveDeadWait;	//Longer sleep if despawning due to all units killed to allow for looting.
-} else {
-	_waitTime = DZAI_dynDespawnWait;	//Shorter sleep if despawning due to no player presence.
-};
+_waitTime = if (_forceDespawn) then {DZAI_dynRemoveDeadWait} else {DZAI_dynDespawnWait};
 
 _grpCount = count _grpArray;
 
@@ -33,7 +28,7 @@ if ((_grpCount == 0) && (isNil "_isCleaning")) exitWith {if (DZAI_debugLevel > 1
 if ((_grpCount == 0) || (_isCleaning)) exitWith {if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Trigger's group array is empty, or a despawn script is already running. Exiting despawn script.";};};				//Exit script if the trigger hasn't spawned any AI units, or if a despawn script is already running for the trigger.
 
 _trigger setVariable["isCleaning",true,false];			//Mark the trigger as being in a cleanup state so that subsequent requests to despawn for the same trigger will not run.
-if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: No players remain in trigger area. Deleting spawned AI in %1 seconds.",_waitTime];};
+if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: No players remain in %1 %2. Deleting spawned AI in %3 seconds.",triggerText _trigger,mapGridPosition _trigger,_waitTime];};
 if (DZAI_debugMarkers > 0) then {
 	private["_marker"];
 	_marker = format["trigger_%1",_trigger];
@@ -67,30 +62,14 @@ if ((triggerActivated _trigger) && (!_forceDespawn)) exitWith {
 	sleep 0.1;
 } forEach _grpArray;
 
-//Restore original trigger statements
-_trigger setTriggerStatements [DYNTRIG_STATEMENTS_INACTIVE];
-_oldPos = mapGridPosition _trigger;
+if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Deleting expired dynamic trigger at %1.",mapGridPosition _trigger];};
 
-//Relocate trigger
-_newPos = _trigger call DZAI_relocDynTrigger;
+//Remove dynamic trigger from global dyn trigger array and clean up trigger
+DZAI_dynTriggerArray = DZAI_dynTriggerArray - [_trigger];
+DZAI_actDynTrigs = DZAI_actDynTrigs - 1;
+DZAI_curDynTrigs = DZAI_curDynTrigs - 1;
+if (DZAI_debugMarkers > 0) then {deleteMarker format["trigger_%1",_trigger]};
 
-if (DZAI_debugMarkers > 0) then {
-	private["_marker"];
-	_marker = format["trigger_%1",_trigger];
-	_marker setMarkerPos _newPos;
-	_marker setMarkerColor "ColorYellow";			//Reset trigger indicator to Ready.
-	_marker setMarkerAlpha 0.8;
-};
-
-//Clean up trigger variables
-if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Relocating dynamic trigger.";};
-_trigger setVariable ["GroupArray",[],false];
-_trigger setVariable ["isCleaning",nil,false];
-_trigger setVariable ["patrolDist",nil,false];
-_trigger setVariable ["gradeChances",nil,false];
-_trigger setVariable ["forceDespawn",nil,false];
-
-DZAI_actDynTrigs = (DZAI_actDynTrigs - 1);
-if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Despawned AI in dynamic trigger area at %1. Trigger relocated to %2.",_oldPos,(mapGridPosition _trigger)];};
+deleteVehicle _trigger;
 
 true

@@ -5,25 +5,19 @@
 	
 	Description: Called through (mapname)_config.sqf when a static trigger is activated by a player.
 	
-	Note: To specify custom patrol waypoints, replace _patrolDist with an array containing:
-		- An array of markers specifying each waypoint
-		- A number between 0-1 specifying probability of selecting a random marker as the next waypoint. (Default: 0.00)
-		- A number between 0-1 specifiying probability of reading the marker array in reverse order. (Default: 0.50)
-		- Example: [['marker1','marker2','marker3'],0.50,0.50]
-	
-	Last updated: 7:14 PM 10/2/2013
+	Last updated: 8:38 AM 10/23/2013
 */
 
-private ["_minAI","_addAI","_patrolDist","_trigger","_equipType","_numGroups","_grpArray","_triggerPos","_gradeChances","_totalAI","_spawnPositions","_spawnCount","_positionArray","_locationArray","_startTime","_tMarker"];
+private ["_minAI","_addAI","_patrolDist","_trigger","_equipType","_numGroups","_grpArray","_triggerPos","_gradeChances","_totalAI","_spawnPositions","_spawnCount","_positionArray","_locationArray","_startTime","_tMarker","_totalSpawned"];
 if (!isServer) exitWith {};
 
 _startTime = diag_tickTime;
 
 _minAI = _this select 0;									//Mandatory minimum number of AI units to spawn
 _addAI = _this select 1;									//Maximum number of additional AI units to spawn
-_patrolDist = _this select 2;								//Numerical: patrol radius. Array: List of markers to use as patrol waypoints.
+_patrolDist = _this select 2;								//Patrol radius from trigger center.
 _trigger = _this select 3;									//The trigger calling this script.
-_positionArray = _this select 4;								//Array of manually-defined spawn points (markers). If empty, nearby buildings are used as spawn points.
+_positionArray = _this select 4;							//Array of manually-defined spawn points (markers). If empty, nearby buildings are used as spawn points.
 _equipType = if ((count _this) > 5) then {_this select 5} else {1};		//(Optional) Select the item probability table to use
 _numGroups = if ((count _this) > 6) then {_this select 6} else {1};		//(Optional) Number of groups of x number of units each to spawn
 
@@ -46,11 +40,11 @@ if ((count _locationArray) == 0) then {
 		_tMarker setMarkerBrush "Solid";
 		if (DZAI_debugMarkers > 1) then {_nul = [_trigger] spawn DZAI_updateSpawnMarker;};
 	};
-	//If no markers specified in position array, then generate spawn points using building positions (search for buildings within 250m. generate a maximum of 100 positions).
+	//If no markers specified in position array, then generate spawn points using building positions (search for buildings within 250m. generate a maximum of 150 positions).
 	if ((count _positionArray) == 0) then {
 		private["_nearbldgs","_nearbldgCount","_spawnPoints"];
 		_spawnPoints = 0;
-		_nearbldgs = nearestObjects [_triggerPos,["HouseBase"],250];
+		_nearbldgs = _triggerPos nearObjects ["HouseBase",250];
 		_nearbldgCount = count _nearbldgs;
 		if (_nearbldgCount > 0) then {
 			{
@@ -58,7 +52,7 @@ if ((count _locationArray) == 0) then {
 					_spawnPositions set [(count _spawnPositions),(getPosATL _x)];
 					_spawnPoints = _spawnPoints + 1;
 				};
-				if (_spawnPoints >= 100) exitWith {};
+				if (_spawnPoints >= 150) exitWith {};
 			} forEach _nearbldgs;
 		};
 		if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Spawning AI from building positions (spawnBandits).";};
@@ -68,9 +62,6 @@ if ((count _locationArray) == 0) then {
 				_spawnPositions set [(count _spawnPositions),(getMarkerPos _x)];
 			} forEach _positionArray;
 			if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Spawning AI from marker positions (spawnBandits).";};
-		} else {
-			_spawnPositions = _positionArray;
-			if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Spawning AI from randomly-generated positions (spawnBandits).";};
 		};
 	};
 } else {
@@ -94,18 +85,18 @@ _totalSpawned = 0;
 
 //Spawn groups
 for "_j" from 1 to _numGroups do {
-	private ["_unitGroup","_spawnPos","_pos","_totalAI"];
+	private ["_unitGroup","_spawnPos","_totalAI"];
 	_totalAI = (_minAI + round(random _addAI));
 	if (_totalAI > 0) then {
 		//Select spawn location
-		_spawnPos = if ((count _spawnPositions) > 0) then {_spawnPositions call DZAI_findSpawnPos} else {[(getPosATL _trigger),20 + random(200),random(360),false] call SHK_pos};
+		_spawnPos = if ((count _spawnPositions) > 0) then {_spawnPositions call DZAI_findSpawnPos} else {[(getPosATL _trigger),random (_patrolDist),random(360),false] call SHK_pos};
 		
 		//Spawn units
-		_unitGroup = [_totalAI,grpNull,_spawnPos,_trigger,_gradeChances] call fnc_createGroup;
-		
+		_weapongrade = [DZAI_weaponGrades,_gradeChances] call fnc_selectRandomWeighted;
+		_unitGroup = [_totalAI,grpNull,_spawnPos,_trigger,_weapongrade] call DZAI_setup_AI;
+
 		//Set group variables
-		_unitGroup setVariable ["unitType",0];
-		_unitGroup setVariable ["trigger",_trigger];
+		_unitGroup setVariable ["unitType","static"];
 		_unitGroup allowFleeing 0;
 		
 		//Update AI count
@@ -113,7 +104,12 @@ for "_j" from 1 to _numGroups do {
 		_totalSpawned = _totalSpawned + _totalAI;
 		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Group %1 has group size %2.",_unitGroup,_totalAI];};
 		
-		0 = [_unitGroup,_triggerPos,_patrolDist,DZAI_debugMarkers] spawn fnc_BIN_taskPatrol;
+		if ((count _spawnPositions) >= 100) then {
+			//diag_log format ["DEBUG :: Counted %1 spawn positions.",count _spawnPositions];
+			_nul = [_unitGroup,_spawnPositions] spawn DZAI_bldgPatrol;
+		} else {
+			0 = [_unitGroup,_triggerPos,_patrolDist,DZAI_debugMarkers] spawn DZAI_BIN_taskPatrol;
+		};
 		
 		_grpArray set [count _grpArray,_unitGroup];
 	} else {
@@ -125,6 +121,6 @@ for "_j" from 1 to _numGroups do {
 
 if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Spawned %1 new AI groups (%2 units total) in %3 seconds at %4 (spawnBandits).",_numGroups,_totalSpawned,(diag_tickTime - _startTime),(triggerText _trigger)];};
 
-0 = [_trigger,_grpArray,_patrolDist,_gradeChances,_spawnPositions,[_minAI,_addAI]] call fnc_initTrigger;
+0 = [_trigger,_grpArray,_patrolDist,_gradeChances,_spawnPositions,[_minAI,_addAI]] call DZAI_setTrigVars;
 
 true

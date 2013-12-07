@@ -30,20 +30,25 @@ DZAI_numAIUnits = 0;										//Tracks current number of currently active AI uni
 DZAI_actDynTrigs = 0;										//Tracks current number of active dynamically-spawned triggers
 DZAI_curDynTrigs = 0;										//Tracks current number of inactive dynamically-spawned triggers.
 DZAI_actTrigs = 0;											//Tracks current number of active static triggers.	
+DZAI_curHeliPatrols = 0;
 DZAI_dynTriggerArray = [];									//List of all generated dynamic triggers.
 DZAI_respawnQueue = [];										//Queue of AI groups that require respawning. Group ID is removed from queue after it is respawned.
-DZAI_respawnActive = false;									//Tracks activity status of respawn queue. Prevents creation of multiple respawn queues.
-DZAI_dmgFactors = [0.3375,0.50625,0.3375,1,1];				//AI health settings.
-DZAI_curHeliPatrols = 0;									//Tracks current number of active AI heli patrols.
-DZAI_locations = [];										//List of positions for cities, towns, and other locations.
 
 //Set side relations
 createcenter east;
 createcenter resistance;
-east setFriend [resistance, 1];
+if (DZAI_freeForAll) then {
+	//Free For All mode - All AI groups are hostile to each other.
+	east setFriend [resistance, 0];
+	resistance setFriend [east, 0];	
+	east setFriend [east, 0];	//East is hostile to self (static and dynamic AI)
+} else {
+	//Normal settings - All AI groups are friendly to each other.
+	east setFriend [resistance, 1];
+	resistance setFriend [east, 1];	
+};
 east setFriend [west, 0];	
 resistance setFriend [west, 0];
-resistance setFriend [east, 1];	
 west setFriend [resistance, 0];
 west setFriend [east, 0];
 
@@ -53,7 +58,10 @@ if (DZAI_modName == "") then {
 	_modVariant = getText (configFile >> "CfgMods" >> "DayZ" >> "dir");
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Detected mod variant %1.",_modVariant];};
 	switch (_modVariant) do {
-		case "@DayZ_Epoch":{DZAI_modName = "epoch"};
+		case "@DayZ_Epoch":{
+			DZAI_modName = "epoch"; 
+			_nul = [] execVM '\z\addons\dayz_server\DZAI\scripts\setup_trader_areas.sqf';
+		};
 		case "DayzOverwatch":{DZAI_modName = "overwatch"};
 		case "@DayzOverwatch":{DZAI_modName = "overwatch"};
 		case "@DayZHuntingGrounds":{DZAI_modName = "huntinggrounds"};
@@ -73,7 +81,7 @@ if (DZAI_objPatch) then {[] execVM '\z\addons\dayz_server\DZAI\scripts\buildingp
 if (DZAI_dynamicWeaponList) then {[DZAI_banAIWeapons] execVM '\z\addons\dayz_server\DZAI\scripts\buildWeaponArrays.sqf';};
 
 //Create reference marker for dynamic triggers and set default values. These values are modified on a per-map basis.
-if (DZAI_dynAISpawns) then {
+if (DZAI_aiHeliPatrols or DZAI_dynAISpawns) then {
 	DZAI_centerMarker = createMarker ["DZAI_centerMarker", (getMarkerPos 'center')];
 	DZAI_centerMarker setMarkerShape "ELLIPSE";
 	DZAI_centerMarker setMarkerType "Empty";
@@ -96,6 +104,7 @@ if (_worldname in ["chernarus","utes","zargabad","fallujah","takistan","tavi","l
 	"DZAI_centerMarker" setMarkerSize [7000, 7000];
 	if (DZAI_modName == "epoch") then {
 		#include "world_classname_configs\epoch\dayz_epoch.sqf"
+		_nul = [] execVM '\z\addons\dayz_server\DZAI\scripts\setup_trader_areas.sqf';
 	};
 	DZAI_newMap = true;
 	diag_log "[DZAI] Unrecognized worldname found. Generating settings for new map...";
@@ -112,6 +121,6 @@ if (isNil "DDOPP_taser_handleHit") then {DZAI_taserAI = false;} else {DZAI_taser
 
 if (DZAI_verifyTables) then {["DZAI_Rifles0","DZAI_Rifles1","DZAI_Rifles2","DZAI_Rifles3","DZAI_Pistols0","DZAI_Pistols1","DZAI_Pistols2","DZAI_Pistols3","DZAI_Backpacks0","DZAI_Backpacks1","DZAI_Backpacks2","DZAI_Backpacks3","DZAI_Edibles","DZAI_Medicals1","DZAI_Medicals2","DZAI_MiscItemS","DZAI_MiscItemL","DZAI_BanditTypes","DZAI_heliTypes"] execVM "\z\addons\dayz_server\DZAI\scripts\verifyTables.sqf";};
 [] execVM '\z\addons\dayz_server\DZAI\scripts\DZAI_scheduler.sqf';
-if (DZAI_monitor) then {[] execVM '\z\addons\dayz_server\DZAI\scripts\DZAI_monitor.sqf';};
+if (DZAI_monitorRate > 0) then {[] execVM '\z\addons\dayz_server\DZAI\scripts\DZAI_monitor.sqf';};
 diag_log format ["[DZAI] DZAI loaded with settings: Debug Level: %1. DebugMarkers: %2. ModName: %3. DZAI_dynamicWeaponList: %4. VerifyTables: %5.",DZAI_debugLevel,DZAI_debugMarkers,DZAI_modName,DZAI_dynamicWeaponList,DZAI_verifyTables];
 diag_log format ["[DZAI] DZAI loading completed in %1 seconds.",(diag_tickTime - _startTime)];

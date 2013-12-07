@@ -21,7 +21,7 @@ waitUntil {sleep 0.1; (!isNil "_heliWeapons" && !isNull (driver _helicopter))};
 _startTime = time;
 
 if ((count _heliWeapons) > 0) then {
-	while {(alive _helicopter)&&(!(isNull _helicopter))} do {	
+	while {(alive _helicopter)&&(!(isNull _helicopter))&&(!(isNull (driver _helicopter)))} do {	
 		//Check if helicopter ammunition needs to be replenished
 		{
 			if ((_helicopter ammo _x) < 20) then {
@@ -37,22 +37,23 @@ if ((count _heliWeapons) > 0) then {
 		};
 	
 		//Destroy helicopter if pilot is killed
-		if (!alive (driver _helicopter)) exitWith {
+		if ((!alive (driver _helicopter))&&(isEngineOn _helicopter)) exitWith {
 			if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: Patrol helicopter pilot killed, helicopter is going down!";};
-			_helicopter removeAllEventHandlers "LandedStopped";
 			_helicopter setFuel 0;
+			_helicopter setVehicleAmmo 0;
 			_helicopter setDamage 1;
 		};
 		
 		//Periodically vary the helicopter's altitude
+		/*
 		if ((random 1) < 0.3) then {
 			_helicopter flyInHeight (_baseHeight + (random 40));
-		};
+		};*/
 	
 		sleep DZAI_refreshRate;
 	};
 } else {
-	while {(alive _helicopter)&&(!(isNull _helicopter))} do {	
+	while {(alive _helicopter)&&(!(isNull _helicopter))&&(!(isNull (driver _helicopter)))} do {	
 		//Check if helicopter fuel is low
 		if (fuel _helicopter < 0.20) then {
 			_helicopter setFuel 1;
@@ -60,24 +61,27 @@ if ((count _heliWeapons) > 0) then {
 		};
 	
 		//Destroy helicopter if pilot is killed
-		if (!alive (driver _helicopter)) exitWith {
+		if ((!alive (driver _helicopter))&&(isEngineOn _helicopter)) exitWith {
 			if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: Patrol helicopter pilot killed, helicopter is going down!";};
-			_helicopter removeAllEventHandlers "LandedStopped";
 			_helicopter setFuel 0;
+			_helicopter setVehicleAmmo 0;
 			_helicopter setDamage 1;
 		};
 		
 		//Periodically vary the helicopter's altitude
+		/*
 		if ((random 1) < 0.3) then {
 			_helicopter flyInHeight (_baseHeight + (random 40));
-		};
+		};*/
 
 		sleep DZAI_refreshRate;
 	};
 };
 
 _timePatrolled = time - _startTime;
+sleep 0.5;
+
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: AI helicopter patrol crash-landed at %1 after %2 seconds of flight.",(getPosATL _helicopter),_timePatrolled];};
-if (_timePatrolled < 30) then {
-	diag_log "DZAI Warning: An AI helicopter was destroyed less than 30 seconds after being spawned. Please check if server_cleanup.fsm was edited properly.";
+if (_timePatrolled < 35) then {
+	diag_log "DZAI Warning: An AI helicopter was destroyed less than 35 seconds after being spawned. Please check if server_cleanup.fsm was edited properly.";
 };
