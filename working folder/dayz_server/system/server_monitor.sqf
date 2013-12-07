@@ -1,9 +1,7 @@
-private ["_result","_pos","_wsDone","_dir","_block","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_date","_script","_key","_outcome","_vehLimit","_hiveResponse","_objectCount","_codeCount","_objectArray","_hour","_minute","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0"];
-[]execVM "\z\addons\dayz_server\system\s_fps.sqf"; //server monitor FPS (writes each ~181s diag_fps+181s diag_fpsmin*)
+private ["_nul","_result","_pos","_wsDone","_dir","_block","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_date","_key","_outcome","_vehLimit","_hiveResponse","_objectCount","_codeCount","_objectArray","_hour","_minute","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0"];
 
 dayz_versionNo = 		getText(configFile >> "CfgMods" >> "DayZ" >> "version");
 dayz_hiveVersionNo = 	getNumber(configFile >> "CfgMods" >> "DayZ" >> "hiveVersion");
-_script = getText(missionConfigFile >> "onPauseScript");
 
 if ((count playableUnits == 0) and !isDedicated) then {
 	isSinglePlayer = true;
@@ -14,36 +12,6 @@ waitUntil{initialized}; //means all the functions are now defined
 diag_log "HIVE: Starting";
 
 waituntil{isNil "sm_done"}; // prevent server_monitor be called twice (bug during login of the first player)
-
-//Set the Time
-//Send request
-_key = "CHILD:307:";
-_result = _key call server_hiveReadWrite;
-_outcome = _result select 0;
-if(_outcome == "PASS") then {
-	_date = _result select 1; 
-		
-	if(dayz_fullMoonNights) then {
-		//date setup
-		//_year = _date select 0;
-		//_month = _date select 1;
-		//_day = _date select 2;
-		_hour = _date select 3;
-		_minute = _date select 4;
-		
-		//Force full moon nights
-		_date = [2013,8,3,_hour,_minute];
-	};
-		
-	if(isDedicated) then {
-		setDate _date;
-		PVDZE_plr_SetDate = _date;
-		publicVariable "PVDZE_plr_SetDate";
-	};
-
-	diag_log ("HIVE: Local Time set to " + str(_date));
-};
-
 	
 // Custom Configs
 if(isnil "MaxVehicleLimit") then {
@@ -87,7 +55,7 @@ if (isServer and isNil "sm_done") then {
 		_objectCount = _hiveResponse select 1;
 		diag_log ("HIVE: Commence Object Streaming...");
 		for "_i" from 1 to _objectCount do { 
-			_hiveResponse = _key call server_hiveReadWrite;
+			_hiveResponse = _key call server_hiveReadWriteLarge;
 			_objectArray set [_i - 1, _hiveResponse];
 			//diag_log (format["HIVE dbg %1 %2", typeName _hiveResponse, _hiveResponse]);
 		};
@@ -353,7 +321,7 @@ if (isServer and isNil "sm_done") then {
 
 	// [_guaranteedLoot, _randomizedLoot, _frequency, _variance, _spawnChance, _spawnMarker, _spawnRadius, _spawnFire, _fadeFire]
 	if(OldHeliCrash) then {
-		nul = [3, 4, (50 * 60), (15 * 60), 0.75, 'center', HeliCrashArea, true, false] spawn server_spawnCrashSite;
+		_nul = [3, 4, (50 * 60), (15 * 60), 0.75, 'center', HeliCrashArea, true, false] spawn server_spawnCrashSite;
 	};
 
 	if (isDedicated) then {

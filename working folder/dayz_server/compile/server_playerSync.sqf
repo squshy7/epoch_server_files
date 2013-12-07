@@ -1,7 +1,8 @@
-private ["_empty","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear"];
+private ["_empty","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear","_friendlies"];
 
 _character = 	_this select 0;
-_magazines =	_this select 1;
+_magazines = _this select 1;
+
 //_force = 		_this select 2;
 _forceGear =	_this select 3;
 _force =	true;
@@ -165,6 +166,11 @@ if (_characterID != "0") then {
 		};
 		_temp = round(_character getVariable ["temperature",100]);
 		_currentState = [_currentWpn,_currentAnim,_temp];
+		if(DZE_FriendlySaving) then {
+			// save only last/most recent 5 entrys as we only have 200 chars in db field and weapon + animation names are sometimes really long 60-70 chars.
+			_friendlies = [(_character getVariable ["friendlies",[]]),5] call array_reduceSizeReverse;
+			_currentState set [(count _currentState),_friendlies];
+		};
 		/*
 			Everything is ready, now publish to HIVE
 		*/
@@ -191,7 +197,7 @@ if (_characterID != "0") then {
 		if (vehicle _character != _character) then {
 			//[vehicle _character, "position"] call server_updateObject;
 			if (!(vehicle _character in needUpdate_objects)) then {
-				diag_log format["DEBUG: Added to NeedUpdate=%1",vehicle _character];
+				//diag_log format["DEBUG: Added to NeedUpdate=%1",vehicle _character];
 				needUpdate_objects set [count needUpdate_objects, vehicle _character];
 			};
 		};

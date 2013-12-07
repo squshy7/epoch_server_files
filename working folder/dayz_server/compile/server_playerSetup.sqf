@@ -61,9 +61,6 @@ _worldspace = 	_primary select 4;
 _humanity =		_primary select 5;
 _lastinstance =	_primary select 6;
 
-_namespace = profileNamespace;
-_friendlies = _namespace getVariable ["friendlies", []];;
-
 //Set position
 _randomSpot = false;
 
@@ -235,17 +232,24 @@ _playerObj setVariable["humanity_CHK",_humanity];
 //_playerObj setVariable["worldspace",_worldspace,true];
 //_playerObj setVariable["state",_state,true];
 _playerObj setVariable["lastPos",getPosATL _playerObj];
-_playerObj setVariable["friendlies",_friendlies,true];
 
 dayzPlayerLogin2 = [_worldspace,_state];
-_clientID = owner _playerObj;
-_clientID publicVariableClient "dayzPlayerLogin2";
 
+// PVDZE_obj_Debris = DZE_LocalRoadBlocks;
+_clientID = owner _playerObj;
+if (!isNull _playerObj) then {
+	_clientID publicVariableClient "dayzPlayerLogin2";
+	
+	if (isNil "PVDZE_plr_SetDate") then {
+		call server_timeSync;
+	};
+	_clientID publicVariableClient "PVDZE_plr_SetDate";
+};
 //record time started
 _playerObj setVariable ["lastTime",time];
 //_playerObj setVariable ["model_CHK",typeOf _playerObj];
 
 //diag_log ("LOGIN PUBLISHING: " + str(_playerObj) + " Type: " + (typeOf _playerObj));
 
-PVDZE_plr_Login = null;
-PVDZE_plr_Login2 = null;
+PVDZE_plr_Login = nil;
+PVDZE_plr_Login2 = nil;

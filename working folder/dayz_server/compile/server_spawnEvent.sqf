@@ -31,9 +31,6 @@ epoch_eventIsAny = {
 	_boolReturn
 };
 
-zero_cleanDead = diag_tickTime;
-zero_cleanLoot = diag_tickTime;
-
 while {true} do {
 	
 	// Find current time from server
@@ -58,17 +55,6 @@ while {true} do {
 					_handle = [] execVM "\z\addons\dayz_server\modules\" + (_x select 5) + ".sqf";
 				};
 			} forEach EpochEvents;
-
-			_time = diag_tickTime;
-			// perform cleanup here
-			if ((_time - zero_cleanDead) > 600) then {
-				call server_cleanDead;
-				zero_cleanDead = _time;
-			};
-			if ((_time - zero_cleanLoot) > 1800) then {
-				call server_cleanLoot;
-				zero_cleanLoot = _time;
-			};
 		};
 	};
 	sleep 10;
