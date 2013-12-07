@@ -82,12 +82,11 @@ if (!isDedicated) then {
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
 	_fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
-	_void = [] execVM "R3F_Realism\R3F_Realism_Init.sqf";
 	
 	// Anti Hack 
-	if (true) then {
-		[] execVM "\z\addons\dayz_code\system\antihack.sqf";
-	};
+	// if (true) then {
+	//	[] execVM "\z\addons\dayz_code\system\antihack.sqf";
+	// };
 	
 	//Lights
 	if (true) then {
