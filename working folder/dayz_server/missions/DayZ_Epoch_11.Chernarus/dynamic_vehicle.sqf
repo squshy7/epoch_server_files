@@ -1,4 +1,11 @@
 AllowedVehiclesList = [
+["V3S_RA_TK_GUE_EP1_DZ",1],
+["V3S_TK_EP1_DZE",1],
+["UralCivil_DZE",1],
+["UralCivil2_DZE",1],
+["KamazOpen_DZE",1],
+["MTVR",1],
+["MtvrRefuel_DZ",1],
 ["KamazReammo",3],
 ["HMMWV_M998_crows_M2_DES_EP1",1],
 ["BAF_Jackal2_L2A1_W",1],
