@@ -94,10 +94,6 @@ if (!isDedicated) then {
 	};
 };
 
-if(true) then {
-	#include "\z\addons\dayz_code\system\REsec.sqf"
-};
-
 //Start Dynamic Weather
 if(true) then {
 	execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
