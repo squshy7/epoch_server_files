@@ -84,9 +84,9 @@ if (!isDedicated) then {
 	_fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
 	
 	// Anti Hack 
-	// if (true) then {
-	//	[] execVM "\z\addons\dayz_code\system\antihack.sqf";
-	// };
+	if (true) then {
+			[] execVM "\z\addons\dayz_code\system\antihack.sqf";
+	};
 	
 	//Lights
 	if (true) then {
