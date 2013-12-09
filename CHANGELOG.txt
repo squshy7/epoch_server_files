@@ -1,4 +1,5 @@
 **Starting new log at Epoch version 1.0.2.5**
+
 	Version 1.0.2.5 (old)
 
 # updated all files up to current version of epoch
