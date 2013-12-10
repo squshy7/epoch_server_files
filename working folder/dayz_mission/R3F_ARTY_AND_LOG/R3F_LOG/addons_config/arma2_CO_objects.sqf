@@ -149,7 +149,7 @@ R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
 	"Mi17_DZE",
 	"MV22_DZ"
 	"UH1H_DZE",
-	"UH1Y_DZE",
+	"UH1Y_DZE"
 	
 ];
 
