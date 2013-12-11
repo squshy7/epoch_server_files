@@ -83,9 +83,9 @@ if (!isDedicated) then {
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
 	
 	// Anti Hack 
-	if (true) then {
-			[] execVM "\z\addons\dayz_code\system\antihack.sqf";
-	};
+	// if (true) then {
+	//		[] execVM "\z\addons\dayz_code\system\antihack.sqf";
+	// };
 	
 	//Lights
 	if (true) then {
