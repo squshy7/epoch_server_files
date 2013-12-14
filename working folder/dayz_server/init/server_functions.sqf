@@ -451,7 +451,7 @@ spawn_mineveins = {
 
 			if(isOnRoad _position) exitWith { diag_log("DEBUG VEIN: on road " + str(_position)); };
 			
-			_spawnveh = ["Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Silver_Vein_DZE","Silver_Vein_DZE","Gold_Vein_DZE"] call BIS_fnc_selectRandom;
+			_spawnveh = ["Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Iron_Vein_DZE","Silver_Vein_DZE","Silver_Vein_DZE","Silver_Vein_DZE","Gold_Vein_DZE","Gold_Vein_DZE"] call BIS_fnc_selectRandom;
 
 			if(DZEdebug) then {
 				_marker = createMarker [str(_position) , _position];
@@ -599,21 +599,21 @@ dayz_recordLogin = {
 };
 
 dayz_perform_purge = {
-	
-	_this removeAllMPEventHandlers "mpkilled";
-	_this removeAllMPEventHandlers "mphit";
-	_this removeAllMPEventHandlers "mprespawn";
-	_this removeAllEventHandlers "FiredNear";
-	_this removeAllEventHandlers "HandleDamage";
-	_this removeAllEventHandlers "Killed";
-	_this removeAllEventHandlers "Fired";
-	_this removeAllEventHandlers "GetOut";
-	_this removeAllEventHandlers "GetIn";
-	_this removeAllEventHandlers "Local";
-	clearVehicleInit _this;
-	deleteVehicle _this;
-	deleteGroup (group _this);
-	//  _this = nil;
+	if(!isNull(_this)) then {
+		_this removeAllMPEventHandlers "mpkilled";
+		_this removeAllMPEventHandlers "mphit";
+		_this removeAllMPEventHandlers "mprespawn";
+		_this removeAllEventHandlers "FiredNear";
+		_this removeAllEventHandlers "HandleDamage";
+		_this removeAllEventHandlers "Killed";
+		_this removeAllEventHandlers "Fired";
+		_this removeAllEventHandlers "GetOut";
+		_this removeAllEventHandlers "GetIn";
+		_this removeAllEventHandlers "Local";
+		clearVehicleInit _this;
+		deleteVehicle _this;
+		deleteGroup (group _this);
+	};
 };
 
 dayz_perform_purge_player = {
@@ -621,44 +621,47 @@ dayz_perform_purge_player = {
 	private ["_countr","_backpack","_backpackType","_backpackWpn","_backpackMag","_objWpnTypes","_objWpnQty","_location","_dir","_holder","_weapons","_magazines"];
     diag_log ("Purging player: " + str(_this));	
 
-	_location = getPosATL _this;
-	_dir = getDir _this;
+	if(!isNull(_this)) then {
 
-	_holder = createVehicle ["GraveDZE", _location, [], 0, "CAN_COLLIDE"];
-	_holder setDir _dir;
-	_holder setPosATL _location;
+		_location = getPosATL _this;
+		_dir = getDir _this;
 
-	_holder enableSimulation false;
+		_holder = createVehicle ["GraveDZE", _location, [], 0, "CAN_COLLIDE"];
+		_holder setDir _dir;
+		_holder setPosATL _location;
 
-	_weapons = weapons _this;
-    _magazines = magazines _this;
+		_holder enableSimulation false;
 
-	// find backpack
-	if(!(isNull unitBackpack _this)) then {
-		_backpack = unitBackpack _this;
-		_backpackType = typeOf _backpack;
-		_backpackWpn = getWeaponCargo _backpack;
-		_backpackMag = getMagazineCargo _backpack;
+		_weapons = weapons _this;
+		_magazines = magazines _this;
 
-		_holder addBackpackCargoGlobal [_backpackType,1];
+		// find backpack
+		if(!(isNull unitBackpack _this)) then {
+			_backpack = unitBackpack _this;
+			_backpackType = typeOf _backpack;
+			_backpackWpn = getWeaponCargo _backpack;
+			_backpackMag = getMagazineCargo _backpack;
 
-		// add items from backpack 
-		_objWpnTypes = _backpackWpn select 0;
-		_objWpnQty = _backpackWpn select 1;
-		_countr = 0;
-		{
-			_holder addWeaponCargoGlobal [_x,(_objWpnQty select _countr)];
-			_countr = _countr + 1;
-		} forEach _objWpnTypes;
+			_holder addBackpackCargoGlobal [_backpackType,1];
 
-		// add backpack magazine items
-		_objWpnTypes = _backpackMag select 0;
-		_objWpnQty = _backpackMag select 1;
-		_countr = 0;
-		{
-			_holder addMagazineCargoGlobal [_x,(_objWpnQty select _countr)];
-			_countr = _countr + 1;
-		} forEach _objWpnTypes;
+			// add items from backpack 
+			_objWpnTypes = _backpackWpn select 0;
+			_objWpnQty = _backpackWpn select 1;
+			_countr = 0;
+			{
+				_holder addWeaponCargoGlobal [_x,(_objWpnQty select _countr)];
+				_countr = _countr + 1;
+			} forEach _objWpnTypes;
+
+			// add backpack magazine items
+			_objWpnTypes = _backpackMag select 0;
+			_objWpnQty = _backpackMag select 1;
+			_countr = 0;
+			{
+				_holder addMagazineCargoGlobal [_x,(_objWpnQty select _countr)];
+				_countr = _countr + 1;
+			} forEach _objWpnTypes;
+		};
 	};
 
 	// add weapons
@@ -689,9 +692,11 @@ dayz_perform_purge_player = {
 
 
 dayz_removePlayerOnDisconnect = {
-	_this removeAllMPEventHandlers "mphit";
-	deleteVehicle _this;
-	deleteGroup (group _this);
+	if(!isNull(_this)) then {
+		_this removeAllMPEventHandlers "mphit";
+		deleteVehicle _this;
+		deleteGroup (group _this);
+	};
 };
 
 server_timeSync = {
@@ -705,9 +710,9 @@ server_timeSync = {
 		
 		if(dayz_fullMoonNights) then {
 			//date setup
-			_year = _date select 0;
-			_month = _date select 1;
-			_day = _date select 2;
+			//_year = _date select 0;
+			//_month = _date select 1;
+			//_day = _date select 2;
 			_hour = _date select 3;
 			_minute = _date select 4;
 		
@@ -725,6 +730,10 @@ server_timeSync = {
 // must spawn these 
 server_spawncleanDead = {
 	private ["_deathTime","_delQtyZ","_delQtyP","_qty","_allDead"];
+	
+	if(!isNil "DZE_DYN_cleandead") exitWith { };
+	DZE_DYN_cleandead = true;
+
 	_allDead = allDead;
 	_delQtyZ = 0;
 	_delQtyP = 0;
@@ -753,6 +762,7 @@ server_spawncleanDead = {
 		_qty = count _allDead;
 		diag_log (format["CLEANUP: Deleted %1 players and %2 zombies out of %3 dead",_delQtyP,_delQtyZ,_qty]);
 	};
+	DZE_DYN_cleandead = nil;
 };
 
 server_spawnCleanNull = {
@@ -760,9 +770,9 @@ server_spawnCleanNull = {
 	_delQtyNull = 0;
 	{
 		if (isNull _x) then {
-			diag_log (format["CLEANUP: Purge performed on null OBJ: %1",_x]);
+			//diag_log (format["CLEANUP: Purge performed on null OBJ: %1",_x]);
 			_x call dayz_perform_purge;
-			sleep 0.025;
+			sleep 1;
 			_delQtyNull = _delQtyNull + 1;
 		};
 		sleep 0.001;
@@ -789,9 +799,11 @@ server_spawnCleanFire = {
 		diag_log (format["CLEANUP: Deleted %1 fireplaces out of %2",_delQtyNull,_qty]);
 	};
 };
-
 server_spawnCleanLoot = {
 	private ["_created","_delQty","_nearby","_age","_keep","_qty","_missionObjs","_dateNow"];
+	if(!isNil "DZE_DYN_cleanLoot") exitWith { };
+	DZE_DYN_cleanLoot = true;
+
 	_missionObjs =  allMissionObjects "ReammoBox";
 	_delQty = 0;
 	_dateNow = (DateToNumber date);
@@ -820,11 +832,14 @@ server_spawnCleanLoot = {
 		_qty = count _missionObjs;
 		diag_log (format["CLEANUP: Deleted %1 Loot Piles out of %2",_delQty,_qty]);
 	};
+	DZE_DYN_cleanLoot = nil;
 };
 
 server_spawnCleanAnimals = {
 	private ["_pos","_delQtyAnimal","_qty","_missonAnimals","_nearby"];
-	_missonAnimals = allMissionObjects "CAAnimalBase";
+	if(!isNil "DZE_DYN_cleanAnimals") exitWith { };
+	DZE_DYN_cleanAnimals = true;
+	_missonAnimals = entities "CAAnimalBase";
 	_delQtyAnimal = 0;
 	{
 		if (local _x) then {
@@ -850,5 +865,7 @@ server_spawnCleanAnimals = {
 		_qty = count _missonAnimals;
 		diag_log (format["CLEANUP: Deleted %1 Animals out of %2",_delQtyAnimal,_qty]);
 	};
+	DZE_DYN_cleanAnimals = nil;
 };
+
 [] execVM "\z\addons\dayz_server\buildings\exec.sqf";

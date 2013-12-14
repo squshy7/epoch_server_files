@@ -75,28 +75,25 @@ if (!isDedicated) then {
 	0 fadeSound 0;
 	waitUntil {!isNil "dayz_loadScreenMsg"};
 	dayz_loadScreenMsg = (localize "STR_AUTHENTICATING");
-
+	
 	//Custom Loadout
 	[] execVM "custom_loadout\loadout.sqf";
+	
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
 	
-	// Anti Hack 
-	// if (true) then {
-	//		[] execVM "\z\addons\dayz_code\system\antihack.sqf";
-	// };
-	
+	//anti Hack
+	// [] execVM "\z\addons\dayz_code\system\antihack.sqf";
+
 	//Lights
-	if (true) then {
-		[0,0,true,true,false,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
-	};
+	[0,0,true,true,false,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
+	
 };
 
 //Start Dynamic Weather
-if(true) then {
-	execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
-};
+execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
+
 
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
 
