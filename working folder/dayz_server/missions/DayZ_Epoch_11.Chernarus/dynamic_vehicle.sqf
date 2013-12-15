@@ -1,5 +1,5 @@
 AllowedVehiclesList = [
-["V3S_RA_TK_GUE_EP1_DZ",1],
+["V3S_RA_TK_GUE_EP1_DZE",1],
 ["V3S_TK_EP1_DZE",1],
 ["UralCivil_DZE",1],
 ["UralCivil2_DZE",1],
