@@ -82,7 +82,7 @@ if (!isDedicated) then {
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "\z\addons\dayz_code\system\player_monitor.sqf";	
-	
+	sleep 1; _fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
 	//anti Hack
 	// [] execVM "\z\addons\dayz_code\system\antihack.sqf";
 
@@ -100,4 +100,3 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 execVM "BTK\Cargo Drop\Start.sqf";
 //R3F towing
 execVM "R3F_ARTY_AND_LOG\init.sqf"
-sleep 1; _fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
