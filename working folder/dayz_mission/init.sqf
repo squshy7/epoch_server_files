@@ -97,7 +97,7 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
 
-sleep 1; _fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
 execVM "BTK\Cargo Drop\Start.sqf";
 //R3F towing
 execVM "R3F_ARTY_AND_LOG\init.sqf"
+sleep 1; _fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
