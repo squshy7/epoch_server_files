@@ -67,7 +67,7 @@ for "_i" from 1 to (DZAI_maxHeliPatrols - DZAI_curHeliPatrols) do {
 			_gunner = _unitGroup createUnit [(DZAI_BanditTypes call BIS_fnc_selectRandom2), [0,0,0], [], 1, "NONE"];
 			_gunner assignAsGunner _helicopter;
 			_gunner moveInTurret [_helicopter,[_i]];
-			0 = [_x,"helicrew"] call DZAI_setSkills;
+			0 = [_gunner,"helicrew"] call DZAI_setSkills;
 			_gunner setVariable ["unithealth",[12000,0,0]];
 			_gunner setVariable ["removeNVG",1];
 			_gunner setVariable ["unconscious",true];	//Prevent AI heli crew from being knocked unconscious
