@@ -98,7 +98,7 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 
 #include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
 
+_nil = [] execVM "safezone\init.sqf";
 execVM "BTK\Cargo Drop\Start.sqf";
 //R3F towing
 execVM "R3F_ARTY_AND_LOG\init.sqf"
-_nil = [] execVM "safezone\init.sqf";
