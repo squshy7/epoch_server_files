@@ -251,8 +251,8 @@ DZAI_gradeChancesHeli = [0.00,0.40,0.43,0.17];
 
 //AI skill settings level 0 (Skill, Minimum skill, Maximum skill).
 DZAI_skill0 = [	
-	["aimingAccuracy",0.10,0.15],
-	["aimingShake",0.50,0.60],
+	["aimingAccuracy",0.05,0.10],
+	["aimingShake",0.45,0.55],
 	["aimingSpeed",0.50,0.60],
 	["endurance",0.40,0.60],
 	["spotDistance",0.30,0.45],
@@ -260,49 +260,49 @@ DZAI_skill0 = [
 	["courage",0.40,0.60],
 	["reloadSpeed",0.40,0.60],
 	["commanding",0.40,0.60],
-	["general",0.40,0.60]
+	["general",0.35,0.55]
 ];
 
 //AI skill settings level 1 (Skill, Minimum skill, Maximum skill).
 DZAI_skill1 = [	
-	["aimingAccuracy",0.125,0.15],
+	["aimingAccuracy",0.10,0.13],
 	["aimingShake",0.60,0.70],
 	["aimingSpeed",0.60,0.70],
-	["endurance",0.55,0.75],
+	["endurance",0.50,0.70],
 	["spotDistance",0.45,0.60],
 	["spotTime",0.65,0.80],
 	["courage",0.55,0.75],
 	["reloadSpeed",0.55,0.75],
 	["commanding",0.55,0.75],
-	["general",0.55,0.75]
+	["general",0.50,0.70]
 ];
 
 //AI skill settings level 2 (Skill, Minimum skill, Maximum skill).
 DZAI_skill2 = [	
 	["aimingAccuracy",0.15,0.20],
-	["aimingShake",0.75,0.85],
-	["aimingSpeed",0.75,0.85],
-	["endurance",0.70,0.90],
+	["aimingShake",0.70,0.80],
+	["aimingSpeed",0.70,0.80],
+	["endurance",0.65,0.85],
 	["spotDistance",0.60,0.75],
 	["spotTime",0.80,0.95],
-	["courage",0.70,0.90],
+	["courage",0.70,0.85],
 	["reloadSpeed",0.70,0.90],
 	["commanding",0.70,0.90],
-	["general",0.70,0.90]
+	["general",0.65,0.85]
 ];
 
 //AI skill settings level 3 (Skill, Minimum skill, Maximum skill).
 DZAI_skill3 = [	
 	["aimingAccuracy",0.20,0.25],
-	["aimingShake",0.85,0.95],
-	["aimingSpeed",0.85,0.95],
-	["endurance",0.80,1.00],
+	["aimingShake",0.80,0.90],
+	["aimingSpeed",0.80,0.90],
+	["endurance",0.80,0.95],
 	["spotDistance",0.70,0.85],
-	["spotTime",0.90,1.00],
-	["courage",0.80,1.00],
+	["spotTime",0.85,0.95],
+	["courage",0.80,0.95],
 	["reloadSpeed",0.80,1.00],
 	["commanding",0.80,1.00],
-	["general",0.80,1.00]
+	["general",0.75,0.95]
 ];
 
 //AI skill settings level 4 (Skill, Minimum skill, Maximum skill).
@@ -316,7 +316,7 @@ DZAI_heliCrewSkills = [
 	["courage",0.90,1.00],
 	["reloadSpeed",0.90,1.00],
 	["commanding",0.90,1.00],
-	["general",0.90,1.00]
+	["general",0.80,0.95]
 ];
 
 

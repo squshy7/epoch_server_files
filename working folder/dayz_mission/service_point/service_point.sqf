@@ -10,7 +10,7 @@ _servicePointClasses = dayz_fuelpumparray; // service point classes (can be hous
 _maxDistance = 10; // maximum distance from a service point for the options to be shown
 _actionTitleFormat = "%1 (%2)"; // text of the vehicle menu, %1 = action name (Refuel, Repair, Rearm), %2 = costs (see format below)
 _actionCostsFormat = "%2 %1"; // %1 = item name, %2 = item count
-_costsFree = "free"; // text for no costs
+_costsFree = "Free"; // text for no costs
 _message = "Vehicle Service Point nearby"; // message to be shown when in range of a service point (set to "" to disable)
 
 // refuel settings
@@ -22,8 +22,8 @@ _refuel_amount = 0.05; // amount of fuel to add with every update (in percent)
 // repair settings
 _repair_enable = true; // enable or disable the repair option
 _repair_costs = [
-	["Air",["ItemGoldBar",5]], // 5 Gold for helicopters and planes
-	["AllVehicles",["ItemGoldBar",2]] // 2 Gold for all other vehicles
+	["Air",["ItemGoldBar",6]], // 5 Gold for helicopters and planes
+	["AllVehicles",["ItemGoldBar",3]] // 2 Gold for all other vehicles
 ];
 _repair_repairTime = 2; // time needed to repair each damaged part (in seconds)
 
@@ -31,8 +31,8 @@ _repair_repairTime = 2; // time needed to repair each damaged part (in seconds)
 _rearm_enable = true; // enable or disable the rearm option
 _rearm_costs = [
 	["ArmoredSUV_PMC_DZE",["ItemGoldBar10oz",2]], // special costs for a single vehicle type
-	["Air",["ItemGoldBar10oz",2]], // 2 10oz Gold for helicopters and planes
-	["AllVehicles",["ItemGoldBar10oz",1]] // 1 10oz Gold for all other vehicles
+	["Air",["ItemGoldBar10oz",4]], // 2 10oz Gold for helicopters and planes
+	["AllVehicles",["ItemGoldBar10oz",2]] // 1 10oz Gold for all other vehicles
 ];
 _rearm_magazineCount = 3; // amount of magazines to be added to the vehicle weapon
 
