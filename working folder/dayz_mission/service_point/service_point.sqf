@@ -30,9 +30,9 @@ _repair_repairTime = 3; // time needed to repair each damaged part (in seconds)
 // rearm settings
 _rearm_enable = true; // enable or disable the rearm option
 _rearm_costs = [
-	["ArmoredSUV_PMC_DZE",["ItemGoldBar",7]], // special costs for a single vehicle type
-	["Air",["ItemGoldBar10oz",1]], // 2 10oz Gold for helicopters and planes
-	["AllVehicles",["ItemGoldBar",7]] // 1 10oz Gold for all other vehicles
+	["ArmoredSUV_PMC_DZE",["ItemGoldBar10oz",3]], // special costs for a single vehicle type
+	["Air",["ItemGoldBar10oz",5]], // 2 10oz Gold for helicopters and planes
+	["AllVehicles",["ItemGoldBar10oz",3]] // 1 10oz Gold for all other vehicles
 ];
 _rearm_magazineCount = 3; // amount of magazines to be added to the vehicle weapon
 
