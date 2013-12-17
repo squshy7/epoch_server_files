@@ -29,6 +29,7 @@ dayz_MapArea = 14000; // Default = 10000
 dayz_maxLocalZombies = 30; // Default = 30 
 
 dayz_paraSpawn = false;
+DZE_requireplot = 0;
 
 dayz_minpos = -1; 
 dayz_maxpos = 16000;
@@ -100,3 +101,4 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 execVM "BTK\Cargo Drop\Start.sqf";
 //R3F towing
 execVM "R3F_ARTY_AND_LOG\init.sqf"
+_nil = [] execVM "safezone\init.sqf";
