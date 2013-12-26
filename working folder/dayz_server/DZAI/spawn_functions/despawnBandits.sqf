@@ -65,8 +65,6 @@ if !(_trigger getVariable ["permadelete",false]) then {
 	//Cleanup variables attached to trigger
 	_trigger setVariable ["GroupArray",[],false];
 	_trigger setVariable ["isCleaning",nil,false];
-	_trigger setVariable ["patrolDist",nil,false];
-	_trigger setVariable ["gradeChances",nil,false];
 
 	if (DZAI_debugMarkers > 0) then {
 		private["_tMarker"];

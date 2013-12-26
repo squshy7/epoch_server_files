@@ -7,10 +7,9 @@
 
 #include "spawn_markers\markers_chernarus.sqf"	//Load manual spawn point definitions file.
 
-if (DZAI_dynAISpawns) then {
-	"DZAI_centerMarker" setMarkerPos [7021.9126, 8964.8379];
+if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+	"DZAI_centerMarker" setMarkerPos [7652.9634, 7870.8076];
 	"DZAI_centerMarker" setMarkerSize [5500, 5500];
-	if (isNil "DZAI_dynTriggersMax") then {DZAI_dynTriggersMax = 15;};
 };
 
 if (DZAI_verifyTables) then {
@@ -450,7 +449,7 @@ if (DZAI_staticAI) then {
 	_this setTriggerActivation ["ANY", "PRESENT", true];
 	_this setTriggerTimeout [10, 15, 20, true];
 	_this setTriggerText "Rog";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,2,175,thisTrigger,['CastleRog','CastleRog2','Rog3','Rog4'],2] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,2,175,thisTrigger,['CastleRog','CastleRog2','Rog3','Rog4'],1] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_134 = _this;
 
 	_this = createTrigger ["EmptyDetector", [13256.356, 5432.5425, 4.7683716e-006]];
@@ -466,7 +465,7 @@ if (DZAI_staticAI) then {
 	_this setTriggerActivation ["ANY", "PRESENT", true];
 	_this setTriggerTimeout [10, 15, 20, true];
 	_this setTriggerText "Devil's Castle";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,2,200,thisTrigger,['DevilsCastle','DevilsCastle2','Devils3','Devils4'],2] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,2,200,thisTrigger,['DevilsCastle','DevilsCastle2','Devils3','Devils4'],1] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_138 = _this;
 
 	_this = createTrigger ["EmptyDetector", [6551.4741, 5595.6704]];
@@ -474,7 +473,7 @@ if (DZAI_staticAI) then {
 	_this setTriggerActivation ["ANY", "PRESENT", true];
 	_this setTriggerTimeout [10, 15, 20, true];
 	_this setTriggerText "Zub";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,2,175,thisTrigger,['CastleZub','CastleZub2','Zub3','Zub4'],2] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "0 = [2,2,175,thisTrigger,['CastleZub','CastleZub2','Zub3','Zub4'],1] call fnc_spawnBandits;", "0 = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_140 = _this;
 
 	_this = createTrigger ["EmptyDetector", [11458.502, 7483.2754, 12.369965]];

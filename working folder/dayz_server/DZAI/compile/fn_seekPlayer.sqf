@@ -39,7 +39,7 @@ if ((_targetPlayer hasWeapon "ItemRadio") && _canRadio) then {
 sleep 15;
 
 //Begin hunting phase
-while {(alive _targetPlayer) && !(isNull _targetPlayer) && (((vehicle _targetPlayer) isKindOf "Man") or ((vehicle _targetPlayer) isKindOf "Motorcycle")) && ((_targetPlayer distance _spawnPos) < 450) && ((_unitGroup getVariable ["groupSize",0]) > 0)} do {
+while {(alive _targetPlayer) && !(isNull _targetPlayer) && (((vehicle _targetPlayer) isKindOf "Man") or ((vehicle _targetPlayer) isKindOf "Motorcycle")) && ((_targetPlayer distance _spawnPos) < 450) && ((_unitGroup getVariable ["GroupSize",0]) > 0)} do {
 	if !(_unitGroup getVariable ["inPursuit",false]) then {
 		_waypoint setWPPos getPosATL _targetPlayer;
 		_unitGroup setCurrentWaypoint _waypoint;
@@ -60,7 +60,7 @@ while {(alive _targetPlayer) && !(isNull _targetPlayer) && (((vehicle _targetPla
 	sleep 30;
 };
 
-if ((_unitGroup getVariable ["groupSize",0]) < 1) exitWith {};
+if ((_unitGroup getVariable ["GroupSize",0]) < 1) exitWith {};
 
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Group %1 has exited hunting phase. Moving to patrol phase. (fn_seekPlayer)",_unitGroup];};
 

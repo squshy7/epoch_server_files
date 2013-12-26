@@ -31,6 +31,9 @@ DZAI_objPatch = false;
 //Minimum seconds to pass until a dead AI body can be cleaned up by DZAI's task scheduler. Affects both static and dynamic AI units (Default: 300).										
 DZAI_cleanupDelay = 300;									
 
+//Enable or disable DZAI reading from dzai_settings_override.sqf file (Default: true)
+DZAI_readOverrideFile = true;
+
 /*
 
 	DZAI_modName value		Enables extra features (ie: Items, AI skins, loot rates, etc.) for...
@@ -49,7 +52,7 @@ DZAI_cleanupDelay = 300;
 DZAI_modName = "";
 
 
-/*	AI Unit Variables
+/*	AI Unit Settings
 --------------------------------------------------------------------------------------------------------------------*/		
 
 //AI weapon noise multiplier for zombie aggro purposes. No effect if DZAI_zombieEnemy is set to false. Enabling this option may impact server performance as a script is run for each AI bullet fired.
@@ -91,41 +94,33 @@ DZAI_despawnWait = 120;
 /*	Dynamic AI Spawning Settings
 --------------------------------------------------------------------------------------------------------------------*/		
 
-//Enable or disable dynamic AI spawns. If enabled, AI spawn locations will be randomly placed around the map. (Default: true)									
+//Enable or disable dynamic AI spawns. If enabled, AI spawn locations will be generated for randomly selected players at randomized intervals (Default: true)									
 DZAI_dynAISpawns = true;
 
-//Enable or disable V2 dynamic AI spawns. (Default: true)
-//If true: New system - With V2 dynamic AI spawns, dynamic triggers are not scattered around the map. Instead, a number of random players are chosen and dynamic triggers are placed directly on their positions.
-//If false: Old system - Dynamic triggers are spawned randomly around the map and periodically relocated. NOTE: This version of dynamic spawns is scheduled to be removed in DZAI 1.9.0.
-//Note: The following settings will have no effect if DZAI_V2dynSpawns is true: DZAI_dynTriggersMax, DZAI_dynBlacklist. DZAI_dynAISpawns must be set true for this option to take effect.
-DZAI_V2dynSpawns = false;
+//Array of area blacklist markers. Players within marker areas will not be targeted for dynamic AI spawns (Example: ["BlacklistArea1","BlacklistArea2","BlacklistArea3"])
+//Epoch: DZAI will automatically set up 200m-radius blacklist areas around each trader area.
+DZAI_dynAreaBlacklist = [];
 
-//(Optional) Leave as nil to have DZAI spawn a predetermined number of dynamic triggers. Can be edited to specify max number of dynamic triggers to spawn. (Default: nil)
-DZAI_dynTriggersMax = nil;
-
-//Time to wait before deleting bodies of AI units spawned from dynamic triggers. (Default: 300)									
+//Time to wait before force-despawning trigger area after all spawned units have been killed.(Default: 300)									
 DZAI_dynRemoveDeadWait = 300;
 
-//Time to wait before despawning all AI units in dynamic trigger area when no players are present, and delay time before force-despawning trigger area after all spawned units have been killed. (Default: 120)
+//Time to wait before despawning all AI units in dynamic trigger area when no players are present. (Default: 120)
 DZAI_dynDespawnWait = 120;
 
-//List of marker-defined areas where dynamic AI spawns should NOT be created. These markers may be of any shape (rectangular or circular).
-//Markers can be defined in /world_map_configs/custom_markers/cust_markers_(mapname).sqf (Default: [])
-//Note: This has no effect if DZAI_V2dynSpawns is set 'true'.
-DZAI_dynBlacklist = [];									
 
 
 /*	AI Air Vehicle patrol settings
-//Note: As of DZAI 1.8.0, users of the missionfile version of DZAI are able to use air vehicle patrols without editing the server_cleanup.fsm.
+//Note: As of DZAI 1.8.0, all users are able to use air vehicle patrols without editing the server_cleanup.fsm.
 --------------------------------------------------------------------------------------------------------------------*/		
 
-//Enable or disable AI air vehicle patrols. (Default: false)
-DZAI_aiHeliPatrols = true;		
-
-//Maximum number of active AI air vehicle patrols. (Default: 0).							
+//Maximum number of active AI air vehicle patrols. Set at 0 to disable (Default: 0).							
 DZAI_maxHeliPatrols = 2;
 
-//Classnames of air vehicles types to use. Valid vehicle types: Helicopters and Planes (Default: "UH1H_DZ").
+//Set minimum and maximum wait time in seconds to respawn an AI vehicle patrol after vehicle is destroyed or disabled. (Default: Min 600, Max 900).
+DZAI_respawnTMinA = 600;
+DZAI_respawnTMaxA = 900;
+
+//Classnames of air vehicle types to use. Valid vehicle types: Helicopters and Planes (Default: "UH1H_DZ").
 //Air vehicles that are normally unarmed may have weapons added by DZAI (see "DZAI_airWeapons" setting below).								
 DZAI_heliTypes = ["Mi17_UN_CDF_EP1"];	
 
@@ -135,20 +130,34 @@ DZAI_heliTypes = ["Mi17_UN_CDF_EP1"];
 DZAI_airWeapons = [
 	[
 		//Air vehicle classnames (Remember: no comma for last entry! Otherwise, separate each string with commas)
-		"AN2_DZ",
-		"AH6X_DZ"
+		"Helicopter1_ExampleClassname",
+		"Helicopter2_ExampleClassname"
 	]
 	,
 	[
 		//Corresponding weapon classnames (Remember: no comma for last entry! Otherwise, separate each string with commas)
-		"M240_veh",
-		"M134"
+		"Helicopter1_ExampleWeapon",
+		"Helicopter2_ExampleWeapon"
 	]
 ];
 
-//Selects what action to take when an AI air vehicle is destroyed (Default: 2):
-//0: Do nothing, 1: Dead lootable units are dropped out by parachute, 2: Live, highly-skilled, well-equipped units are dropped out by parachute.
-DZAI_airLootMode = 1;		
+
+/*AI Land Vehicle patrol settings
+
+	NOTES: 	This feature is only intended for demonstration purposes and does not represent the future finished version. 
+			Therefore, there is NO support for using this feature, and it might not even work at all! 
+			If you experience any problems using this feature, disable it.
+--------------------------------------------------------------------------------------------------------------------*/	
+
+//Maximum number of active AI land vehicle patrols. Set at 0 to disable (Default: 0).	
+DZAI_maxLandPatrols = 1;
+
+//Set minimum and maximum wait time in seconds to respawn an AI vehicle patrol after vehicle is destroyed or disabled. (Default: Min 600, Max 900).
+DZAI_respawnTMinL = 600;
+DZAI_respawnTMaxL = 900;
+
+//Classnames of land vehicle types to use. (Default: "UAZ_Unarmed_TK_EP1")
+DZAI_vehTypes = ["UAZ_Unarmed_TK_EP1"];
 
 
 /*	Extra AI Settings
@@ -167,17 +176,26 @@ DZAI_humanityGain = 200;
 DZAI_radioMsgs = true;
 
 
-/*	Dynamic weapon list settings
+/*	AI weapon selection settings
 --------------------------------------------------------------------------------------------------------------------*/
 
-//True: Dynamically generate AI weapon list from CfgBuildingLoot. False: Use preset weapon list located in world_classname_configs/default/default_classnames.sqf. (Default: true).
+//True: Dynamically generate AI weapon list from CfgBuildingLoot (DayZ loot tables). False: Use preset weapon list located in world_classname_configs/default/default_classnames.sqf. (Default: true).
 //Highly recommended to enable DZAI_verifyTables if this option is set to false. 
 DZAI_dynamicWeaponList = true;
 
-//(Only if DZAI_dynamicWeaponList = true) List of classnames of weapons that AI should never use. By default, AI may carry any lootable weapon. Example: DZAI_banAIWeapons = ["M107_DZ","BAF_AS50_scoped"]; will remove the M107 and AS50 from AI weapon tables if dynamic weapon list is enabled.								
+//(Only if DZAI_dynamicWeaponList = true) List of classnames of weapons that AI should never use. By default, AI may carry any lootable weapon. 
+//Example: DZAI_banAIWeapons = ["M107_DZ","BAF_AS50_scoped"] will remove the M107 and AS50 from AI weapon tables if dynamic weapon list is enabled.								
 //Note: It is recommended to add all melee weapon classnames into this list as AI have issues using melee weapons. 
 //All melee weapons and crossbows present in DayZ 1.7.7.1 have been pre-banned ("Crossbow_DZ","Crossbow","MeleeHatchet","MeleeCrowbar","MeleeMachete","MeleeBaseball","MeleeBaseBallBat","MeleeBaseBallBatBarbed","MeleeBaseBallBatNails")
 DZAI_banAIWeapons = [];										
+
+//List of launcher-type weapons for mid/high-level AI to use (by default, weapongrade 1/2/3). If left empty, AI will not use launcher weapons. (Default: [])
+//If AI encounter an armored player vehicle, they will switch to a randomly-selected launcher-type weapon to engage. (Maximum 1 launcher per AI group).
+//Weapon classnames added here are verified if DZAI_verifyTables is set to true.
+DZAI_launcherTypes = [];	
+
+//List of AI weapongrades that are permitted to use launcher-type weapons. Individual custom weapongrade levels may be added to allow launcher use (Default: [1,2,3])
+DZAI_launcherLevels = [1,2,3];								
 
 
 /*	AI loot quantity settings
@@ -196,7 +214,7 @@ DZAI_bpmedicals = 1;
 DZAI_bpedibles = 1;	
 
 //Maximum number of items to select from DZAI_MiscItemS table.										
-DZAI_numMiscItemS = 2;						
+DZAI_numMiscItemS = 3;						
 
 //Maximum number of items to select from DZAI_MiscItemL table.				
 DZAI_numMiscItemL = 1;										
@@ -212,7 +230,7 @@ DZAI_chanceMedicals = 0.70;
 DZAI_chanceEdibles = 0.75;
 
 //Chance to add random item from DZAI_MiscItemS table.									
-DZAI_chanceMiscItemS = 0.50;
+DZAI_chanceMiscItemS = 0.60;
 
 //Chance to add random item from DZAI_MiscItemL table.								
 DZAI_chanceMiscItemL = 0.10;								
@@ -221,23 +239,26 @@ DZAI_chanceMiscItemL = 0.10;
 /*AI weapon/skill probabilities (gradeChances should add up to 1.00) - [Civilian, Military, MilitarySpecial, HeliCrash] - Note: AI with higher grade weaponry will also have higher skill settings.
 --------------------------------------------------------------------------------------------------------------------*/
 
+//equipType = -1 - most AI will have pistols, sometimes basic rifles.
+DZAI_gradeChancesNewbie = [0.90,0.10,0.00,0.00,0.00];	
+
 //equipType = 0 - most AI will have basic pistols or rifles, and occasionally common military weapons.
-DZAI_gradeChances0 = [0.90,0.10,0.00,0.00];	
+DZAI_gradeChances0 = [0.00,0.90,0.10,0.00,0.00];	
 
 //equipType = 1 - most AI will have common rifles, many will have common military weapons. Very rarely, AI will spawn with high-grade military or helicrash weapons.				
-DZAI_gradeChances1 = [0.60,0.35,0.04,0.01];	
+DZAI_gradeChances1 = [0.00,0.60,0.35,0.04,0.01];	
 
 //equipType = 2 - most AI carry military weapons, and occasionally high-grade military weapons.				
-DZAI_gradeChances2 = [0.20,0.60,0.15,0.05];
+DZAI_gradeChances2 = [0.00,0.20,0.60,0.15,0.05];
 
 //equipType = 3 - All AI will carry at least a military-grade weapon. Many will be carrying high-grade military weapons.					
-DZAI_gradeChances3 = [0.00,0.50,0.38,0.12];	
+DZAI_gradeChances3 = [0.00,0.00,0.50,0.38,0.12];	
 
 //Weapongrade chances for AI spawned from dynamic triggers.				
-DZAI_gradeChancesDyn = [0.00,0.88,0.09,0.03];				
+DZAI_gradeChancesDyn = [0.00,0.00,0.88,0.09,0.03];				
 
 //Weapongrade chances for dead AI ejected from destroyed helicopter patrols.					
-DZAI_gradeChancesHeli = [0.00,0.40,0.43,0.17];	
+DZAI_gradeChancesHeli = [0.00,0.00,0.40,0.43,0.17];	
 
 /*
 	AI skill settings
@@ -305,7 +326,30 @@ DZAI_skill3 = [
 	["general",0.75,0.95]
 ];
 
-//AI skill settings level 4 (Skill, Minimum skill, Maximum skill).
+//Note: Additional AI skill settings can be defined (DZAI_skill4 - DZAI_skill9) using the same format above.
+//Instructions: replace "nil" with the skill array. Refer to the above preset skill arrays for examples.
+//Custom AI skill settings can only be used with custom-defined spawns (spawns created using the DZAI_spawn function).
+
+//weapongrade 4 skills
+DZAI_skill4 = nil; 
+
+//weapongrade 5 skills
+DZAI_skill5 = nil; 
+
+//weapongrade 6 skills
+DZAI_skill6 = nil; 
+
+//weapongrade 7 skills
+DZAI_skill7 = nil; 
+
+//weapongrade 8 skills
+DZAI_skill8 = nil;
+
+//weapongrade 9 skills
+DZAI_skill9 = nil; 
+
+
+//AI skill settings - AI helicopter crew (Skill, Minimum skill, Maximum skill).
 DZAI_heliCrewSkills = [	
 	["aimingAccuracy",0.50,0.50],
 	["aimingShake",0.85,0.95],
@@ -316,13 +360,13 @@ DZAI_heliCrewSkills = [
 	["courage",0.90,1.00],
 	["reloadSpeed",0.90,1.00],
 	["commanding",0.90,1.00],
-	["general",0.80,0.95]
+	["general",0.75,0.90]
 ];
 
 
 //NOTHING TO EDIT BEYOND THIS POINT
 
 //Load custom DZAI settings file.
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\DZAI_settings_override.sqf";
+if (DZAI_readOverrideFile) then {call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\DZAI_settings_override.sqf"};
 
-diag_log "[DZAI] DZAI Variables loaded.";
+diag_log "[DZAI] DZAI configuration file loaded.";

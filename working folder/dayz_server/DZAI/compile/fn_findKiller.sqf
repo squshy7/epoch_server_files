@@ -11,17 +11,17 @@ _victim = _this select 0;
 _killer = _this select 1;
 _unitGroup = _this select 2;
 
-_groupSize = _unitGroup getVariable ["groupSize",0];
+_groupSize = _unitGroup getVariable ["GroupSize",0];
 if (_groupSize == 0) exitWith {if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: All units in group are dead. (fn_findKiller)";};};
 
 //If group is already pursuing player and target player has killed another group member, then extend pursuit time.
 if (((_unitGroup getVariable ["pursuitTime",0]) > 0)&&((_unitGroup getVariable ["targetKiller",objNull]) == _killer)) exitWith {
 	_unitGroup setVariable ["pursuitTime",((_unitGroup getVariable ["pursuitTime",0]) + 20)];
-	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Pursuit time +20 sec for Group %1 (Target: %2) to %3 seconds (fn_findKiller).",_unitGroup,name _killer,_unitGroup getVariable ["pursuitTime",0]]};
+	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Pursuit time +20 sec for Group %1 (Target: %2) to %3 seconds (fn_findKiller).",_unitGroup,name _killer,(_unitGroup getVariable ["pursuitTime",0]) - time]};
 };
 
 //Reveal killer to AI group and order units to target and fire.
-_unitGroup reveal [(vehicle _killer),4];
+//_unitGroup reveal [(vehicle _killer),4];
 (units _unitGroup) doTarget (vehicle _killer);
 (units _unitGroup) doFire (vehicle _killer);
 
@@ -52,7 +52,7 @@ if (((_victim distance _killer) < _detectRange) && (_killer isKindOf "Man")) the
 	};
 	
 	//Begin pursuit state.
-	while {(time < (_unitGroup getVariable ["pursuitTime",0])) && (alive _killer) && ((_unitGroup getVariable ["groupSize",0]) > 0) && !(isNull _killer) && ((_trigger distance _killer) < _chaseDist) && (((vehicle _killer) isKindOf "Man") or ((vehicle _killer) isKindOf "Motorcycle"))} do {
+	while {(time < (_unitGroup getVariable ["pursuitTime",0])) && (alive _killer) && ((_unitGroup getVariable ["GroupSize",0]) > 0) && !(isNull _killer) && ((_trigger distance _killer) < _chaseDist) && (((vehicle _killer) isKindOf "Man") or ((vehicle _killer) isKindOf "Motorcycle"))} do {
 		_killerPos = getPosATL _killer;
 		(units _unitGroup) doMove _killerPos;
 		{if (alive _x) then {_x moveTo _killerPos;/*diag_log "AI unit in pursuit.";*/};} forEach (units _unitGroup);

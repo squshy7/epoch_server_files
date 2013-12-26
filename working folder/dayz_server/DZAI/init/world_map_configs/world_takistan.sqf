@@ -7,10 +7,9 @@
 
 #include "spawn_markers\markers_takistan.sqf"	//Load manual spawn point definitions file.
 
-if (DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
 	"DZAI_centerMarker" setMarkerPos [6368.2764, 6624.2744];
 	"DZAI_centerMarker" setMarkerSize [6000, 6000];
-	if (isNil "DZAI_dynTriggersMax") then {DZAI_dynTriggersMax = 16;};
 };
 		
 if (DZAI_verifyTables) then {

@@ -5,7 +5,7 @@
 		
         Usage: [_unit,_killer] call DZAI_unitDeath;
 		
-		Last updated: 11:51 PM 11/19/2013
+		Last updated: 7:09 PM 12/15/2013
 */
 
 private["_victim","_killer","_unitGroup","_unitType"];
@@ -14,6 +14,10 @@ _killer = _this select 1;
 
 if (_victim getVariable ["deathhandled",false]) exitWith {};
 _victim setVariable ["deathhandled",true];
+/*if ((vehicle _victim) != _victim) then {
+	_victim action ["eject",(vehicle _victim)];
+	unassignVehicle _victim;
+};*/
 _victim setDamage 1;
 _victim removeAllEventHandlers "HandleDamage";
 
@@ -31,7 +35,25 @@ switch (_unitType) do {
 	case "air": 
 	{
 		_victim setVariable ["DZAI_deathTime",time];
-		_victim removeWeapon "NVGoggles";
+		if ((_victim getVariable ["removeNVG",0]) == 1) then {
+			_victim removeWeapon "NVGoggles";
+		};
+		_victim spawn DZAI_deathFlies;
+		_victim setVariable ["bodyName",_victim getVariable ["bodyName","unknown"],true];		//Broadcast the unit's name (was previously a private variable).
+		_victim setVariable ["deathType","bled",true];
+		_victim setVariable ["DZAI_deathTime",time];
+		_victim enableSimulation false;
+	};
+	case "land":
+	{
+		_victim setVariable ["DZAI_deathTime",time];
+		if ((_victim getVariable ["removeNVG",0]) == 1) then {
+			_victim removeWeapon "NVGoggles";
+		};
+		_victim spawn DZAI_deathFlies;
+		_victim setVariable ["bodyName",_victim getVariable ["bodyName","unknown"],true];		//Broadcast the unit's name (was previously a private variable).
+		_victim setVariable ["deathType","bled",true];
+		_victim setVariable ["DZAI_deathTime",time];
 		_victim enableSimulation false;
 	};
 	case default {
@@ -48,6 +70,7 @@ switch (_unitType) do {
 if (_unitType in ["static","dynamic"]) then {
 	0 = [_victim,_killer,_unitGroup] call DZAI_AI_killed_all;
 };
+
 //diag_log format ["DEBUG :: AI %1 (Group %2) killed by %3",_victim,_unitGroup,_killer];
 
 true

@@ -50,10 +50,8 @@ for "_i" from 1 to _totalAI do {
 	_unit setPosATL _pos;
 	[_unit] joinSilent _unitGroup;														// Add AI unit to group
 
-	_name = (name _unit);
-	_unit setIdentity _name;	
-	_unit setVariable ["bodyName",_name];												// Set unit body name
-	_unit setVariable ["unithealth",[12000,0,0]];										// Set unit health (blood, hands health, legs health)
+	_unit setVariable ["bodyName",(name _unit)];										// Set unit body name
+	_unit setVariable ["unithealth",[12000,0,0,false,false]];							// Set unit health (blood, hands health, legs health, hands broken, legs broken)
 	_unit setVariable ["unconscious",false];											// Set unit consciousness
 
 	if (DZAI_zAggro) then {
@@ -80,6 +78,6 @@ if (!isNil "_dummy") then {
 
 _unitGroup selectLeader ((units _unitGroup) select 0);
 _unitGroup setVariable ["trigger",_trigger];
-_unitGroup setVariable ["groupSize",_totalAI];
+_unitGroup setVariable ["GroupSize",_totalAI];
 
 _unitGroup

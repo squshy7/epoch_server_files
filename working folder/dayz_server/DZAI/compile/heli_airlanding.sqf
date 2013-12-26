@@ -3,16 +3,18 @@
 		
 		Description: Called when AI air vehicle performs a landing. Converts onboard AI crew into static-type units.
 		
-        Usage: [_helicopter] call DZAI_airLanding;
-		
-		Last updated: 12:02 AM 11/21/2013
+		Last updated: 1:49 PM 12/18/2013
 */
 
 private ["_helicopter","_trigger","_heliPos","_weapongrade","_unitsAlive","_unitGroup"];
 _helicopter = _this select 0;
 
+if (_helicopter getVariable ["heli_disabled",false]) exitWith {};
+_helicopter setVariable ["heli_disabled",true];
+
 _helicopter removeAllEventHandlers "GetOut";
 _helicopter removeAllEventHandlers "Killed";
+_helicopter removeAllEventHandlers "HandleDamage";
 _helicopter addEventHandler ["GetIn",{
 	if (isPlayer (_this select 2)) then {
 		(_this select 2) action ["getOut",(_this select 0)]; 
@@ -32,8 +34,9 @@ _weapongrade = [DZAI_weaponGrades,DZAI_gradeChancesHeli] call fnc_selectRandomWe
 		0 = [_x, _weapongrade] call DZAI_setSkills;
 		0 = [_x, _weapongrade] spawn DZAI_autoRearm_unit;
 		_x setVariable ["unconscious",false];
-		_x setVariable ["unithealth",[12000,0,0]];
-		if ((getDammage _x) > 0) then {_x setDamage 0};
+		_x setVariable ["unithealth",[12000,0,0,false,false]];
+		_x setHit["hands",0];
+		_x setHit["legs",0];
 		unassignVehicle _x;
 	};
 } forEach (units _unitGroup);
@@ -59,8 +62,9 @@ _trigger setVariable ["permadelete",true];
 
 _unitGroup setVariable ["unitType","static"];
 _unitGroup setVariable ["trigger",_trigger];
-_unitGroup setVariable ["groupSize",_unitsAlive];
+_unitGroup setVariable ["GroupSize",_unitsAlive];
 
 [_helicopter,900] spawn DZAI_deleteObject;
 DZAI_curHeliPatrols = DZAI_curHeliPatrols - 1;
+0 = ["air"] spawn fnc_respawnHandler;
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: AI helicopter %1 landed at %2.",typeOf _helicopter,mapGridPosition _helicopter];};

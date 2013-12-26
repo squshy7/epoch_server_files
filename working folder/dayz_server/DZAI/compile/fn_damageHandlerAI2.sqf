@@ -10,9 +10,9 @@ _damage = 		_this select 2;				//Resulting level of damage for the selection. (R
 _source = 		_this select 3;				//The source unit that caused the damage. 
 _ammo = 		_this select 4;				//Classname of the projectile that caused inflicted the damage. ("" for unknown, such as falling damage.) 
 
-//if (_ammo isKindOf "Melee") then {_damage = _damage * 0.024};
 if ((group _unit) == (group _source)) then {_damage = (_damage/5)};	//Reduce friendly fire and collision damage.
 _unithealth = _unit getVariable "unithealth"; 		// Retrieve unit's health statistics
+if (isNil "_unithealth") exitWith {_damage};
 
 _scale = 300;
 if (_damage > 0.1) then {
@@ -21,12 +21,20 @@ if (_damage > 0.1) then {
 		case "hands": {
 			_partdamage = (_unithealth select 1) + (_damage/2);
 			_unithealth set [1,_partdamage];	//Record hand damage internally
-			if (_partdamage >= 1) then {_unit setHit["hands",1]};	//Break hands when enough damage taken
+			if ((_partdamage >= 1) && !(_unithealth select 3)) then {
+				[nil,_unit,rSAY,["z_fracture_0",40]] call RE;
+				_unit setHit["hands",1];
+				_unithealth set [3,true];
+			};	//Break hands when enough damage taken
 		};
 		case "legs": {
 			_partdamage = (_unithealth select 2) + (_damage/2);
 			_unithealth set [2,_partdamage];	//Record leg damage internally
-			if (_partdamage >= 1) then {_unit setHit["legs",1]}; //Break legs when enough damage taken
+			if ((_partdamage >= 1) && !(_unithealth select 4)) then {
+				[nil,_unit,rSAY,["z_fracture_1",40]] call RE;
+				_unit setHit["legs",1];
+				_unithealth set [4,true];
+			}; //Break legs when enough damage taken
 		};
 		case "head_hit": {
 			_scale = _scale * 6;

@@ -2,7 +2,7 @@
 	Reads from CfgWorlds config and extracts information about city/town names, positions, and types.
 	If an unrecognized map is detected, this script will automatically create static triggers where needed.
 	
-	Last updated: 1:39 AM 9/29/2013
+	Last updated: 12:39 AM 11/30/2013
 */
 
 private ["_location","_cfgWorldName","_startTime","_locCount"];
@@ -24,13 +24,17 @@ if (isNil "DZAI_newMap") then {
 		private ["_placeType"];
 		_placeType = getText (_cfgWorldName >> _x >> "type");
 		if (_placeType in ["NameCityCapital","NameCity","NameVillage","NameLocal"]) then {
-			private ["_placeName","_placePos"];
+			private ["_placeName","_placePos","_blacklist"];
 			_placeName = getText (_cfgWorldName >> _x >> "name");
 			_placePos = [] + getArray (_cfgWorldName >> _x >> "position");
-			DZAI_locations set [(count DZAI_locations),[_placeName,_placePos,_placeType,objNull]];	//Location Name, Position, Type, Dynamic Trigger object (objNull if none).
+			if (_placeType != "NameLocal") then {
+				_blacklist = createLocation ["Strategic",_placePos,600,600];
+			};
+			DZAI_locations set [(count DZAI_locations),[_placeName,_placePos,_placeType]];	//Location Name, Position, Type.
 			_locCount = _locCount + 1;
 			//diag_log format ["DEBUG :: Found a location at %1 (%2, %3).",_placeName,_placeType,_placePos];
 		};
+		if ((_forEachIndex % 25) == 0) then {sleep 0.01;};
 	} forEach _allPlaces;
 } else {
 	for "_i" from 0 to ((count _cfgWorldName) -1) do {
@@ -81,11 +85,8 @@ if (isNil "DZAI_newMap") then {
 				_locCount = _locCount + 1;
 				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Created a static spawn at %1 (%2).",_placeName,_placeType];};
 			};
-			sleep 0.01;
+			if ((_forEachIndex % 25) == 0) then {sleep 0.01;};
 		} forEach _allPlaces;
-		if ((DZAI_dynAISpawns)&&(isNil "DZAI_dynTriggersMax")&&(!DZAI_V2dynSpawns)) then {
-			DZAI_dynTriggersMax = ceil (0.2*_locCount);
-		};
 };
 DZAI_locations_ready = true;
 

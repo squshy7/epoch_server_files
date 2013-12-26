@@ -8,10 +8,9 @@
 #include "spawn_markers\markers_trinity.sqf"	//Load manual spawn point definitions file.
 #include "spawn_areas\areas_trinity.sqf"		//Load spawn area definitions file.
 
-if (DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
 	"DZAI_centerMarker" setMarkerPos [7183.8403, 7067.4727];
 	"DZAI_centerMarker" setMarkerSize [5250, 5250];
-	if (isNil "DZAI_dynTriggersMax") then {DZAI_dynTriggersMax = 10;};
 };
 
 if (DZAI_verifyTables) then {

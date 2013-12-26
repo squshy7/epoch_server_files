@@ -61,5 +61,5 @@ if (_unitsAlive == 0) then {
 	};
 };
 
-sleep 3;
+sleep 1.5;
 _victim enableSimulation false;
