@@ -5,60 +5,58 @@
 	
 	Last updated: 2:21 PM 8/27/2013
 */
+private ["_randomizeCount"];
 
-diag_log "DZAI Scheduler is running required script files...";
+diag_log "Starting DZAI Scheduler in 30 seconds.";
 
-_vehiclesEnabled = ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0));
-
-[] call compile preprocessFile "\z\addons\dayz_server\DZAI\scripts\buildWeightedTables.sqf";
-
-//If serverside object patch enabled, then spawn in serverside objects.
-if (DZAI_objPatch) then {
-	_nul = [] execVM '\z\addons\dayz_server\DZAI\scripts\buildingpatch_all.sqf';
-};
-
-//Build DZAI weapon classname tables from CfgBuildingLoot data if DZAI_dynamicWeapons = true;
-if (DZAI_dynamicWeaponList) then {
-	_weaponlist = [DZAI_banAIWeapons] execVM '\z\addons\dayz_server\DZAI\scripts\buildWeaponArrays.sqf';
-	//waitUntil {sleep 0.005; scriptDone _weaponlist};
-};
+sleep 30;
 
 if (DZAI_verifyTables) then {
-	_verify = [	"DZAI_Rifles0","DZAI_Rifles1","DZAI_Rifles2","DZAI_Rifles3","DZAI_Pistols0","DZAI_Pistols1","DZAI_Pistols2","DZAI_Pistols3",
-				"DZAI_Backpacks0","DZAI_Backpacks1","DZAI_Backpacks2","DZAI_Backpacks3","DZAI_Edibles","DZAI_Medicals1","DZAI_Medicals2",
-				"DZAI_MiscItemS","DZAI_MiscItemL","DZAI_BanditTypes","DZAI_heliTypes","DZAI_launcherTypes"] execVM "\z\addons\dayz_server\DZAI\scripts\verifyTables.sqf";
-	waitUntil {sleep 0.005; scriptDone _verify};
+	waitUntil {sleep 0.1; !isNil "DZAI_classnamesVerified"};	//Wait for DZAI to finish verifying classname arrays.
+} else {
+	waitUntil {sleep 0.1; !isNil "DZAI_weaponsInitialized"};	//Wait for DZAI to finish building weapon classname arrays.
 };
 
-//Build map location list. If using an unknown map, DZAI will automatically generate basic static triggers at cities and towns.
-_nul = [] execVM '\z\addons\dayz_server\DZAI\scripts\setup_locations.sqf';
-sleep 0.1;
-
-if ((count DZAI_dynAreaBlacklist) > 0) then {
-	_nul = DZAI_dynAreaBlacklist execVM '\z\addons\dayz_server\DZAI\scripts\setup_blacklist_areas.sqf';
-	sleep 0.1;
-};
-
-if (_vehiclesEnabled) then {
-	_nul = [] execVM '\z\addons\dayz_server\DZAI\scripts\setup_veh_patrols.sqf';
+if (DZAI_aiHeliPatrols) then {
+	if ((count DZAI_heliTypes) < 1) then {DZAI_heliTypes = ["UH1H_DZ"]}; 
+	_nul = [] execVM '\z\addons\dayz_server\DZAI\scripts\setup_heli_patrol.sqf';
+	_objectMonitor = [] call DZAI_getObjMon;
 };
 
 if (DZAI_dynAISpawns) then {
-	if (DZAI_modName == "epoch") then {
-		_nul = [] execVM '\z\addons\dayz_server\DZAI\scripts\setup_trader_areas.sqf';
+	if (!DZAI_V2dynSpawns) then {
+		if (!(isNil "DZAI_newMap")) then {waitUntil {sleep 1; DZAI_locations_ready};};
+		_dynTriggers = [DZAI_dynTriggersMax] execVM '\z\addons\dayz_server\DZAI\scripts\spawnTriggers_random.sqf';
+		waitUntil {sleep 1; scriptDone _dynTriggers};
+		_randomizeCount = ceil(0.25*DZAI_dynTriggersMax);
+	} else {
+		_dynManagerV2 = [] execVM '\z\addons\dayz_server\DZAI\scripts\dynamicSpawn_manager.sqf';
 	};
-	_dynManagerV2 = [] execVM '\z\addons\dayz_server\DZAI\scripts\dynamicSpawn_manager.sqf';
 };
 
-sleep 10;
-
-if (DZAI_monitorRate > 0) then {[] execVM '\z\addons\dayz_server\DZAI\scripts\DZAI_monitor.sqf';};
+sleep 3;
 
 diag_log "DZAI Scheduler will continue tasks in 15 minutes.";
 sleep 900;
 
 while {true} do {
 	if (DZAI_debugLevel > 0) then {diag_log "DZAI Scheduler is now running.";};
+
+	//Randomize some dynamic triggers
+	if (DZAI_dynAISpawns && (!DZAI_V2dynSpawns)) then {
+		_dynTriggers = [_randomizeCount] spawn DZAI_randDynTriggers;
+		waitUntil {sleep 1; scriptDone _dynTriggers};
+		sleep 3;
+	};
+	
+	if (DZAI_aiHeliPatrols) then {
+		//Respawn any destroyed AI helicopters
+		_helipatrols = [] spawn fnc_spawnHeliPatrol;
+		waitUntil {sleep 1; scriptDone _helipatrols};
+		sleep 3;
+		//Clean up server object monitor
+		_objectMonitor = _objectMonitor - [objNull];
+	};
 
 	//Clean up dead units spawned by DZAI.
 	{

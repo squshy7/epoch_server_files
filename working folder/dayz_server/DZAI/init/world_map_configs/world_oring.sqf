@@ -7,9 +7,10 @@
 
 #include "spawn_markers\markers_oring.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if (DZAI_dynAISpawns) then {
 	"DZAI_centerMarker" setMarkerPos [5191.1069, 5409.1938];
 	"DZAI_centerMarker" setMarkerSize [4750, 4750];
+	if (isNil "DZAI_dynTriggersMax") then {DZAI_dynTriggersMax = 15;};
 };
 
 if (DZAI_verifyTables) then {

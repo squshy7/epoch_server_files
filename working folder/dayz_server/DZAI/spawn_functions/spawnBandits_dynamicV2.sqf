@@ -15,7 +15,7 @@ _patrolDist = _this select 0;
 _trigger = _this select 1;
 _spawnChance = _this select 2;
 
-if ((count (_trigger getVariable ["GroupArray",[]]) > 0) or (_trigger getVariable ["forceDespawn",false])) exitWith {if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: Active groups found. Exiting spawn script (spawnBandits_dynamic)";};};	
+if (count (_trigger getVariable ["GroupArray",[]]) > 0) exitWith {if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: Active groups found. Exiting spawn script (spawnBandits_dynamic)";};};	
 
 _startTime = diag_tickTime;
 
@@ -67,8 +67,7 @@ if (DZAI_debugMarkers > 0) then {
 
 //Spawn units
 _spawnPos = [_playerPos,(_baseDist + random (_distVariance)),[(_playerDir-_dirVariance),(_playerDir+_dirVariance)],false] call SHK_pos;
-//_weapongrade = [DZAI_weaponGrades,DZAI_gradeChancesDyn] call fnc_selectRandomWeighted;
-_weapongrade = DZAI_dynEquipType call DZAI_getWeapongrade;
+_weapongrade = [DZAI_weaponGrades,DZAI_gradeChancesDyn] call fnc_selectRandomWeighted;
 _unitGroup = [_totalAI,grpNull,_spawnPos,_trigger,_weapongrade] call DZAI_setup_AI;
 
 //Set group variables

@@ -14,20 +14,12 @@ if ((typeName _weapongrade) == "SCALAR") then {
 	};
 	
 	switch (_weapongrade) do {
-		case -1: {
-			if ((random 1) < 0.8) then {
-				_weapons = DZAI_Pistols0;
-			} else {
-				_weapons = [DZAI_rifles0,DZAI_Pistols1] call BIS_fnc_selectRandom2;;
-			};
-			_backpacks = DZAI_Backpacks0;
-			_gadgetsArray = DZAI_gadgets0;
-		};
 		case 0: {
-			if ((random 1) > 0.25) then {
-				_weapons = DZAI_rifles0;
-			} else {
+			if ((random 1) < 0.25) then {
 				_weapons = [DZAI_Pistols0,DZAI_Pistols1] call BIS_fnc_selectRandom2;
+				_unit setVariable ["CanGivePistol",false];	//Prevent unit from being assigned a pistol after death.
+			} else {
+				_weapons = DZAI_rifles0;
 			};
 			_backpacks = DZAI_Backpacks0;
 			_gadgetsArray = DZAI_gadgets0;
@@ -44,36 +36,6 @@ if ((typeName _weapongrade) == "SCALAR") then {
 		};
 		case 3: {
 			_weapons = DZAI_rifles3;
-			_backpacks = DZAI_Backpacks3;
-			_gadgetsArray = DZAI_gadgets1;
-		};
-		case 4: {
-			_weapons = if (isNil "DZAI_Rifles4") then {DZAI_Rifles3} else {DZAI_Rifles4};
-			_backpacks = DZAI_Backpacks3;
-			_gadgetsArray = DZAI_gadgets1;
-		};
-		case 5: {
-			_weapons = if (isNil "DZAI_Rifles5") then {DZAI_Rifles3} else {DZAI_Rifles5};
-			_backpacks = DZAI_Backpacks3;
-			_gadgetsArray = DZAI_gadgets1;
-		};
-		case 6: {
-			_weapons = if (isNil "DZAI_Rifles6") then {DZAI_Rifles3} else {DZAI_Rifles6};
-			_backpacks = DZAI_Backpacks3;
-			_gadgetsArray = DZAI_gadgets1;
-		};
-		case 7: {
-			_weapons = if (isNil "DZAI_Rifles7") then {DZAI_Rifles3} else {DZAI_Rifles7};
-			_backpacks = DZAI_Backpacks3;
-			_gadgetsArray = DZAI_gadgets1;
-		};
-		case 8: {
-			_weapons = if (isNil "DZAI_Rifles8") then {DZAI_Rifles3} else {DZAI_Rifles8};
-			_backpacks = DZAI_Backpacks3;
-			_gadgetsArray = DZAI_gadgets1;
-		};
-		case 9: {
-			_weapons = if (isNil "DZAI_Rifles9") then {DZAI_Rifles3} else {DZAI_Rifles9};
 			_backpacks = DZAI_Backpacks3;
 			_gadgetsArray = DZAI_gadgets1;
 		};
@@ -94,7 +56,6 @@ if ((typeName _weapongrade) == "SCALAR") then {
 	_unit addWeapon _weapon;
 	_unit selectWeapon _weapon;
 	_unit addBackpack _backpack;
-	if ((getNumber (configFile >> "CfgWeapons" >> _weapon >> "type")) == 2) then {_unit setVariable ["CanGivePistol",false]};
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Created weapon %1 and backpack %3 for AI with weapongrade %2. (fn_unitSelectWeapon)",_weapon,_weapongrade,_backpack];};
 	
 	//diag_log format ["DEBUG :: Counted %1 tools in _gadgetsArray.",(count _gadgetsArray)];
