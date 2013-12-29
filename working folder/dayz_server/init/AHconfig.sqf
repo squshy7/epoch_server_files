@@ -12,7 +12,7 @@
 /*  BANNED PLAYER HERE    */ _BLOCKED =         ["0","0","0"]; //do not have a , at the end.
 /* ********************************************************************************* */
 /*  Top esc menu TXT      */ _TopOfESC = 'KoN'; //do not use ' or " in this text.
-/*  Bottom esc menu TXT   */ _LowerTop = 'KoN'; //do not use ' or " in this text.
+/*  Bottom esc menu TXT   */ _LowerTop = 'www.knightsofnom.com'; //do not use ' or " in this text.
 /*  Bottom esc menu TXT2  */ _LowerBottom = 'Knights of Nom'; //do not use ' or " in this text.
 /*  Color esc menu TXT    */ _EscColor = [0,0.8,1,1];
 /* ********************************************************************************* */
