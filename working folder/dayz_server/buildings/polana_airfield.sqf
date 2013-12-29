@@ -907,7 +907,7 @@ if (true) then
 _bldObj = objNull;
 if (true) then
 {
-  _bldObj = createVehicle ["Land_Mil_hangar_EP1", [11149.512, 7963.0342, 0.50590569], [], 0, "CAN_COLLIDE"]
+  _bldObj = createVehicle ["Land_Mil_hangar_EP1", [11149.512, 7963.0342, 0.50590569], [], 0, "CAN_COLLIDE"];
   _bldObj setDir 24.546232;
   _bldObj setPos [11149.512, 7963.0342, 0.50590569];
 };
