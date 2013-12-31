@@ -4,6 +4,8 @@
 
 [] ExecVM "\z\addons\dayz_server\buildings\elektro.sqf";
 
+[] ExecVM "\z\addons\dayz_server\buildings\golden_river.sqf";
+
 [] ExecVM "\z\addons\dayz_server\buildings\NEAF.sqf";
 
 [] ExecVM "\z\addons\dayz_server\buildings\NWAF.sqf";
