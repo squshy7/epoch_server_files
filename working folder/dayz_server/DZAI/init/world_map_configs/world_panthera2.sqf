@@ -7,10 +7,9 @@
 
 #include "spawn_markers\markers_panthera2.sqf"	//Load manual spawn point definitions file.
 
-if (DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
 	"DZAI_centerMarker" setMarkerPos [5343.6953, 4366.2534];
 	"DZAI_centerMarker" setMarkerSize [3500, 3500];
-	if (isNil "DZAI_dynTriggersMax") then {DZAI_dynTriggersMax = 9;};
 };
 
 if (DZAI_verifyTables) then {

@@ -28,6 +28,7 @@ if (_unitsAlive == 0) then {
 	_dummy disableAI "MOVE";
 	_dummy disableAI "TARGET";
 	_dummy disableAI "AUTOTARGET";
+	_dummy setVariable ["unconscious",true]; //prevent radio messages if dummy is group leader
 	
 	if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: All groups spawned by trigger %1 are dead. Starting force respawn. (fnc_dynAIDeath).",_trigger];};
 	_trigger setVariable ["forceDespawn",true];
@@ -35,6 +36,3 @@ if (_unitsAlive == 0) then {
 };
 
 if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: AI group %1 killed, %2 units left alive in group. (fnc_dynAIDeath).",_unitGroup,_unitsAlive];};
-
-sleep 3;
-_victim enableSimulation false;

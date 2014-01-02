@@ -26,16 +26,15 @@ _attempts = 0;
 _baseDist = 100;
 
 while {((count _pos) < 1)&&(_attempts < 3)} do {
-	_pos = _spawnPos findEmptyPosition [0.5,_baseDist,"Land_Ind_BoardsPack2"];
+	_pos = _spawnPos findEmptyPosition [0.5,_baseDist,"Misc_cargo_cont_small_EP1"];
 	if ((count _pos) > 1) then {
 		_pos = _pos isFlatEmpty [0,0,0.75,5,0,false,ObjNull];
 	};
-	_baseDist = (_baseDist + 75);	_attempts = (_attempts + 1);
+	_baseDist = (_baseDist + 100);	_attempts = (_attempts + 1);
 };
 
 if ((count _pos) < 1) then {
-	_pos = [_spawnPos,0,100,0.5,0,2000,0] call BIS_fnc_findSafePos;
-	if ((_pos distance _spawnPos) > 200) then {_pos = _spawnPos;};
+	_pos = [(getPosATL _trigger),random (125),random(360),false] call SHK_pos;
 	_attempts = (_attempts + 1);
 };
 
@@ -50,10 +49,8 @@ for "_i" from 1 to _totalAI do {
 	_unit setPosATL _pos;
 	[_unit] joinSilent _unitGroup;														// Add AI unit to group
 
-	_name = (name _unit);
-	_unit setIdentity _name;	
-	_unit setVariable ["bodyName",_name];												// Set unit body name
-	_unit setVariable ["unithealth",[12000,0,0]];										// Set unit health (blood, hands health, legs health)
+	_unit setVariable ["bodyName",(name _unit)];										// Set unit body name
+	_unit setVariable ["unithealth",[12000,0,0,false,false]];							// Set unit health (blood, hands health, legs health, hands broken, legs broken)
 	_unit setVariable ["unconscious",false];											// Set unit consciousness
 
 	if (DZAI_zAggro) then {
@@ -80,6 +77,7 @@ if (!isNil "_dummy") then {
 
 _unitGroup selectLeader ((units _unitGroup) select 0);
 _unitGroup setVariable ["trigger",_trigger];
-_unitGroup setVariable ["groupSize",_totalAI];
+_unitGroup setVariable ["GroupSize",_totalAI];
+DZAI_numAIUnits = DZAI_numAIUnits + _totalAI;
 
 _unitGroup

@@ -2,7 +2,7 @@ private ["_unit","_pistol","_pistols","_weapongrade","_magazine","_currentWeapon
 _unit = _this select 0;
 _weapongrade = _this select 1;
 
-if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: AI killed by player at %1. Generating loot with weapongrade %2 (fn_banditAIKilled).",mapGridPosition _unit,_weapongrade];};
+if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: AI killed by player at %1. Generating loot with weapongrade %2.",mapGridPosition _unit,_weapongrade];};
 
 if (_unit getVariable ["CanGivePistol",true]) then {
 	_pistols = switch (_weapongrade) do {
@@ -48,27 +48,30 @@ for "_i" from 1 to DZAI_bpedibles do {
 	};
 };
 
+//Chance to add miscellaneous item (Small) to backpack
+for "_i" from 1 to DZAI_numMiscItemS do {
+	if ((random 1) < DZAI_chanceMiscItemS) then {
+		private ["_miscItemS"];
+		_miscItemS = DZAI_MiscItemS call BIS_fnc_selectRandom2;
+		(unitBackpack _unit) addMagazineCargoGlobal [_miscItemS,1];
+		if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: Generated Misc Item (Small): %1 for AI.",_miscItemS];};
+	};
+};
+
 if (_weapongrade > 0) then {
-	//Chance to add miscellaneous item (Small) to backpack
-	for "_i" from 1 to DZAI_numMiscItemS do {
-		if ((random 1) < DZAI_chanceMiscItemS) then {
-			private ["_miscItemS"];
-			_miscItemS = DZAI_MiscItemS call BIS_fnc_selectRandom2;
-			(unitBackpack _unit) addMagazineCargoGlobal [_miscItemS,1];
-			if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: Generated Misc Item (Small): %1 for AI.",_miscItemS];};
+	
+	//Chance to add miscellaneous item (Large) to backpack - only if backpack capacity is 10 or higher
+	if ((getNumber (configFile >> "CfgVehicles" >> (str (unitBackpack _unit)) >> "transportMaxMagazines")) > 9) then {
+		for "_i" from 1 to DZAI_numMiscItemL do {
+			if ((random 1) < DZAI_chanceMiscItemL) then {
+				private["_miscItemL"];
+				_miscItemL = DZAI_MiscItemL call BIS_fnc_selectRandom2;
+				(unitBackpack _unit) addMagazineCargoGlobal [_miscItemL,1];
+				if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: Generated Misc Item (Large): %1 for AI.",_miscItemL];};
+			};
 		};
 	};
 	
-	//Chance to add miscellaneous item (Large) to backpack
-	for "_i" from 1 to DZAI_numMiscItemL do {
-		if ((random 1) < DZAI_chanceMiscItemL) then {
-			private["_miscItemL"];
-			_miscItemL = DZAI_MiscItemL call BIS_fnc_selectRandom2;
-			(unitBackpack _unit) addMagazineCargoGlobal [_miscItemL,1];
-			if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: Generated Misc Item (Large): %1 for AI.",_miscItemL];};
-		};
-	};
-
 	//Add medical items to backpack
 	for "_i" from 1 to DZAI_bpmedicals do {
 		if ((random 1) < DZAI_chanceMedicals) then {

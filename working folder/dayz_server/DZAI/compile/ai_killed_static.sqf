@@ -36,6 +36,7 @@ if (_unitsAlive == 0) then {
 		_dummy disableAI "MOVE";
 		_dummy disableAI "TARGET";
 		_dummy disableAI "AUTOTARGET";
+		_dummy setVariable ["unconscious",true]; //prevent radio messages if dummy is group leader
 		_unitGroup setVariable ["dummyUnit",_dummy];
 		if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: Spawned 1 dummy AI unit for group %1. (fnc_staticAIDeath)",_unitGroup];};
 		
@@ -60,6 +61,3 @@ if (_unitsAlive == 0) then {
 		DZAI_actTrigs = DZAI_actTrigs - 1;
 	};
 };
-
-sleep 3;
-_victim enableSimulation false;

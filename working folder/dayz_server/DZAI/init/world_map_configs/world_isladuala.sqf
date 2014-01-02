@@ -7,10 +7,9 @@
 
 #include "spawn_markers\markers_isladuala.sqf"	//Load manual spawn point definitions file.
 
-if (DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
 	"DZAI_centerMarker" setMarkerPos [4945.3438, 4919.6616];
 	"DZAI_centerMarker" setMarkerSize [4000, 4000];
-	if (isNil "DZAI_dynTriggersMax") then {DZAI_dynTriggersMax = 8;};
 };
 
 if (DZAI_verifyTables) then {

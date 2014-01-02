@@ -7,19 +7,19 @@
 	
 */
 
-private ["_objectMonitor"];
+private ["_amount"];
 
 if (DZAI_curHeliPatrols >= DZAI_maxHeliPatrols) exitWith {};
 
-_objectMonitor = [] call DZAI_getObjMon;
+_amount = _this;
 
-for "_i" from 1 to (DZAI_maxHeliPatrols - DZAI_curHeliPatrols) do {
-	private ["_heliType","_startPos","_helicopter","_unitGroup","_pilot","_turretCount","_crewCount","_weapongrade"];
+for "_i" from 1 to _amount do {
+	private ["_heliType","_startPos","_helicopter","_unitGroup","_pilot","_turretCount","_weapongrade","_waypoint"];
 	_heliType = DZAI_heliTypes call BIS_fnc_selectRandom2;
 	
 	//If chosen classname isn't an air-type vehicle, then use UH1H as default.
-	if !(_heliType isKindOf "Air") then {_heliType = "UH1H_DZ"};
-	_startPos = [(getMarkerPos "DZAI_centerMarker"),(600 + random((getMarkerSize "DZAI_centerMarker") select 0)),random(360),false] call SHK_pos;
+	if !(_heliType isKindOf "air") then {_heliType = "UH1H_DZ"};
+	_startPos = [(getMarkerPos "DZAI_centerMarker"),(random((getMarkerSize "DZAI_centerMarker") select 0)),random(360),false] call SHK_pos;
 	//_startPos = ["DZAI_centerMarker",true] call SHK_pos;
 	
 	//Create the patrol group
@@ -29,6 +29,7 @@ for "_i" from 1 to (DZAI_maxHeliPatrols - DZAI_curHeliPatrols) do {
 	//Create helicopter crew
 	_pilot = _unitGroup createUnit [(DZAI_BanditTypes call BIS_fnc_selectRandom2), [0,0,0], [], 1, "NONE"];
 	[_pilot] joinSilent _unitGroup;
+	_unitGroup selectLeader _pilot;
 		
 	//Create the helicopter and set variables
 	_helicopter = createVehicle [_heliType, [_startPos select 0, _startPos select 1, 180], [], 0, "FLY"];
@@ -42,21 +43,26 @@ for "_i" from 1 to (DZAI_maxHeliPatrols - DZAI_curHeliPatrols) do {
 		_helicopter setDir _heliDir;
 		_helicopter setVelocity [(sin _heliDir * _heliSpd),(cos _heliDir * _heliSpd), 0];
 	};
-	_objectMonitor set [count _objectMonitor, _helicopter];
-	_helicopter setVariable ["ObjectID",""];
+	_nul = _helicopter call DZAI_protectObject;
 	_helicopter setVariable ["unitGroup",_unitGroup];
+	_helicopter setVariable ["durability",[0,0]];	//[structural, engine]
 	if (DZAI_debugLevel > 0) then {diag_log format ["Spawned helicopter type %1 for group %2 at %3.",_heliType,_unitGroup,mapGridPosition _helicopter];};
 
 	//Add helicopter pilot
-	_crewCount = 1;
+	//_weapongrade = [DZAI_weaponGrades,DZAI_gradeChancesHeli] call fnc_selectRandomWeighted;
+	_weapongrade = DZAI_heliEquipType call DZAI_getWeapongrade;
 	_pilot assignAsDriver _helicopter;
 	_pilot moveInDriver _helicopter;
 	0 = [_pilot,"helicrew"] call DZAI_setSkills;
-	_pilot setVariable ["unithealth",[12000,0,0]];
-	_pilot setVariable ["removeNVG",1];
+	0 = [_pilot, _weapongrade] call DZAI_setupLoadout;
+	_pilot setVariable ["unithealth",[12000,0,0,false,false]];
 	_pilot setVariable ["unconscious",true];	//Prevent AI heli crew from being knocked unconscious
 	_pilot setVariable ["DZAI_deathTime",time];
-	_pilot addWeapon "NVGoggles";
+	_pilot setVariable ["bodyName",(name _pilot)];
+	if (!(_pilot hasWeapon "NVGoggles")) then {
+		_pilot addWeapon "NVGoggles";
+		_pilot setVariable ["removeNVG",1];
+	};
 	_pilot addEventHandler ["HandleDamage",{_this call DZAI_AI_handledamage}];
 	
 	//Fill all available helicopter gunner seats.
@@ -68,14 +74,17 @@ for "_i" from 1 to (DZAI_maxHeliPatrols - DZAI_curHeliPatrols) do {
 			_gunner assignAsGunner _helicopter;
 			_gunner moveInTurret [_helicopter,[_i]];
 			0 = [_gunner,"helicrew"] call DZAI_setSkills;
-			_gunner setVariable ["unithealth",[12000,0,0]];
-			_gunner setVariable ["removeNVG",1];
+			0 = [_gunner,_weapongrade] call DZAI_setupLoadout;
+			_gunner setVariable ["unithealth",[12000,0,0,false,false]];
 			_gunner setVariable ["unconscious",true];	//Prevent AI heli crew from being knocked unconscious
 			_gunner setVariable ["DZAI_deathTime",time];
-			_gunner addWeapon "NVGoggles";
+			_gunner setVariable ["bodyName",(name _gunner)];
+			if (!(_gunner hasWeapon "NVGoggles")) then {
+				_gunner addWeapon "NVGoggles";
+				_gunner setVariable ["removeNVG",1];
+			};
 			_gunner addEventHandler ["HandleDamage",{_this call DZAI_AI_handledamage}];
 			[_gunner] joinSilent _unitGroup;
-			_crewCount = _crewCount + 1;
 			//diag_log format ["DEBUG :: Assigned gunner %1 of %2 to AI %3.",(_i+1),(count _heliTurrets),_heliType];
 		};
 	} else {
@@ -92,11 +101,11 @@ for "_i" from 1 to (DZAI_maxHeliPatrols - DZAI_curHeliPatrols) do {
 		};
 	};
 	//Add eventhandlers
-	_helicopter addEventHandler ["Killed",{_this spawn fnc_heliDespawn;}];					//Begin despawn process when heli is destroyed.
-	//_helicopter addEventHandler ["LandedTouchDown",{(_this select 0) setFuel 0;(_this select 0) setDamage 1;}];			//Destroy helicopter if it is forced to land.
+	_helicopter addEventHandler ["Killed",{_this call DZAI_heliDestroyed;}];					//Begin despawn process when heli is destroyed.
 	_helicopter addEventHandler ["GetOut",{_this call DZAI_airLanding;}];	//Converts AI crew to ground AI units.
-	_helicopter setVariable ["crewCount",_crewCount];
+	_helicopter addEventHandler ["HandleDamage",{_this call DZAI_hHandleDamage}];
 	_helicopter setVehicleAmmo 1;
+	_helicopter flyInHeight 125;
 	[_helicopter] spawn DZAI_autoRearm_heli;
 
 	//Set group behavior and waypoint
@@ -118,13 +127,21 @@ for "_i" from 1 to (DZAI_maxHeliPatrols - DZAI_curHeliPatrols) do {
 
 	//Set initial waypoint and begin patrol
 	[_unitGroup,0] setWaypointType "MOVE";
-	[_unitGroup,0] setWaypointTimeout [5,10,15];
+	[_unitGroup,0] setWaypointTimeout [1,1,1];
 	[_unitGroup,0] setWaypointCompletionRadius 150;
-	[_unitGroup,0] setWaypointStatements ["true","[(group this)] spawn DZAI_heliRandomPatrol;"];
+	[_unitGroup,0] setWaypointStatements ["true","[(group this)] spawn DZAI_heliDetectPlayers;"];
+	
+	_waypoint = _unitGroup addWaypoint [_startPos,0];
+	_waypoint setWaypointType "MOVE";
+	_waypoint setWaypointTimeout [3,6,9];
+	_waypoint setWaypointCompletionRadius 150;
+	_waypoint setWaypointStatements ["true","[(group this)] spawn DZAI_heliRandomPatrol;"];
+	
 	[_unitGroup] spawn DZAI_heliRandomPatrol;
 
-	if (!isNull _helicopter) then {DZAI_curHeliPatrols = DZAI_curHeliPatrols + 1};
-	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Created AI helicopter crew group %1 is now active and patrolling.",_unitGroup];};
-
-	if (_i <= (DZAI_maxHeliPatrols - DZAI_curHeliPatrols)) then {sleep 20};
+	if ((!isNull _helicopter)&&(!isNull _unitGroup)) then {
+		DZAI_curHeliPatrols = DZAI_curHeliPatrols + 1;
+		if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Created AI helicopter crew group %1 is now active and patrolling.",_unitGroup];};
+	};
+	if (_i < _amount) then {sleep 20};
 };
