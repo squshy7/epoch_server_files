@@ -1,4 +1,14 @@
-if (isServer) then {
+activateAddons [ 
+  "map_eu"
+];
+
+activateAddons ["map_eu"];
+initAmbientLife;
+
+_this = createCenter west;
+_center_0 = _this;
+
+_group_0 = createGroup _center_0;
 
 _vehicle_5 = objNull;
 if (true) then
@@ -115,24 +125,6 @@ if (true) then
   _vehicle_18 = _this;
   _this setDir -93.769531;
   _this setPos [982.60052, 4170.9995];
-};
-
-_vehicle_19 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Base_WarfareBBarrier10xTall", [983.61053, 4155.6948], [], 0, "CAN_COLLIDE"];
-  _vehicle_19 = _this;
-  _this setDir -93.306816;
-  _this setPos [983.61053, 4155.6948];
-};
-
-_vehicle_20 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Base_WarfareBBarrier10xTall", [983.29089, 4140.4185, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
-  _vehicle_20 = _this;
-  _this setDir 86.820145;
-  _this setPos [983.29089, 4140.4185, -3.0517578e-005];
 };
 
 _vehicle_21 = objNull;
@@ -403,15 +395,6 @@ if (true) then
   _vehicle_51 = _this;
   _this setDir -70.224075;
   _this setPos [1478.761, 3899.2769, -0.0001373291];
-};
-
-_vehicle_52 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Base_WarfareBBarrier10xTall", [984.03851, 4125.3638, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
-  _vehicle_52 = _this;
-  _this setDir 87.001396;
-  _this setPos [984.03851, 4125.3638, 3.0517578e-005];
 };
 
 _vehicle_53 = objNull;
@@ -736,6 +719,17 @@ if (true) then
   _vehicle_102 = _this;
   _this setDir -24.375641;
   _this setPos [1773.3055, 3555.6482];
+};
+
+_unit_4 = objNull;
+if (true) then
+{
+  _this = _group_0 createUnit ["BAF_Soldier_SniperH_W", [1064.8909, 4158.2329], [], 0, "CAN_COLLIDE"];
+  _unit_4 = _this;
+  _this setDir 86.017471;
+  _this setUnitAbility 0.60000002;
+  if (true) then {_group_0 selectLeader _this;};
+  if (true) then {selectPlayer _this;};
 };
 
 _vehicle_103 = objNull;
@@ -2616,4 +2610,6 @@ if (true) then
   _this setPos [1136.701, 4191.1172, 3.0517578e-005];
 };
 
-};
+processInitCommands;
+runInitScript;
+finishMissionInit;
