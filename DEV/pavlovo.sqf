@@ -117,24 +117,6 @@ if (true) then
   _this setPos [982.60052, 4170.9995];
 };
 
-_vehicle_19 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Base_WarfareBBarrier10xTall", [983.61053, 4155.6948], [], 0, "CAN_COLLIDE"];
-  _vehicle_19 = _this;
-  _this setDir -93.306816;
-  _this setPos [983.61053, 4155.6948];
-};
-
-_vehicle_20 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Base_WarfareBBarrier10xTall", [983.29089, 4140.4185, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
-  _vehicle_20 = _this;
-  _this setDir 86.820145;
-  _this setPos [983.29089, 4140.4185, -3.0517578e-005];
-};
-
 _vehicle_21 = objNull;
 if (true) then
 {
@@ -403,15 +385,6 @@ if (true) then
   _vehicle_51 = _this;
   _this setDir -70.224075;
   _this setPos [1478.761, 3899.2769, -0.0001373291];
-};
-
-_vehicle_52 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Base_WarfareBBarrier10xTall", [984.03851, 4125.3638, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
-  _vehicle_52 = _this;
-  _this setDir 87.001396;
-  _this setPos [984.03851, 4125.3638, 3.0517578e-005];
 };
 
 _vehicle_53 = objNull;
@@ -2568,10 +2541,10 @@ if (true) then
 _vehicle_359 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_Mil_ControlTower_EP1", [1260.9906, 4186.25, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_ControlTower_EP1", [1289.0288, 4188.4038, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_359 = _this;
-  _this setDir -2.0874383;
-  _this setPos [1260.9906, 4186.25, -3.0517578e-005];
+  _this setDir -131.81216;
+  _this setPos [1289.0288, 4188.4038, -3.0517578e-005];
 };
 
 _vehicle_364 = objNull;
@@ -2603,17 +2576,19 @@ if (true) then
 _vehicle_382 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_Mil_Barracks", [1161.6379, 4188.9102, 4.5776367e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_Barracks", [1160.0076, 4183.6689, 4.5776367e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_382 = _this;
-  _this setPos [1161.6379, 4188.9102, 4.5776367e-005];
+  _this setDir 88.520004;
+  _this setPos [1160.0076, 4183.6689, 4.5776367e-005];
 };
 
 _vehicle_383 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_Mil_Barracks", [1136.701, 4191.1172, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_Barracks", [1144.9498, 4182.9795, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_383 = _this;
-  _this setPos [1136.701, 4191.1172, 3.0517578e-005];
+  _this setDir 88.025063;
+  _this setPos [1144.9498, 4182.9795, 3.0517578e-005];
 };
 
 _vehicle_384 = objNull;
@@ -2873,6 +2848,629 @@ if (true) then
   _vehicle_438 = _this;
   _this setDir -156.68626;
   _this setPos [1163.7448, 4057.9241];
+};
+
+_vehicle_440 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_HouseB_Tenement", [1778.7367, 3911.832, -4.5776367e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_440 = _this;
+  _this setDir -20.603653;
+  _this setPos [1778.7367, 3911.832, -4.5776367e-005];
+};
+
+_vehicle_446 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_A_CraneCon", [1837.672, 4041.2983, -0.00010681152], [], 0, "CAN_COLLIDE"];
+  _vehicle_446 = _this;
+  _this setDir 66.801254;
+  _this setPos [1837.672, 4041.2983, -0.00010681152];
+};
+
+_vehicle_455 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_Expedice_1", [1943.2114, 3954.5962, 4.5776367e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_455 = _this;
+  _this setDir 108.13138;
+  _this setPos [1943.2114, 3954.5962, 4.5776367e-005];
+};
+
+_vehicle_458 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_Mlyn_01", [1955.1672, 4033.9392, -1.984365], [], 0, "CAN_COLLIDE"];
+  _vehicle_458 = _this;
+  _this setDir -72.771233;
+  _this setPos [1955.1672, 4033.9392, -1.984365];
+};
+
+_vehicle_460 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_Mlyn_03", [1913.4132, 3966.2871, 4.5776367e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_460 = _this;
+  _this setDir 18.716694;
+  _this setPos [1913.4132, 3966.2871, 4.5776367e-005];
+};
+
+_vehicle_464 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_Pec_01", [2040.9373, 4012.0981, -1.993295], [], 0, "CAN_COLLIDE"];
+  _vehicle_464 = _this;
+  _this setDir -249.7881;
+  _this setPos [2040.9373, 4012.0981, -1.993295];
+};
+
+_vehicle_473 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_ind_silomale", [2073.4253, 4003.1848, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_473 = _this;
+  _this setDir 109.82989;
+  _this setPos [2073.4253, 4003.1848, 3.0517578e-005];
+};
+
+_vehicle_474 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_SiloVelke_01", [1913.1099, 4061.1262, -1.0750121], [], 0, "CAN_COLLIDE"];
+  _vehicle_474 = _this;
+  _this setDir 197.78786;
+  _this setPos [1913.1099, 4061.1262, -1.0750121];
+};
+
+_vehicle_475 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_SiloVelke_02", [2029.6099, 3985.5569, -0.3527461], [], 0, "CAN_COLLIDE"];
+  _vehicle_475 = _this;
+  _this setDir -342.42743;
+  _this setPos [2029.6099, 3985.5569, -0.3527461];
+};
+
+_vehicle_477 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_Stack_Big", [1999.4249, 3976.4856, -6.1035156e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_477 = _this;
+  _this setDir -252.24329;
+  _this setPos [1999.4249, 3976.4856, -6.1035156e-005];
+};
+
+_vehicle_494 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_A_MunicipalOffice", [1801.1378, 3708.334, 0.25866586], [], 0, "CAN_COLLIDE"];
+  _vehicle_494 = _this;
+  _this setDir 164.75592;
+  _this setPos [1801.1378, 3708.334, 0.25866586];
+};
+
+_vehicle_497 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_A_TVTower_Base", [1641.2229, 3957.1938, -6.1035156e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_497 = _this;
+  _this setPos [1641.2229, 3957.1938, -6.1035156e-005];
+};
+
+_vehicle_498 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_A_TVTower_Mid", [1641.2048, 3957.2241, -7.6293945e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_498 = _this;
+  _this setPos [1641.2048, 3957.2241, -7.6293945e-005];
+};
+
+_vehicle_499 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_A_TVTower_Top", [1641.2277, 3957.197, -1.2233993], [], 0, "CAN_COLLIDE"];
+  _vehicle_499 = _this;
+  _this setPos [1641.2277, 3957.197, -1.2233993];
+};
+
+_vehicle_505 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Church_03_dam", [1843.3956, 3712.6646, 1.0446854], [], 0, "CAN_COLLIDE"];
+  _vehicle_505 = _this;
+  _this setPos [1843.3956, 3712.6646, 1.0446854];
+};
+
+_vehicle_510 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_telek1", [1625.4526, 3940.9258], [], 0, "CAN_COLLIDE"];
+  _vehicle_510 = _this;
+  _this setPos [1625.4526, 3940.9258];
+};
+
+_vehicle_511 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Vysilac_FM", [1619.8856, 3938.7021, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_511 = _this;
+  _this setPos [1619.8856, 3938.7021, -3.0517578e-005];
+};
+
+_vehicle_512 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_vysilac_FM2", [1622.2034, 3934.4463, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_512 = _this;
+  _this setPos [1622.2034, 3934.4463, -3.0517578e-005];
+};
+
+_vehicle_517 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_TankBig", [1828.6683, 4119.9902, -7.6293945e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_517 = _this;
+  _this setDir 19.705307;
+  _this setPos [1828.6683, 4119.9902, -7.6293945e-005];
+};
+
+_vehicle_519 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_TankSmall2", [1882.049, 4002.3767, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_519 = _this;
+  _this setDir -69.436203;
+  _this setPos [1882.049, 4002.3767, -3.0517578e-005];
+};
+
+_vehicle_525 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1838.5762, 4068.0356, -1.5258789e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_525 = _this;
+  _this setDir -64.057404;
+  _this setPos [1838.5762, 4068.0356, -1.5258789e-005];
+};
+
+_vehicle_529 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Barn_Metal", [1855.3311, 4019.1921, 0.31868556], [], 0, "CAN_COLLIDE"];
+  _vehicle_529 = _this;
+  _this setDir -70.890213;
+  _this setPos [1855.3311, 4019.1921, 0.31868556];
+};
+
+_vehicle_536 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_SiloVelke_02", [1985.3817, 3999.4006, -7.6293945e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_536 = _this;
+  _this setDir -162.02217;
+  _this setPos [1985.3817, 3999.4006, -7.6293945e-005];
+};
+
+_vehicle_538 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_SiloVelke_02", [1941.6727, 4014.2434, 0.32003528], [], 0, "CAN_COLLIDE"];
+  _vehicle_538 = _this;
+  _this setDir -161.84883;
+  _this setPos [1941.6727, 4014.2434, 0.32003528];
+};
+
+_vehicle_618 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_SiloVelke_most", [2006.3967, 3992.7112, -0.13140541], [], 0, "CAN_COLLIDE"];
+  _vehicle_618 = _this;
+  _this setDir 17.501352;
+  _this setPos [2006.3967, 3992.7112, -0.13140541];
+};
+
+_vehicle_624 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_IndPipe2_big_ground1", [1966.7448, 4001.5457, 36.508801], [], 0, "CAN_COLLIDE"];
+  _vehicle_624 = _this;
+  _this setDir -73.024399;
+  _this setPos [1966.7448, 4001.5457, 36.508801];
+};
+
+_vehicle_625 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_IndPipe2_big_9", [1961.1248, 4003.6104, 36.504353], [], 0, "CAN_COLLIDE"];
+  _vehicle_625 = _this;
+  _this setDir -72.639053;
+  _this setPos [1961.1248, 4003.6104, 36.504353];
+};
+
+_vehicle_627 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_IndPipe2_big_ground2", [1954.9907, 4005.8052, 36.514145], [], 0, "CAN_COLLIDE"];
+  _vehicle_627 = _this;
+  _this setDir -72.525322;
+  _this setPos [1954.9907, 4005.8052, 36.514145];
+};
+
+_vehicle_634 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_concrete_block", [1956.6199, 4004.6597, 34.515736], [], 0, "CAN_COLLIDE"];
+  _vehicle_634 = _this;
+  _this setDir 18.186605;
+  _this setPos [1956.6199, 4004.6597, 34.515736];
+};
+
+_vehicle_635 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_concrete_block", [1965.0306, 4001.7737, 34.313526], [], 0, "CAN_COLLIDE"];
+  _vehicle_635 = _this;
+  _this setDir 18.961273;
+  _this setPos [1965.0306, 4001.7737, 34.313526];
+};
+
+_vehicle_636 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_Stack_Big", [1955.9779, 3991.2207, -6.1035156e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_636 = _this;
+  _this setDir 106.66129;
+  _this setPos [1955.9779, 3991.2207, -6.1035156e-005];
+};
+
+_vehicle_637 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_Stack_Big", [2046.0223, 3962.0952, 1.5258789e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_637 = _this;
+  _this setDir 108.96206;
+  _this setPos [2046.0223, 3962.0952, 1.5258789e-005];
+};
+
+_vehicle_638 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_IndPipe2_big_18ladder", [2036.1617, 3997.5474, 36.270874], [], 0, "CAN_COLLIDE"];
+  _vehicle_638 = _this;
+  _this setDir -161.06471;
+  _this setPos [2036.1617, 3997.5474, 36.270874];
+};
+
+_vehicle_641 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_IndPipe2_big_ground1", [2040.6932, 4005.5313, 36.266502], [], 0, "CAN_COLLIDE"];
+  _vehicle_641 = _this;
+  _this setDir 199.70641;
+  _this setPos [2040.6932, 4005.5313, 36.266502];
+};
+
+_vehicle_655 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_IndPipe2_big_ground2", [2033.3717, 3985.9177, 36.284817], [], 0, "CAN_COLLIDE"];
+  _vehicle_655 = _this;
+  _this setDir -161.27512;
+  _this setPos [2033.3717, 3985.9177, 36.284817];
+};
+
+_vehicle_658 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_D_Mlyn_Vys", [1945.3411, 4054.6204, 21.460455], [], 0, "CAN_COLLIDE"];
+  _vehicle_658 = _this;
+  _this setDir 18.13806;
+  _this setPos [1945.3411, 4054.6204, 21.460455];
+};
+
+_vehicle_659 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_D_Pec_Vez1", [1940.767, 4052.2197, -2.6396618], [], 0, "CAN_COLLIDE"];
+  _vehicle_659 = _this;
+  _this setDir 17.442263;
+  _this setPos [1940.767, 4052.2197, -2.6396618];
+};
+
+_vehicle_666 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_MalyKomin", [1824.579, 4092.0295, 0.0001373291], [], 0, "CAN_COLLIDE"];
+  _vehicle_666 = _this;
+  _this setDir -158.27129;
+  _this setPos [1824.579, 4092.0295, 0.0001373291];
+};
+
+_vehicle_674 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_Pec_02", [1833.8617, 4086.6831, -0.25888598], [], 0, "CAN_COLLIDE"];
+  _vehicle_674 = _this;
+  _this setDir 20.985584;
+  _this setPos [1833.8617, 4086.6831, -0.25888598];
+};
+
+_vehicle_688 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_SiloVelke_01", [1935.2227, 4085.0398, -0.93915004], [], 0, "CAN_COLLIDE"];
+  _vehicle_688 = _this;
+  _this setDir 18.373854;
+  _this setPos [1935.2227, 4085.0398, -0.93915004];
+};
+
+_vehicle_690 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_SiloVelke_02", [1889.0656, 4101.1465, -0.79067498], [], 0, "CAN_COLLIDE"];
+  _vehicle_690 = _this;
+  _this setDir -159.80545;
+  _this setPos [1889.0656, 4101.1465, -0.79067498];
+};
+
+_vehicle_691 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_SiloVelke_most", [1913.3179, 4092.501, -1.0459646], [], 0, "CAN_COLLIDE"];
+  _vehicle_691 = _this;
+  _this setDir 20.523355;
+  _this setPos [1913.3179, 4092.501, -1.0459646];
+};
+
+_vehicle_692 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_MalyKomin", [1822.062, 4085.3464, 0.00016784668], [], 0, "CAN_COLLIDE"];
+  _vehicle_692 = _this;
+  _this setDir -158.02913;
+  _this setFuel 0.89999998;
+  _this setPos [1822.062, 4085.3464, 0.00016784668];
+};
+
+_vehicle_693 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_MalyKomin", [1819.483, 4078.637, 0.00025939941], [], 0, "CAN_COLLIDE"];
+  _vehicle_693 = _this;
+  _this setDir -158.27605;
+  _this setPos [1819.483, 4078.637, 0.00025939941];
+};
+
+_vehicle_694 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_Ind_MalyKomin", [1816.7904, 4071.7446, 0.00062561035], [], 0, "CAN_COLLIDE"];
+  _vehicle_694 = _this;
+  _this setDir -158.20097;
+  _this setPos [1816.7904, 4071.7446, 0.00062561035];
+};
+
+_vehicle_695 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_D_Pec_Vez1", [1926.4607, 4073.8633, -8.2894592], [], 0, "CAN_COLLIDE"];
+  _vehicle_695 = _this;
+  _this setDir 106.58197;
+  _this setPos [1926.4607, 4073.8633, -8.2894592];
+};
+
+_vehicle_696 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [2082.759, 4149.2046, 0], [], 0, "CAN_COLLIDE"];
+  _vehicle_696 = _this;
+  _this setPos [2082.759, 4149.2046, 0];
+};
+
+_vehicle_697 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1918.2493, 4048.1619, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_697 = _this;
+  _this setDir -19.263985;
+  _this setPos [1918.2493, 4048.1619, -3.0517578e-005];
+};
+
+_vehicle_698 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1867.7517, 4002.3953, -4.5776367e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_698 = _this;
+  _this setDir -23.083481;
+  _this setPos [1867.7517, 4002.3953, -4.5776367e-005];
+};
+
+_vehicle_699 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1989.9346, 3971.8662, -4.5776367e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_699 = _this;
+  _this setDir 8.917655;
+  _this setPos [1989.9346, 3971.8662, -4.5776367e-005];
+};
+
+_vehicle_700 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1913.4283, 3956.2817, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_700 = _this;
+  _this setDir -30.911903;
+  _this setPos [1913.4283, 3956.2817, -3.0517578e-005];
+};
+
+_vehicle_701 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [2027.7633, 4012.2456, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_701 = _this;
+  _this setDir 23.422264;
+  _this setPos [2027.7633, 4012.2456, -3.0517578e-005];
+};
+
+_vehicle_702 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1934.5334, 4078.1309], [], 0, "CAN_COLLIDE"];
+  _vehicle_702 = _this;
+  _this setDir -33.652363;
+  _this setPos [1934.5334, 4078.1309];
+};
+
+_vehicle_703 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1791.8076, 4176.0742, -4.5776367e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_703 = _this;
+  _this setDir -32.442711;
+  _this setPos [1791.8076, 4176.0742, -4.5776367e-005];
+};
+
+_vehicle_704 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1643.3612, 3968.7705, 1.5258789e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_704 = _this;
+  _this setDir -80.470695;
+  _this setPos [1643.3612, 3968.7705, 1.5258789e-005];
+};
+
+_vehicle_705 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1773.8788, 3919.749, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_705 = _this;
+  _this setDir -64.036125;
+  _this setPos [1773.8788, 3919.749, 3.0517578e-005];
+};
+
+_vehicle_706 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1765.1791, 3562.4507], [], 0, "CAN_COLLIDE"];
+  _vehicle_706 = _this;
+  _this setDir -42.577354;
+  _this setPos [1765.1791, 3562.4507];
+};
+
+_vehicle_707 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1728.4802, 3630.8103], [], 0, "CAN_COLLIDE"];
+  _vehicle_707 = _this;
+  _this setDir -31.380745;
+  _this setPos [1728.4802, 3630.8103];
+};
+
+_vehicle_708 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1724.1251, 3729.8237], [], 0, "CAN_COLLIDE"];
+  _vehicle_708 = _this;
+  _this setDir -79.384514;
+  _this setPos [1724.1251, 3729.8237];
+};
+
+_vehicle_709 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1018.3035, 4112.3555], [], 0, "CAN_COLLIDE"];
+  _vehicle_709 = _this;
+  _this setDir -81.430977;
+  _this setPos [1018.3035, 4112.3555];
+};
+
+_vehicle_710 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1050.1508, 4218.8149], [], 0, "CAN_COLLIDE"];
+  _vehicle_710 = _this;
+  _this setDir -49.556854;
+  _this setPos [1050.1508, 4218.8149];
+};
+
+_vehicle_711 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1173.327, 4179.5342, 1.5258789e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_711 = _this;
+  _this setDir 63.6465;
+  _this setPos [1173.327, 4179.5342, 1.5258789e-005];
+};
+
+_vehicle_712 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1294.9941, 4176.709], [], 0, "CAN_COLLIDE"];
+  _vehicle_712 = _this;
+  _this setDir 71.096779;
+  _this setPos [1294.9941, 4176.709];
+};
+
+_vehicle_713 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1451.0364, 4048.8342, 1.5258789e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_713 = _this;
+  _this setDir 53.311897;
+  _this setPos [1451.0364, 4048.8342, 1.5258789e-005];
+};
+
+_vehicle_714 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1536.4271, 4047.2678, -9.1552734e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_714 = _this;
+  _this setDir 79.489265;
+  _this setPos [1536.4271, 4047.2678, -9.1552734e-005];
+};
+
+_vehicle_715 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1553.2997, 3881.2097, -9.1552734e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_715 = _this;
+  _this setDir -110.45692;
+  _this setPos [1553.2997, 3881.2097, -9.1552734e-005];
+};
+
+_vehicle_716 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1549.5074, 3700.2153, -2.2888184e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_716 = _this;
+  _this setDir -66.445282;
+  _this setPos [1549.5074, 3700.2153, -2.2888184e-005];
+};
+
+_vehicle_717 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1613.8788, 4129.9858], [], 0, "CAN_COLLIDE"];
+  _vehicle_717 = _this;
+  _this setDir -60.325764;
+  _this setPos [1613.8788, 4129.9858];
+};
+
+_vehicle_718 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [1716.3734, 3820.1084], [], 0, "CAN_COLLIDE"];
+  _vehicle_718 = _this;
+  _this setDir -31.486038;
+  _this setPos [1716.3734, 3820.1084];
+};
+
+_vehicle_719 = objNull;
+if (true) then
+{
+  _this = createVehicle ["MAP_misc_amplion_wood", [2086.8801, 3788.1101, 4.5776367e-005], [], 0, "CAN_COLLIDE"];
+  _vehicle_719 = _this;
+  _this setDir -95.552544;
+  _this setPos [2086.8801, 3788.1101, 4.5776367e-005];
 };
 
 };
