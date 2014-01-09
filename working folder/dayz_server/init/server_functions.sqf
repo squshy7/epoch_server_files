@@ -31,7 +31,7 @@ server_spawnEvents =		compile preprocessFileLineNumbers "\z\addons\dayz_server\c
 
 fnc_plyrHit   =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_plyrHit.sqf";
 server_deaths = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDeaths.sqf";
-fnc_hTime = compile preprocessFile "\z\addons\dayz_server\EMS\misc\fnc_hTime.sqf"; //Random integer selector for mission wait time
+
 
 vehicle_handleInteract = {
 	private["_object"];
@@ -597,17 +597,6 @@ dayz_recordLogin = {
 	_key = format["CHILD:103:%1:%2:%3:",_this select 0,_this select 1,_this select 2];
 	_key call server_hiveWrite;
 };
-
-//----------InitMissions--------//
-MissionGo = 0;
-MissionGoMinor = 0;
-if (isServer) then { 
-  SMarray = ["SM1","SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SM10","SM11","SM12","SM13"];
-  [] execVM "\z\addons\dayz_server\EMS\major\SMfinder.sqf"; //Starts major mission system
-  SMarray2 = ["SM1","SM2","SM3","SM4","SM5","SM6","SM7","SM8","SM9","SM10","SM11","SM12","SM13"];
-  [] execVM "\z\addons\dayz_server\EMS\minor\SMfinder.sqf"; //Starts minor mission system
-};
-//---------EndInitMissions------//
 
 dayz_perform_purge = {
 	if(!isNull(_this)) then {

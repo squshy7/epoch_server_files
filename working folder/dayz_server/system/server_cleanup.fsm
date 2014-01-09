@@ -294,7 +294,7 @@ class FSM
       name = "group_cleanup";
       init = /*%FSM<STATEINIT""">*/"//Check for hackers" \n
        " {" \n
-       "	if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x) && (vehicle _x getVariable [""Sarge"",0] != 1) && !((typeOf vehicle _x) in DZE_safeVehicle)) then {" \n
+       "	if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle)) then {" \n
        "		diag_log (""CLEANUP: KILLING A HACKER "" + (name _x) + "" "" + str(_x) + "" IN "" + (typeOf vehicle _x));" \n
        "		(vehicle _x) setDamage 1;" \n
        "		_x setDamage 1;" \n
