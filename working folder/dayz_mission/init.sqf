@@ -89,6 +89,12 @@ if (!isDedicated) then {
 	//Lights
 	[0,0,true,true,false,58,280,600,[0.698, 0.556, 0.419],"Generator_DZ",0.1] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
 	
+	// Mission System Markers
+	if (!isServer) then {
+	[] execVM "debug\addmarkers.sqf";
+	[] execVM "debug\addmarkers75.sqf";
+	};
+	
 	//Service Points
 	execVM "service_point\service_point.sqf";
 };
