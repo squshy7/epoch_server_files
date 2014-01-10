@@ -346,7 +346,6 @@ if (isServer and isNil "sm_done") then {
 	};
 
 	call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
-	[] ExecVM "\z\addons\dayz_server\WAI\init.sqf";
 	allowConnection = true;
 
 	// [_guaranteedLoot, _randomizedLoot, _frequency, _variance, _spawnChance, _spawnMarker, _spawnRadius, _spawnFire, _fadeFire]
