@@ -26,3 +26,254 @@
 */
 
 //----------------------------Add your custom spawn definitions below this line ----------------------------
+[
+	"squadspawn1",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn2",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn3",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn4",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn5",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn6",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn7",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn8",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn9",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn10",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn11",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn12",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn13",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn14",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn15",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn16",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn17",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn18",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn19",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn20",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn21",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn22",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn23",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn24",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"squadspawn25",
+	5,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"sniperspawn1",
+	3,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"sniperspawn2",
+	3,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"sniperspawn3",
+	3,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"sniperspawn4",
+	3,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"guardspawn1",
+	1,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"guardspawn2",
+	1,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"guardspawn3",
+	1,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"guardspawn4",
+	1,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"guardspawn5",
+	1,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"guardspawn6",
+	1,
+	3,
+	true
+] call DZAI_spawn;
+
+[
+	"guardspawn7",
+	1,
+	3,
+	true
+] call DZAI_spawn;
