@@ -1,4 +1,5 @@
 //Axe murderer script Created by TheSzerdi Edited by Falcyn [QF]
+//Edited for EMS by Fuchs
 
 private ["_coords","_wait","_dummymarker","_grouparray","_group"];
 [] execVM "\z\addons\dayz_server\EMS\SMGoMinor.sqf";

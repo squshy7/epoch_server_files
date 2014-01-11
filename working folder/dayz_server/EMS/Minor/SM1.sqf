@@ -1,4 +1,5 @@
 //Bandit Hunting Party by lazyink (Full credit to TheSzerdi & TAW_Tonic for the code)
+//Edited for EMS by Fuchs
 
 private ["_coords","_wait","_MainMarker75"];
 [] execVM "\z\addons\dayz_server\EMS\SMGoMinor.sqf";

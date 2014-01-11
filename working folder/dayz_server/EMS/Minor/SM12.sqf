@@ -1,4 +1,5 @@
 //ural wreck Mission Created by TheSzerdi Edited by Falcyn [QF]
+//Edited for EMS by Fuchs
 
 private ["_coords","_itemType","_itemChance","_weights","_index","_iArray","_num","_nearby","_checking","_people","_wait","_dummymarker"];
 [] execVM "\z\addons\dayz_server\EMS\SMGoMinor.sqf";

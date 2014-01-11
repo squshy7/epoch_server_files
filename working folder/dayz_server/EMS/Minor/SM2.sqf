@@ -1,5 +1,5 @@
 //Medical Outpost by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
-//edited for [EMS] by Fuchs
+//Edited for EMS by Fuchs
 
 private ["_coords","_wait","_MainMarker75"];
 [] execVM "\z\addons\dayz_server\EMS\SMGoMinor.sqf";

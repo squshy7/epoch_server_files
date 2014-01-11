@@ -1,4 +1,5 @@
 //Hillbilly mission  Created by TheSzerdi Edited by Falcyn [QF]
+//Edited for EMS by Fuchs
 
 private ["_coords","_iArray","_nearby","_index","_num","_itemType","_itemChance","_weights","_wait","_dummymarker"];
 [] execVM "\z\addons\dayz_server\EMS\SMGoMinor.sqf";

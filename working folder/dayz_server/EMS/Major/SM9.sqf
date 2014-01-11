@@ -1,5 +1,5 @@
 //Firebase mission Created by TheSzerdi Edited by Falcyn [QF]
-//Modified by Mimic for Epoch Mission System
+//Edited for EMS by Fuchs
 
 private ["_coords","_dummymarker","_base","_wait"];
 [] execVM "\z\addons\dayz_server\EMS\SMGoMajor.sqf";

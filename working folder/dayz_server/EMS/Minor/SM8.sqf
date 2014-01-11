@@ -1,5 +1,5 @@
 //Outpost sidemission Created by TheSzerdi Edited by Falcyn [QF]
-//Edited by Fuchs
+//Edited for EMS by Fuchs
 
 private ["_coords","_wait","_dummymarker"];
 [] execVM "\z\addons\dayz_server\EMS\SMGoMinor.sqf";

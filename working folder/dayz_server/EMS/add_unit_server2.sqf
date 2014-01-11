@@ -1,5 +1,6 @@
 //Created by Axeman Edited by TheSzerdi
-//Edited by Fuchs for EMS
+//Edited for EMS by Fuchs
+
 private ["_aiunit","_xpos","_ypos","_unitpos","_aiGroup","_wppos","_wpradius","_wpnum","_levelnum","_numunits","_rndLOut","_ailoadout","_wp","_aispawnpos","_aiwep1","_aiammo1"];
  
     _aiunit = objNull;
