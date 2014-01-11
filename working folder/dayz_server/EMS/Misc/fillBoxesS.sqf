@@ -23,7 +23,8 @@ _crate2 addMagazineCargoGlobal ["10Rnd_762x54_SVD", 10];
 // ITEMS
 _crate2 addWeaponCargoGlobal ["ItemToolbox", 5];
 _crate2 addWeaponCargoGlobal ["ItemMatchbox_DZE", 5];
-_crate2 addWeaponCargoGlobal ["ChainSaw", 5];
+_crate2 addWeaponCargoGlobal ["ChainSaw", 1];
+_crate2 addWeaponCargoGlobal ["ItemRadio", 2];
 
 // BACKPACKS
 _crate2 addBackpackCargoGlobal ['DZ_Backpack_EP1', 1];

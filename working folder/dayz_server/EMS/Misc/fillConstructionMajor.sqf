@@ -17,7 +17,7 @@ _crate addMagazineCargoGlobal ["ItemTankTrap", 25];
 _crate addMagazineCargoGlobal ["PartWoodPile", 25];
 
 // TOOLS
-_crate addWeaponCargoGlobal ["ItemToolbox", 5];
-_crate addWeaponCargoGlobal ["ItemEtool", 5];
+_crate addWeaponCargoGlobal ["ItemToolbox", 2];
+_crate addWeaponCargoGlobal ["ItemEtool", 2];
 _crate addWeaponCargoGlobal ["ItemCrowbar", 5];
 _crate addWeaponCargoGlobal ["ItemKnife", 5];

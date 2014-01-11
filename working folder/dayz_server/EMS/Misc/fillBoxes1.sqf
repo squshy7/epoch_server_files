@@ -80,7 +80,8 @@ _crate addWeaponCargoGlobal ["ItemToolbox", 2];
 _crate addWeaponCargoGlobal ["ItemMatchbox_DZE", 1];
 _crate addMagazineCargoGlobal ["ItemBloodbag", 4];
 _crate addWeaponCargoGlobal ["Binocular_Vector", 1];
-_crate addWeaponCargoGlobal ["NVGoggles", 2];
+_crate addWeaponCargoGlobal ["NVGoggles", 1];
+_crate addWeaponCargoGlobal ["ItemRadio", 2];
 
 // CLOTHING
 _crate addMagazineCargoGlobal ["Skin_Sniper1_DZ", 1];
