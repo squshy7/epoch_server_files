@@ -612,4 +612,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_lingor.sqf"
 #include "custom_spawns\cust_spawns_lingor.sqf"
 
-diag_log "Lingor static/dynamic trigger configuration loaded.";
+diag_log "Lingor map configuration loaded.";

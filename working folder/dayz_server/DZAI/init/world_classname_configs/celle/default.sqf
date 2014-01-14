@@ -22,4 +22,4 @@ for "_i" from 0 to ((count _newItems) - 1) do {DZAI_BanditTypes set [(count DZAI
 _newItems = ["FoodCanGriff","FoodCanBadguy","FoodCanBoneboy","FoodCanCorn","FoodCanCurgon","FoodCanDemon","FoodCanFraggleos","FoodCanHerpy","FoodCanOrlok","FoodCanPowell","FoodCanTylers","ItemSodaMtngreen","ItemSodaR4z0r","ItemSodaClays","ItemSodaSmasht","ItemSodaDrwaste","ItemSodaLemonade","ItemSodaLvg","ItemSodaMzly","ItemSodaRabbit"];
 for "_i" from 0 to ((count _newItems) - 1) do {DZAI_Edibles set [(count DZAI_Edibles),(_newItems select _i)];};
 
-diag_log "Celle classnames loaded.";
+diag_log "[DZAI] Celle classnames loaded.";

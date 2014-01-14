@@ -67,4 +67,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_utes.sqf"
 #include "custom_spawns\cust_spawns_utes.sqf"
 
-diag_log "Utes static/dynamic trigger configuration loaded.";
+diag_log "Utes map configuration loaded.";

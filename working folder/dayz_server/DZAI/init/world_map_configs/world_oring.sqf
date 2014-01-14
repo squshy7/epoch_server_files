@@ -282,4 +282,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_oring"
 #include "custom_spawns\cust_spawns_oring"
 
-diag_log "Oring static/dynamic trigger configuration loaded.";
+diag_log "Oring map configuration loaded.";

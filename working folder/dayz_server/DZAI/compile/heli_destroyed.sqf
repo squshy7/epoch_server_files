@@ -28,4 +28,4 @@ DZAI_curHeliPatrols = DZAI_curHeliPatrols - 1;
 
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Helicopter patrol destroyed at %1",mapGridPosition _helicopter];};
 0 = ["air"] spawn fnc_respawnHandler;
-[_helicopter,900] spawn DZAI_deleteObject;
+[_helicopter,900] call DZAI_deleteObject;

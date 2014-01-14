@@ -234,4 +234,4 @@ _nul = [] spawn {
 	} forEach _bsLeader;
 };
 
-diag_log "Namalsk static/dynamic trigger configuration loaded.";
+diag_log "Namalsk map configuration loaded.";

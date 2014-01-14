@@ -220,12 +220,12 @@ _this setMarkerAlpha 0;
 _this setMarkerSize [200, 200];
 _marker_145 = _this;
 
-_this = createMarker ["DZAI_NEAF", [12057.165, 12613.224, 0.056991577]];
+_this = createMarker ["DZAI_NEAF", [12076.522, 12637.961, 0.056991577]];
 _this setMarkerShape "ELLIPSE";
 _this setMarkerType "Flag";
 _this setMarkerBrush "Solid";
 _this setMarkerAlpha 0;
-_this setMarkerSize [200, 200];
+_this setMarkerSize [175, 175];
 _marker_146 = _this;
 
 _this = createMarker ["DZAI_Krasnostav", [11128.36, 12342.763]];

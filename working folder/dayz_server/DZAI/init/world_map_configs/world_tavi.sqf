@@ -635,4 +635,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_tavi.sqf"
 #include "custom_spawns\cust_spawns_tavi.sqf"
 
-diag_log "Taviana static/dynamic trigger configuration loaded.";
+diag_log "Taviana map configuration loaded.";

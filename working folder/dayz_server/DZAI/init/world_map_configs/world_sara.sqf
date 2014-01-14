@@ -546,4 +546,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_sara.sqf"
 #include "custom_spawns\cust_spawns_sara.sqf"
 
-diag_log "Sahrani static/dynamic trigger configuration loaded.";
+diag_log "Sahrani map configuration loaded.";

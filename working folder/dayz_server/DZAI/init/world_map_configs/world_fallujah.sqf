@@ -297,4 +297,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_fallujah.sqf"
 #include "custom_spawns\cust_spawns_fallujah.sqf"
 
-diag_log "Fallujah static/dynamic trigger configuration loaded.";
+diag_log "Fallujah map configuration loaded.";

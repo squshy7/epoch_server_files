@@ -38,4 +38,4 @@ DZAI_Backpacks0 = ["ice_apo_pack3"];
 DZAI_Backpacks1 = ["ice_apo_pack3","ice_apo_pack1"];
 DZAI_Backpacks2 = ["ice_apo_pack1","ice_apo_pack4","ice_apo_pack2"];
 DZAI_Backpacks3 = ["ice_apo_pack4","ice_apo_pack2"];
-diag_log "Namalsk 2017 classnames loaded.";
+diag_log "[DZAI] Namalsk 2017 classnames loaded.";

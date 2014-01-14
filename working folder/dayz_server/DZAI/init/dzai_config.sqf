@@ -56,8 +56,8 @@ DZAI_modName = "";
 --------------------------------------------------------------------------------------------------------------------*/		
 
 //AI weapon noise multiplier for zombie aggro purposes. No effect if DZAI_zombieEnemy is set to false. Enabling this option may impact server performance as a script is run for each AI bullet fired.
-//Note: AI cannot be attacked or damaged by zombies.(Default: 0.00. Player equivalent: 1.00)		
-DZAI_weaponNoise = 0.00;
+//Note: AI cannot be attacked or damaged by zombies.(Default: false)		
+DZAI_weaponNoise = false;
 
 //Passive zombie-to-AI aggro. If enabled, zombies will tend to be attracted to a nearby AI group leader. Less impactful on server performance than setting a value to DZAI_weaponNoise (Default: false).
 DZAI_passiveAggro = false;
@@ -72,8 +72,7 @@ DZAI_zDetectRange = 200;
 DZAI_zombieEnemy = true;	
 
 //Enable or disable "Free For All" mode. If FFA mode is enabled, all AI groups will be hostile to each other. (default: false)
-//Exceptions: AI units of the same group, AI air patrols, and custom-spawn AI will not attack each other.
-//Warning: This option will affect ALL AI spawned, including those spawned from other addons that include AI.
+//WARNING: This option will affect ALL AI spawned, including those spawned from other addons that include AI. Not recommended to enable if using other addons with AI.
 DZAI_freeForAll = false;
 
 //If enabled, AI group will attempt to track down player responsible for killing a group member. Players with radios will be given text warnings if they are being pursued (Default: true)
@@ -83,7 +82,7 @@ DZAI_findKiller = true;
 DZAI_tempNVGs = false;	
 
 //Amount of humanity to reward player for killing an AI unit (Default: 0)									
-DZAI_humanityGain = 100;										
+DZAI_humanityGain = 50;										
 
 //If enabled, players with radios will be given text warnings if they are being pursued by AI groups. (Default: true)
 DZAI_radioMsgs = true;
@@ -139,7 +138,7 @@ DZAI_respawnTMaxA = 900;
 DZAI_heliTypes = ["Mi17_UN_CDF_EP1"];	
 
 //Specify vehicle weapon for air vehicles that are unarmed by default. DZAI will arm these air vehicles with the specified weapons upon spawning each vehicle.
-//NOTE: These classnames are not verified by DZAI - it is the user's responsibility to make sure they are valid and unbanned.
+//NOTE: As of DZAI 1.9+, vehicle classnames are verified. If the classname is invalid (banned or nonexistent), it will not be added to the vehicle.
 //Format: Each row containing a vehicle classname will be equipped with the weapon from the corresponding row in weapon classnames section. Ammo will be automatically assigned.
 DZAI_airWeapons = [
 	[
@@ -225,7 +224,7 @@ DZAI_numMiscItemL = 1;
 DZAI_chanceMedicals = 0.70;	
 
 //Chance to add each edible item.								
-DZAI_chanceEdibles = 0.75;
+DZAI_chanceEdibles = 0.70;
 
 //Chance to add random item from DZAI_MiscItemS table.									
 DZAI_chanceMiscItemS = 0.60;
@@ -273,12 +272,12 @@ DZAI_skill0 = [
 	["aimingAccuracy",0.10,0.125],
 	["aimingShake",0.45,0.55],
 	["aimingSpeed",0.45,0.55],
-	["endurance",0.40,0.60],
+	["endurance",0.40,0.50],
 	["spotDistance",0.30,0.45],
-	["spotTime",0.30,0.60],
+	["spotTime",0.30,0.45],
 	["courage",0.40,0.60],
-	["reloadSpeed",0.40,0.60],
-	["commanding",0.40,0.60],
+	["reloadSpeed",0.50,0.60],
+	["commanding",0.40,0.50],
 	["general",0.40,0.60]
 ];
 
@@ -287,12 +286,12 @@ DZAI_skill1 = [
 	["aimingAccuracy",0.125,0.15],
 	["aimingShake",0.60,0.70],
 	["aimingSpeed",0.60,0.70],
-	["endurance",0.55,0.75],
+	["endurance",0.55,0.65],
 	["spotDistance",0.45,0.60],
-	["spotTime",0.45,0.75],
+	["spotTime",0.45,0.60],
 	["courage",0.55,0.75],
-	["reloadSpeed",0.55,0.75],
-	["commanding",0.55,0.75],
+	["reloadSpeed",0.60,0.70],
+	["commanding",0.55,0.65],
 	["general",0.55,0.75]
 ];
 
@@ -300,12 +299,12 @@ DZAI_skill1 = [
 DZAI_skill2 = [	
 	["aimingAccuracy",0.15,0.20],
 	["aimingShake",0.75,0.85],
-	["aimingSpeed",0.75,0.85],
-	["endurance",0.70,0.90],
+	["aimingSpeed",0.70,0.80],
+	["endurance",0.70,0.80],
 	["spotDistance",0.60,0.75],
-	["spotTime",0.60,0.90],
+	["spotTime",0.60,0.75],
 	["courage",0.70,0.90],
-	["reloadSpeed",0.70,0.90],
+	["reloadSpeed",0.70,0.80],
 	["commanding",0.70,0.90],
 	["general",0.70,0.90]
 ];
@@ -314,13 +313,13 @@ DZAI_skill2 = [
 DZAI_skill3 = [	
 	["aimingAccuracy",0.20,0.25],
 	["aimingShake",0.85,0.95],
-	["aimingSpeed",0.85,0.95],
-	["endurance",0.80,1.00],
+	["aimingSpeed",0.80,0.90],
+	["endurance",0.80,0.90],
 	["spotDistance",0.70,0.85],
-	["spotTime",0.70,1.00],
+	["spotTime",0.70,0.85],
 	["courage",0.80,1.00],
-	["reloadSpeed",0.80,1.00],
-	["commanding",0.80,1.00],
+	["reloadSpeed",0.80,0.90],
+	["commanding",0.80,0.90],
 	["general",0.80,1.00]
 ];
 
@@ -349,16 +348,16 @@ DZAI_skill9 = nil;
 
 //AI skill settings - AI helicopter crew (Skill, Minimum skill, Maximum skill).
 DZAI_heliCrewSkills = [	
-	["aimingAccuracy",0.50,0.50],
-	["aimingShake",0.85,0.95],
-	["aimingSpeed",0.85,0.95],
+	["aimingAccuracy",0.40,0.50],
+	["aimingShake",0.80,0.95],
+	["aimingSpeed",0.80,0.95],
 	["endurance",0.60,0.80],
-	["spotDistance",0.90,1.00],
-	["spotTime",0.90,1.00],
-	["courage",0.90,1.00],
-	["reloadSpeed",0.90,1.00],
-	["commanding",0.90,1.00],
-	["general",0.80,0.90]
+	["spotDistance",0.80,1.00],
+	["spotTime",0.80,1.00],
+	["courage",0.80,1.00],
+	["reloadSpeed",0.80,1.00],
+	["commanding",0.80,1.00],
+	["general",0.80,1.00]
 ];
 
 

@@ -402,4 +402,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_panthera2.sqf"
 #include "custom_spawns\cust_spawns_panthera2.sqf"
 
-diag_log "Panthera static/dynamic trigger configuration loaded.";
+diag_log "Panthera map configuration loaded.";
