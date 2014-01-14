@@ -42,13 +42,13 @@ _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 8, _coords selec
 _crate2 setVariable ["permaLoot",true];
 
 
-[[(_coords select 0) - 20, (_coords select 1) - 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server.sqf";//AI Guards
+_aispawn = [[(_coords select 0) - 20, (_coords select 1) - 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server.sqf";//AI Guards
 sleep 3;
-[[(_coords select 0) + 10, (_coords select 1) + 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server.sqf";//AI Guards
+_aispawn = [[(_coords select 0) + 10, (_coords select 1) + 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server.sqf";//AI Guards
 sleep 3;
-[[(_coords select 0) - 10, (_coords select 1) - 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server.sqf";//AI Guards
+_aispawn = [[(_coords select 0) - 10, (_coords select 1) - 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server.sqf";//AI Guards
 sleep 3;
-[[(_coords select 0) + 20, (_coords select 1) + 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server.sqf";//AI Guards
+_aispawn = [[(_coords select 0) + 20, (_coords select 1) + 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server.sqf";//AI Guards
 sleep 3;
 
 waitUntil{{isPlayer _x && _x distance _baserunover < 30  } count playableunits > 0}; 

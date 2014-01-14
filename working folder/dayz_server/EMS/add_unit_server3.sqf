@@ -10,8 +10,8 @@
     _numunits = _this select 3;
     _levelnum = _this select 4;
     
-    LandingParty = createGroup EAST;
-    publicVariable "LandingParty";
+    Outpost = createGroup EAST;
+    publicVariable "Outpost";
     _baserunover2 = createGroup EAST;
     publicVariable "_baserunover2";
  

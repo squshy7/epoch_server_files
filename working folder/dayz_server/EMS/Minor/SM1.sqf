@@ -19,11 +19,11 @@ publicVariable "MCoords";
 _hummer = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 _hummer setVariable ["Sarge",1,true];
 
-[_coords,80,4,2,1] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
+_aispawn = [_coords,80,4,2,1] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
 sleep 5;
-[_coords,80,4,2,1] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
+ [_coords,80,4,2,1] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
 sleep 5;
-[_coords,80,4,2,1] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
+_aispawn = [_coords,80,4,2,1] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
 sleep 1;
 
 waitUntil{({alive _x} count (units SniperTeam)) < 1};

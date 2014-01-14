@@ -16,7 +16,7 @@ MCoords = _coords;
 publicVariable "MCoords";
 [] execVM "debug\addmarkers75.sqf";
 
-[_coords,80,4,2,1] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
+_aispawn = [_coords,80,4,2,1] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
 sleep 1;
 waitUntil{({alive _x} count (units SniperTeam)) < 1};
 

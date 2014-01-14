@@ -24,9 +24,9 @@ _hueychop setVariable ["Sarge",1,true];
 _hueychop setFuel 0.50;
 _hueychop setVehicleAmmo 0.00;
 
-_crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate2] execVM "\z\addons\dayz_server\EMS\misc\fillBoxesS.sqf";
-_crate2 setVariable ["permaloot",true];
+_crate1 = createVehicle ["USLaunchersBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
+[_crate1] execVM "\z\addons\dayz_server\EMS\misc\fillBoxesS.sqf";
+_crate1 setVariable ["permaloot",true];
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) + 6, _coords select 1,0],[], 90, "CAN_COLLIDE"];
 [_crate2] execVM "\z\addons\dayz_server\EMS\misc\fillBoxesS.sqf";

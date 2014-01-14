@@ -23,9 +23,9 @@ baserunover = createVehicle ["land_housev_1i4",[(_coords select 0) +2, (_coords 
 baserunover2 = createVehicle ["land_kbud",[(_coords select 0) - 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 baserunover3 = createVehicle ["land_kbud",[(_coords select 0) - 7, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 
-[[(_coords select 0) - 20, (_coords select 1) - 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
+_aispawn = [[(_coords select 0) - 20, (_coords select 1) - 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
 sleep 3;
-[[(_coords select 0) + 20, (_coords select 1) + 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
+_aispawn = [[(_coords select 0) + 20, (_coords select 1) + 15,0],40,4,2,0] execVM "\z\addons\dayz_server\EMS\add_unit_server2.sqf";//AI Guards
 sleep 3;
 
 if (isDedicated) then {
