@@ -252,7 +252,7 @@ DZAI_gradeChances2 = [0.00,0.20,0.60,0.15,0.05];
 DZAI_gradeChances3 = [0.00,0.00,0.50,0.38,0.12];	
 
 //Weapongrade chances for AI spawned from dynamic triggers.				
-DZAI_gradeChancesDyn = [0.00,0.00,0.88,0.09,0.03];				
+DZAI_gradeChancesDyn = [0.05,0.18,0.65,0.09,0.03];				
 
 //Weapongrade chances for dead AI ejected from destroyed helicopter patrols.					
 DZAI_gradeChancesHeli = [0.00,0.00,0.40,0.43,0.17];	
