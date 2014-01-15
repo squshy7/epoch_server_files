@@ -12,10 +12,10 @@ if (DZAI_debugLevel > 0) then {diag_log "DZAI V2 Dynamic Spawn Manager started."
 #define SPAWN_MAX 10 
 
 //Frequency of each cycle
-#define SLEEP_DELAY 600
+#define SLEEP_DELAY 500
 
 //Cycle frequency variance.
-#define SLEEP_VARY 540
+#define SLEEP_VARY 440
 
 _playerUIDs = [];		//Array of all collected playerUIDs
 _timestamps = [];		//Array of timestamps for each corresponding playerUID
