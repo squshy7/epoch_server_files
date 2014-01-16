@@ -3520,7 +3520,7 @@ if (true) then
 _bldObj = objNull;
 if (true) then
 {
-  _bldObj = createVehicle ["ACamp", [13639.037, 11784.898, 0.00029754639], [], 0, "CAN_COLLIDE"];
+  _bldObj = createVehicle ["Land_A_FuelStation_Feed", [13639.037, 11784.898, 0.00029754639], [], 0, "CAN_COLLIDE"];
   _bldObj setDir 10.187959;
   _bldObj setPos [13639.037, 11784.898, 0.00029754639];
 };
