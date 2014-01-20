@@ -225,38 +225,6 @@
   _this setMarkerSize [50, 50];
   _this setMarkerAlpha 0;
   _squadspawn25 = _this;
-
-  _this = createMarker ["sniperspawn1", [1896.9258, 4095.8901, 36.95126]];
-  _this setMarkerShape "ELLIPSE";
-  _this setMarkerType "Flag";
-  _this setMarkerBrush "Solid";
-  _this setMarkerSize [5, 5];
-  _this setMarkerAlpha 0;
-  _sniperspawn1 = _this;
-  
-  _this = createMarker ["sniperspawn2", [1991.3192, 3995.0637, 37.084694]];
-  _this setMarkerShape "ELLIPSE";
-  _this setMarkerType "Flag";
-  _this setMarkerBrush "Solid";
-  _this setMarkerSize [5, 5];
-  _this setMarkerAlpha 0;
-  _sniperspawn2 = _this;
-  
-  _this = createMarker ["sniperspawn3", [1632.5652, 3927.8953, 44.378883]];
-  _this setMarkerShape "ELLIPSE";
-  _this setMarkerType "Flag";
-  _this setMarkerBrush "Solid";
-  _this setMarkerSize [5, 5];
-  _this setMarkerAlpha 0;
-  _sniperspawn3 = _this;
-  
-  _this = createMarker ["sniperspawn4", [1733.6924, 3761.0652, 41.948624]];
-  _this setMarkerShape "ELLIPSE";
-  _this setMarkerType "Flag";
-  _this setMarkerBrush "Solid";
-  _this setMarkerSize [5, 5];
-  _this setMarkerAlpha 0;
-  _sniperspawn4 = _this;
   
   _this = createMarker ["guardspawn1", [987.01398, 4167.1445, -1.5258789e-005]];
   _this setMarkerShape "ELLIPSE";

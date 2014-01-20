@@ -202,34 +202,6 @@
 ] call DZAI_spawn;
 
 [
-	"sniperspawn1",
-	3,
-	2,
-	false
-] call DZAI_spawn;
-
-[
-	"sniperspawn2",
-	3,
-	2,
-	false
-] call DZAI_spawn;
-
-[
-	"sniperspawn3",
-	3,
-	2,
-	false
-] call DZAI_spawn;
-
-[
-	"sniperspawn4",
-	3,
-	2,
-	false
-] call DZAI_spawn;
-
-[
 	"guardspawn1",
 	1,
 	2,
