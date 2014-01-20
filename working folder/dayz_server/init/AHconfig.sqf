@@ -12,9 +12,9 @@
 /*  BANNED PLAYER HERE    */ _BLOCKED =         ["0","0","0"]; //do not have a , at the end.
 /* ********************************************************************************* */
 /*  Top esc menu TXT      */ _TopOfESC = 'KoN'; //do not use ' or " in this text.
-/*  Bottom esc menu TXT   */ _LowerTop = 'www.knightsofnom.com'; //do not use ' or " in this text.
-/*  Bottom esc menu TXT2  */ _LowerBottom = 'Knights of Nom'; //do not use ' or " in this text.
-/*  Color esc menu TXT    */ _EscColor = [0,0.8,1,1];
+/*  Bottom esc menu TXT   */ _LowerTop = 'Knights of Nom'; //do not use ' or " in this text.
+/*  Bottom esc menu TXT2  */ _LowerBottom = 'www.knightsofnom.com'; //do not use ' or " in this text.
+/*  Color esc menu TXT    */ _EscColor = [0,0.3,1,1];
 /* ********************************************************************************* */
 /*  DebugMonitor TXT      */ _BottomDebug = 'Knights of Nom'; //do not use ' or " in this text.
 /*  DebugMonitor Key      */ _ODK =  0xCF;	/* google DIK_KeyCodes (0xCF is END) */
@@ -32,17 +32,26 @@
 /*  Use SafeZones ?       */ _USZ =  true;   /* true or false */	/* recommended:  true */	/* if you have a zone where people get godmode/anti zombie aggro (most Epoch server do have this!) */
 /*  HACKED BOX Check ?    */ _CHB =  true;   /* true or false */	/* recommended:  true */	/* some epoch player might want to turn this one off */
 /*  Check CMDMenus ?      */ _CCM =  true;   /* true or false */	/* recommended:  true */	/* only disable this if you know what you are doing. */
-/*  BLOCK ALL CMDMenus    */ _BCM =  true;   /* true or false */	/* recommended:  true */	/* we don't need commandingMenus. so have this true. */
+/*  BLOCK ALL CMDMenus    */ _BCM = false;   /* true or false */	/* recommended:  true */	/* we don't need commandingMenus. so have this true. */
 /*  Check Actions ?       */ _CSA = false;   /* true or false */	/* recommended:  true */	/* R3F vehicle towing can't be whitelisted so we need to turn this off */
 /* ********************************************************************************* */
 /*  Player that have one of the items in _ForbiddenWeapons in their inventory will get punished!  */
-/*  FORBIDDEN Weapons     */ _ForbiddenWeapons = ['RAILGUN','P00PGUN','LEAKTUBE'];
+/*  FORBIDDEN Weapons     */ _ForbiddenWeapons =
+[
+	'ItemMap_Debug','ItemCore','Laserdesignator'
+];
 /* ********************************************************************************* */
 /*  If _UVC = true; and _UVW = true; this check will start and delete all vehicles that are not in _ALLOWED_Vehicles  */
 /*  ALLOWED  Vehicles     */ _ALLOWED_Vehicles = ['ALL IF _UVW = false','Tractor','Policecar'];
 /* ********************************************************************************* */
 /*  If _UVC = true; this check will start and delete all vehicles that are in _FORBIDDEN_Vehicles  */
-/*  FORBIDDEN Vehicles    */ _FORBIDDEN_Vehicles = ['A10','AH1Z','AH64D','T90'];
+/*  FORBIDDEN Vehicles    */ _FORBIDDEN_Vehicles =
+[
+	'A10','AH1Z','AH64D','T90','F35B','AV8B2','UH1Y','Mi24_V',
+	'Mi24_P','Mi24_D','KA52','KA52Black','SU39','Su25_CDF','SU25_Ins',
+	'A10_US_EP1','AH64D_EP1','M1A1','M1A1_TUSK_MG','T72','T72_INS','T72_RU',
+	'T72_CDF','T72_Gue','BMP3','MLRS','T34','2S6M_Tunguska'
+];
 /* ********************************************************************************* */
 /*  ALLOWED CMDMenus are only used if you have _BCM = false; which I would not recommend.  */
 /*  ALLOWED CMDMenus      */ _cMenu = 
@@ -51,12 +60,14 @@
 	'RscWatchDir','RscDisplayClassSelecter','RscDisplayGenderSelect',
 	'RscDisplaySpawnSelecter','RscWatchMoreDir','#GETIN','RscStatus',
 	'RscCombatMode','RscFormations','RscTeam','RscSelectTeam','RscReply',
-	'RscCallSupport','#ACTION','#CUSTOM_RADIO','RscRadio','RscGroupRootMenu'
+	'RscCallSupport','#ACTION','#CUSTOM_RADIO','RscRadio','RscGroupRootMenu',
+	'BTC_Hud'
 ];
 /* ********************************************************************************* */
 /*  ALLOWED Actions are only used if you have _CSA =  true;  */
 /*  ALLOWED Actions      */ _dayzActions =
 "([
+	BTC_SganciaActionId,BTC_liftActionId,BTC_liftHudId,
 	dayz_myCursorTarget,s_player_craftZombieBait,wardrobe,s_player_butcher_human,s_player_makeBomb,s_player_zombieShield,s_player_upgrademoto,
 	s_player_smeltRecipes,null,churchie_check,churchie_defuse,churchie_rig_veh,player_Cannibalism,s_player_fillfuel210,s_player_knockout,s_player_upgradegyro,ActionMenu,
 	manatee_craft_menu,manatee_craft_menu_wea,manatee_craft_menu_sur,manatee_craft_menu_ind,s_player_craftZombieBaitBomb,horror_traders,s_player_takeOwnership,s_siphon,s_player_suicide,
@@ -89,8 +100,7 @@
 	unpackRavenAct,disassembleRavenAct,launchRavenAct,strobeRavenResetAct,strobeRavenTestAct,
 	batteryLevelCheckRavenAct,batteryRechargeRavenAct,mavBaseStationActionName_00,mavBaseStationActionName_001,
 	mavBaseStationActionName_01,mavBaseStationActionName_02,mavBaseStationActionName_03,mavBaseStationActionName_04,
-	s_player_dance,s_player_igniteTent,s_player_clothes,
-	STR_R3F_LOG_action_heliporter,STR_R3F_LOG_action_heliport_larguer,
+	s_player_dance,s_player_igniteTent,s_player_clothes,STR_R3F_LOG_action_heliporter,STR_R3F_LOG_action_heliport_larguer,
 	STR_R3F_LOG_action_relacher_objet,STR_R3F_LOG_action_deplacer_objet,STR_R3F_LOG_action_remorquer_deplace,
 	STR_R3F_LOG_action_selectionner_objet_remorque,STR_R3F_LOG_action_detacher,STR_R3F_LOG_action_charger_deplace,
 	STR_R3F_LOG_action_selectionner_objet_charge,STR_R3F_LOG_action_remorquer_selection,STR_R3F_LOG_action_charger_selection,
