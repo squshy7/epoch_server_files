@@ -30,222 +30,253 @@
 	"squadspawn1",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn2",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn3",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn4",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn5",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn6",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn7",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn8",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn9",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn10",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn11",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn12",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn13",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn14",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn15",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn16",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn17",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn18",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn19",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn20",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn21",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn22",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn23",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn24",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"squadspawn25",
 	5,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
+<<<<<<< HEAD
+=======
+	"sniperspawn1",
+	3,
+	2,
+	true
+] call DZAI_spawn;
+
+[
+	"sniperspawn2",
+	3,
+	2,
+	true
+] call DZAI_spawn;
+
+[
+	"sniperspawn3",
+	3,
+	2,
+	true
+] call DZAI_spawn;
+
+[
+	"sniperspawn4",
+	3,
+	2,
+	true
+] call DZAI_spawn;
+
+[
+>>>>>>> parent of 6f70f74... False moved to AI city
 	"guardspawn1",
 	1,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"guardspawn2",
 	1,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"guardspawn3",
 	1,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"guardspawn4",
 	1,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"guardspawn5",
 	1,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"guardspawn6",
 	1,
 	2,
-	false
+	true
 ] call DZAI_spawn;
 
 [
 	"guardspawn7",
 	1,
 	2,
-	false
+	true
 ] call DZAI_spawn;
