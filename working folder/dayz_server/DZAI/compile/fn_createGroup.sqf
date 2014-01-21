@@ -30,7 +30,7 @@ while {((count _pos) < 1) && {(_attempts < 3)}} do {
 	if ((count _pos) > 1) then {
 		_pos = _pos isFlatEmpty [0,0,0.75,5,0,false,ObjNull];
 	} else {
-		_baseDist = (_baseDist + 100);	_attempts = (_attempts + 1);
+		_baseDist = (_baseDist + 50);	_attempts = (_attempts + 1);
 	};
 };
 

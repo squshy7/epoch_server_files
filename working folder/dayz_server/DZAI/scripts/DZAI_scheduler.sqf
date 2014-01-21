@@ -3,7 +3,7 @@
 	
 	Description:
 	
-	Last updated: 2:21 PM 8/27/2013
+	Last updated: 6:24 PM 1/20/2014
 */
 
 diag_log "DZAI Scheduler is running required script files...";
@@ -83,7 +83,7 @@ while {true} do {
 				_object = (_x select 0);
 				_object call DZAI_unprotectObject;
 				deleteVehicle _object;
-				_x set [_forEachIndex,objNull];
+				DZAI_deleteObjectQueue set [_forEachIndex,objNull];
 			};
 			sleep 0.005;
 		} forEach DZAI_deleteObjectQueue;
@@ -96,7 +96,7 @@ while {true} do {
 			_deletetime = _x getVariable "deletetime";
 			if (time >= _deletetime) then {
 				deleteLocation _x;
-				_x set [_forEachIndex,locationNull];
+				DZAI_dynLocations set [_forEachIndex,locationNull];
 			};
 			sleep 0.005;
 		} forEach DZAI_dynLocations;
