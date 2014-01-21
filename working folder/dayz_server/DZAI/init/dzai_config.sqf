@@ -127,7 +127,7 @@ DZAI_dynDespawnWait = 120;
 --------------------------------------------------------------------------------------------------------------------*/		
 
 //Maximum number of active AI air vehicle patrols. Set at 0 to disable (Default: 0).							
-DZAI_maxHeliPatrols = 4;
+DZAI_maxHeliPatrols = 2;
 
 //Set minimum and maximum wait time in seconds to respawn an AI vehicle patrol after vehicle is destroyed or disabled. (Default: Min 600, Max 900).
 DZAI_respawnTMinA = 420;
@@ -135,7 +135,7 @@ DZAI_respawnTMaxA = 600;
 
 //Classnames of air vehicle types to use. Valid vehicle types: Helicopters and Planes (Default: "UH1H_DZ").
 //Air vehicles that are normally unarmed may have weapons added by DZAI (see "DZAI_airWeapons" setting below).								
-DZAI_heliTypes = ["Mi17_UN_CDF_EP1","C130J_US_EP1"];	
+DZAI_heliTypes = ["Mi17_UN_CDF_EP1"];	
 
 //Specify vehicle weapon for air vehicles that are unarmed by default. DZAI will arm these air vehicles with the specified weapons upon spawning each vehicle.
 //NOTE: As of DZAI 1.9+, vehicle classnames are verified. If the classname is invalid (banned or nonexistent), it will not be added to the vehicle.
@@ -143,12 +143,14 @@ DZAI_heliTypes = ["Mi17_UN_CDF_EP1","C130J_US_EP1"];
 DZAI_airWeapons = [
 	[
 		//Air vehicle classnames (Remember: no comma for last entry! Otherwise, separate each string with commas)
-		"Helicopter1_C130J_US_EP1"
+		"Helicopter1_ExampleClassname",
+		"Helicopter2_ExampleClassname"
 	]
 	,
 	[
 		//Corresponding weapon classnames (Remember: no comma for last entry! Otherwise, separate each string with commas)
-		"Helicopter1_M134"
+		"Helicopter1_ExampleWeapon",
+		"Helicopter2_ExampleWeapon"
 	]
 ];
 
