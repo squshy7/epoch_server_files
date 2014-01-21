@@ -24,10 +24,10 @@ DZAI_AI_killed_all = compile preprocessFileLineNumbers format ["%1\compile\ai_ki
 DZAI_AI_killed_static = compile preprocessFileLineNumbers format ["%1\compile\ai_killed_static.sqf",DZAI_directory];
 DZAI_unitDeath = compile preprocessFileLineNumbers format ["%1\compile\ai_death.sqf",DZAI_directory];
 DZAI_countKills = compile preprocessFileLineNumbers format ["%1\compile\fn_countkills.sqf",DZAI_directory];
+fnc_despawnBandits = compile preprocessFileLineNumbers format ["%1\spawn_functions\despawnBandits.sqf",DZAI_directory];
 
 if (DZAI_staticAI) then {
 	fnc_spawnBandits = compile preprocessFileLineNumbers format ["%1\spawn_functions\spawnBandits.sqf",DZAI_directory];
-	fnc_despawnBandits = compile preprocessFileLineNumbers format ["%1\spawn_functions\despawnBandits.sqf",DZAI_directory];
 	DZAI_bldgPatrol = compile preprocessFileLineNumbers format ["%1\compile\ai_buildingpatrol.sqf",DZAI_directory];
 	DZAI_static_spawn = compile preprocessFileLineNumbers format ["%1\compile\fn_createStaticSpawn.sqf",DZAI_directory];
 };
