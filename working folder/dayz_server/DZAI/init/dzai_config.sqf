@@ -98,8 +98,8 @@ DZAI_useRadioAddon = false;
 DZAI_staticAI = false;
 
 //Set minimum and maximum wait time in seconds to respawn an AI group after all units have been killed. Applies to both static AI and custom spawned AI (Default: Min 300, Max 600).									
-DZAI_respawnTimeMin = 600;
-DZAI_respawnTimeMax = 900;
+DZAI_respawnTimeMin = 2700;
+DZAI_respawnTimeMax = 3600;
 
 //Time to allow spawned AI units to exist in seconds before being despawned when no players are present in a trigger area. Applies to both static AI and custom spawned AI (Default: 120)										
 DZAI_despawnWait = 120;										
@@ -130,8 +130,8 @@ DZAI_dynDespawnWait = 120;
 DZAI_maxHeliPatrols = 2;
 
 //Set minimum and maximum wait time in seconds to respawn an AI vehicle patrol after vehicle is destroyed or disabled. (Default: Min 600, Max 900).
-DZAI_respawnTMinA = 600;
-DZAI_respawnTMaxA = 900;
+DZAI_respawnTMinA = 420;
+DZAI_respawnTMaxA = 600;
 
 //Classnames of air vehicle types to use. Valid vehicle types: Helicopters and Planes (Default: "UH1H_DZ").
 //Air vehicles that are normally unarmed may have weapons added by DZAI (see "DZAI_airWeapons" setting below).								
