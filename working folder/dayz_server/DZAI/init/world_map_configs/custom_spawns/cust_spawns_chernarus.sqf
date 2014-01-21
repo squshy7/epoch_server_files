@@ -202,37 +202,6 @@
 ] call DZAI_spawn;
 
 [
-<<<<<<< HEAD
-=======
-	"sniperspawn1",
-	3,
-	2,
-	true
-] call DZAI_spawn;
-
-[
-	"sniperspawn2",
-	3,
-	2,
-	true
-] call DZAI_spawn;
-
-[
-	"sniperspawn3",
-	3,
-	2,
-	true
-] call DZAI_spawn;
-
-[
-	"sniperspawn4",
-	3,
-	2,
-	true
-] call DZAI_spawn;
-
-[
->>>>>>> parent of 6f70f74... False moved to AI city
 	"guardspawn1",
 	1,
 	2,
