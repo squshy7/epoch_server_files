@@ -1,4 +1,4 @@
-private ["_nul","_result","_pos","_wsDone","_dir","_block","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_date","_key","_outcome","_vehLimit","_hiveResponse","_objectCount","_codeCount","_objectArray","_hour","_minute","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0"];
+private ["_nul","_result","_pos","_wsDone","_dir","_block","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_date","_key","_outcome","_vehLimit","_hiveResponse","_objectCount","_codeCount","_hour","_minute","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0","_bQty","_vQty"];
 
 dayz_versionNo = 		getText(configFile >> "CfgMods" >> "DayZ" >> "version");
 dayz_hiveVersionNo = 	getNumber(configFile >> "CfgMods" >> "DayZ" >> "hiveVersion");
@@ -41,9 +41,7 @@ waituntil{isNil "sm_done"}; // prevent server_monitor be called twice (bug durin
 if(isnil "MaxVehicleLimit") then {
 	MaxVehicleLimit = 50;
 };
-if(isnil "MaxHeliCrashes") then {
-	MaxHeliCrashes = 5;
-};
+
 if(isnil "MaxDynamicDebris") then {
 	MaxDynamicDebris = 100;
 };
@@ -73,36 +71,44 @@ if (isServer and isNil "sm_done") then {
 			_i = 99; // break
 		};
 	};
+	
+	_BuildingQueue = [];
+	_objectQueue = [];
+	_finalEpochObjArray = [];
 
-	_objectArray = [];
 	if ((_hiveResponse select 0) == "ObjectStreamStart") then {
-		_objectCount = _hiveResponse select 1;
 		diag_log ("HIVE: Commence Object Streaming...");
-		for "_i" from 1 to _objectCount do { 
+		_key = format["CHILD:302:%1:", dayZ_instance];
+		_objectCount = _hiveResponse select 1;
+		_bQty = 0;
+		_vQty = 0;
+		for "_i" from 1 to _objectCount do {
 			_hiveResponse = _key call server_hiveReadWriteLarge;
-			_objectArray set [_i - 1, _hiveResponse];
 			//diag_log (format["HIVE dbg %1 %2", typeName _hiveResponse, _hiveResponse]);
+			if ((_hiveResponse select 2) isKindOf "ModularItems") then {
+				_BuildingQueue set [_bQty,_hiveResponse];
+				_bQty = _bQty + 1;
+			} else {
+				_objectQueue set [_vQty,_hiveResponse];
+				_vQty = _vQty + 1;
+			};
 		};
-		diag_log ("HIVE: got " + str(count _objectArray) + " objects");
 	};
+	diag_log ("HIVE: got " + str(_bQty) + " Epoch Objects and " + str(_vQty) + " Vehicles");
 
-	// # START OF STREAMING #
-	_countr = 0;	
+	// # NOW SPAWN OBJECTS #
 	_totalvehicles = 0;
 	{
-		//Parse Array
-		_countr = _countr + 1;
+		_idKey = 		_x select 1;
+		_type =			_x select 2;
+		_ownerID = 		_x select 3;
 
-		_idKey = 	_x select 1;
-		_type =		_x select 2;
-		_ownerID = 	_x select 3;
-
-		_worldspace = _x select 4;
-		_intentory=	_x select 5;
-		_hitPoints=	_x select 6;
-		_fuel =		_x select 7;
-		_damage = 	_x select 8;
-
+		_worldspace = 	_x select 4;
+		_intentory =	_x select 5;
+		_hitPoints =	_x select 6;
+		_fuel =			_x select 7;
+		_damage = 		_x select 8;
+		
 		_dir = 0;
 		_pos = [0,0,0];
 		_wsDone = false;
@@ -114,12 +120,14 @@ if (isServer and isNil "sm_done") then {
 				_wsDone = true;
 			}
 		};			
+		
 		if (!_wsDone) then {
 			if (count _worldspace >= 1) then { _dir = _worldspace select 0; };
 			_pos = [getMarkerPos "center",0,4000,10,0,2000,0] call BIS_fnc_findSafePos;
 			if (count _pos < 3) then { _pos = [_pos select 0,_pos select 1,0]; };
 			diag_log ("MOVED OBJ: " + str(_idKey) + " of class " + _type + " to pos: " + str(_pos));
 		};
+		
 
 		if (_damage < 1) then {
 			//diag_log format["OBJ: %1 - %2", _idKey,_type];
@@ -181,6 +189,7 @@ if (isServer and isNil "sm_done") then {
 						_object enableSimulation false;
 					};
 // ### [CPC] Indestructible Buildables Fix
+
 			if (count _intentory > 0) then {
 				if (_type in DZE_LockedStorage) then {
 					// Fill variables with loot
@@ -270,9 +279,9 @@ if (isServer and isNil "sm_done") then {
 			//Monitor the object
 			PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_object];
 		};
-	} forEach _objectArray;
-	// # END OF STREAMING #
-
+	} forEach (_BuildingQueue + _objectQueue);
+	// # END SPAWN OBJECTS #
+	
 
 	// preload server traders menu data into cache
 	{
@@ -313,11 +322,13 @@ if (isServer and isNil "sm_done") then {
 
 	//  spawn_vehicles
 	_vehLimit = MaxVehicleLimit - _totalvehicles;
-	diag_log ("HIVE: Spawning # of Vehicles: " + str(_vehLimit));
 	if(_vehLimit > 0) then {
+		diag_log ("HIVE: Spawning # of Vehicles: " + str(_vehLimit));
 		for "_x" from 1 to _vehLimit do {
 			[] spawn spawn_vehicles;
 		};
+	} else {
+		diag_log "HIVE: Vehicle Spawn limit reached!";
 	};
 	//  spawn_roadblocks
 	diag_log ("HIVE: Spawning # of Debris: " + str(MaxDynamicDebris));
@@ -344,7 +355,6 @@ if (isServer and isNil "sm_done") then {
 	if(isnil "OldHeliCrash") then {
 		OldHeliCrash = false;
 	};
-
 	call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
 	allowConnection = true;
 
@@ -357,7 +367,11 @@ if (isServer and isNil "sm_done") then {
 		// Epoch Events
 		_id = [] spawn server_spawnEvents;
 		// server cleanup
-		_id = [] execFSM "\z\addons\dayz_server\system\server_cleanup.fsm";
+		[] spawn {
+			sleep 200; //Sleep Lootcleanup, don't need directly cleanup on startup + fix some performance issues on serverstart
+			waitUntil {!isNil "server_spawnCleanAnimals"};
+			_id = [] execFSM "\z\addons\dayz_server\system\server_cleanup.fsm";
+		};
 
 		// spawn debug box
 		_debugMarkerPosition = getMarkerPos "respawn_west";

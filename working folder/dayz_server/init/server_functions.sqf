@@ -6,32 +6,44 @@ BIS_MPF_remoteExecutionServer = {
 		[nil,(_this select 1) select 0,"loc",rJIPEXEC,[any,any,"per","execVM","ca\Modules\Functions\init.sqf"]] call RE;
 	};
 };
+/* Skaronator - secured better remoteExecServer
+BIS_MPF_remoteExecutionServer = {
+	if ((_this select 1) select 2 == "JIPrequest") then {
+		_playerObj = (_this select 1) select 0;			
+		remExField = [nil, nil, format ["";if !(isServer) then {[] execVM "ca\Modules\Functions\init.sqf";};""]];
+		(owner _playerObj) publicVariableClient "remExField";
+	};
+};*/
 
-BIS_Effects_Burn =			{};
-server_playerLogin =		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerLogin.sqf";
-server_playerSetup =		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerSetup.sqf";
-server_onPlayerDisconnect = compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_onPlayerDisconnect.sqf";
-server_updateObject =		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_updateObject.sqf";
-server_playerDied =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDied.sqf";
-server_publishObj = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";	//Creates the object in DB
-server_deleteObj =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_deleteObj.sqf"; 	//Removes the object from the DB
-server_swapObject =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_swapObject.sqf"; 
-server_publishVeh = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle.sqf"; // Custom to add vehicles
-server_publishVeh2 = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle2.sqf"; // Custom to add vehicles
-server_publishVeh3 = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle3.sqf"; // Custom to add vehicles
-server_tradeObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_tradeObject.sqf";
-server_traders = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_traders.sqf";
-server_playerSync =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerSync.sqf";
-zombie_findOwner =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\zombie_findOwner.sqf";
+BIS_Effects_Burn =				{};
+server_playerLogin =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerLogin.sqf";
+server_playerSetup =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerSetup.sqf";
+server_onPlayerDisconnect = 	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_onPlayerDisconnect.sqf";
+server_updateObject =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_updateObject.sqf";
+server_playerDied =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDied.sqf";
+server_publishObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";	//Creates the object in DB
+server_deleteObj =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_deleteObj.sqf"; 	//Removes the object from the DB
+server_swapObject =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_swapObject.sqf"; 
+server_publishVeh = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle.sqf"; // Custom to add vehicles
+server_publishVeh2 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle2.sqf"; // Custom to add vehicles
+server_publishVeh3 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle3.sqf"; // Custom to add vehicles
+server_tradeObj = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_tradeObject.sqf";
+server_traders = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_traders.sqf";
+server_playerSync =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerSync.sqf";
+zombie_findOwner =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\zombie_findOwner.sqf";
 server_updateNearbyObjects =	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_updateNearbyObjects.sqf";
-server_spawnCrashSite  =    compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnCrashSite.sqf";
-server_handleZedSpawn =		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_handleZedSpawn.sqf";
-server_spawnEvents =		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnEvent.sqf";
-//server_weather =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_weather.sqf";
+server_spawnCrashSite  =    	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnCrashSite.sqf";
+server_handleZedSpawn =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_handleZedSpawn.sqf";
+server_spawnEvents =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnEvent.sqf";
+//server_weather =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_weather.sqf";
+fnc_plyrHit   =					compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_plyrHit.sqf";
+server_deaths = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDeaths.sqf";
+server_maintainArea = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_maintainArea.sqf";
 
-fnc_plyrHit   =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_plyrHit.sqf";
-server_deaths = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDeaths.sqf";
+/* PVS/PVC - Skaronator */
+server_sendToClient =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_sendToClient.sqf";
 
+onPlayerDisconnected 		"[_uid,_name] call server_onPlayerDisconnect;";
 
 vehicle_handleInteract = {
 	private["_object"];
@@ -105,10 +117,7 @@ check_publishobject = {
 
 	_object = _this select 0;
 	_playername = _this select 1;
-	
 	_allowed = false;
-       
-	//diag_log format ["DEBUG: Checking if Object: %1 is allowed published by %2", _object, _playername];
 
 	if ((typeOf _object) in dayz_allowedObjects) then {
 			//diag_log format ["DEBUG: Object: %1 published by %2 is Safe",_object, _playername];
@@ -118,7 +127,7 @@ check_publishobject = {
 };
 
 //event Handlers
-eh_localCleanup =			{
+eh_localCleanup = {
 	private ["_object"];
 	_object = _this select 0;
 	_object addEventHandler ["local", {
@@ -148,29 +157,43 @@ eh_localCleanup =			{
 
 server_hiveWrite = {
 	private["_data"];
-	//diag_log ("ATTEMPT WRITE: " + _this);
 	_data = "HiveExt" callExtension _this;
-	//diag_log ("WRITE: " +str(_data));
 };
 
 server_hiveReadWrite = {
 	private["_key","_resultArray","_data"];
 	_key = _this;
-	//diag_log ("ATTEMPT READ/WRITE: " + _key);
 	_data = "HiveExt" callExtension _key;
-	// diag_log ("READ/WRITE: " +str(_data));
 	_resultArray = call compile format ["%1",_data];
 	_resultArray
+};
+
+server_maintainObj = {
+	private["_data"];
+	_data = "HiveExt" callExtension _this;
 };
 
 server_hiveReadWriteLarge = {
 	private["_key","_resultArray","_data"];
 	_key = _this;
-	//diag_log ("ATTEMPT READ/WRITE: " + _key);
 	_data = "HiveExt" callExtension _key;
-	// diag_log ("READ/WRITE: " +str(_data));
 	_resultArray = call compile _data;
 	_resultArray
+};
+
+server_checkIfTowed = {
+	private ["_vehicle","_player","_attached"];
+	if (DZE_HeliLift) then {
+		_vehicle = 	_this select 0;
+		_player = 	_this select 2;
+		_attached = _vehicle getVariable["attached",false];
+		if ((typeName _attached == "OBJECT")) then {
+			_player action ["eject", _vehicle];
+			detach _vehicle;
+			_vehicle setVariable["attached",false,true];
+			_attached setVariable["hasAttached",false,true];
+		};
+	};
 };
 
 server_characterSync = {
@@ -184,15 +207,9 @@ server_characterSync = {
 	_currentModel = _this select 6;
 	
 	_key = format["CHILD:201:%1:%2:%3:%4:%5:%6:%7:%8:%9:%10:%11:%12:%13:%14:%15:%16:",_characterID,_playerPos,_playerGear,_playerBackp,_medical,false,false,0,0,0,0,_currentState,0,0,_currentModel,0];
-	//diag_log ("HIVE: WRITE: "+ str(_key) + " / " + _characterID);
 	_key call server_hiveWrite;
 };
 
-//onPlayerConnected 		"[_uid,_name] spawn server_onPlayerConnect;";
-onPlayerDisconnected 		"[_uid,_name] call server_onPlayerDisconnect;";
-
-
-// Setup globals allow overwrite from init.sqf
 if(isnil "dayz_MapArea") then {
 	dayz_MapArea = 10000;
 };
@@ -216,131 +233,136 @@ BuildingList = [];
 spawn_vehicles = {
 	private ["_random","_lastIndex","_weights","_index","_vehicle","_velimit","_qty","_isAir","_isShip","_position","_dir","_istoomany","_veh","_objPosition","_marker","_iClass","_itemTypes","_cntWeights","_itemType","_num","_allCfgLoots"];
 	
-	if (isDedicated) then {
+	if (!isDedicated) exitWith { }; //Be sure the run this
 
-		while {count AllowedVehiclesList > 0} do {
-			// BIS_fnc_selectRandom replaced because the index may be needed to remove the element
-			_index = floor random count AllowedVehiclesList;
-			_random = AllowedVehiclesList select _index;
+	while {count AllowedVehiclesList > 0} do {
+		// BIS_fnc_selectRandom replaced because the index may be needed to remove the element
+		_index = floor random count AllowedVehiclesList;
+		_random = AllowedVehiclesList select _index;
 
-			_vehicle = _random select 0;
-			_velimit = _random select 1;
+		_vehicle = _random select 0;
+		_velimit = _random select 1;
 
-			_qty = {_x == _vehicle} count serverVehicleCounter;
+		_qty = {_x == _vehicle} count serverVehicleCounter;
 
-			// If under limit allow to proceed
-			if (_qty <= _velimit) exitWith {};
+		// If under limit allow to proceed
+		if (_qty <= _velimit) exitWith {};
 
-			// vehicle limit reached, remove vehicle from list
-			// since elements cannot be removed from an array, overwrite it with the last element and cut the last element of (as long as order is not important)
-			_lastIndex = (count AllowedVehiclesList) - 1;
-			if (_lastIndex != _index) then {
-				AllowedVehiclesList set [_index, AllowedVehiclesList select _lastIndex];
-			};
-			AllowedVehiclesList resize _lastIndex;
+		// vehicle limit reached, remove vehicle from list
+		// since elements cannot be removed from an array, overwrite it with the last element and cut the last element of (as long as order is not important)
+		_lastIndex = (count AllowedVehiclesList) - 1;
+		if (_lastIndex != _index) then {
+			AllowedVehiclesList set [_index, AllowedVehiclesList select _lastIndex];
 		};
+		AllowedVehiclesList resize _lastIndex;
+	};
 
-		if (count AllowedVehiclesList == 0) then {
-			diag_log("DEBUG: unable to find suitable vehicle to spawn");
+	if (count AllowedVehiclesList == 0) then {
+		diag_log("DEBUG: unable to find suitable vehicle to spawn");
+	} else {
+
+		// add vehicle to counter for next pass
+		serverVehicleCounter set [count serverVehicleCounter,_vehicle];
+	
+		// Find Vehicle Type to better control spawns
+		_isAir = _vehicle isKindOf "Air";
+		_isShip = _vehicle isKindOf "Ship";
+	
+		if(_isShip || _isAir) then {
+			if(_isShip) then {
+				// Spawn anywhere on coast on water
+				waitUntil{!isNil "BIS_fnc_findSafePos"};
+				_position = [MarkerPosition,0,DynamicVehicleArea,10,1,2000,1] call BIS_fnc_findSafePos;
+				//diag_log("DEBUG: spawning boat near coast " + str(_position));
+			} else {
+				// Spawn air anywhere that is flat
+				waitUntil{!isNil "BIS_fnc_findSafePos"};
+				_position = [MarkerPosition,0,DynamicVehicleArea,10,0,2000,0] call BIS_fnc_findSafePos;
+				//diag_log("DEBUG: spawning air anywhere flat " + str(_position));
+			};
+		
+		
 		} else {
-
-			// add vehicle to counter for next pass
-			serverVehicleCounter set [count serverVehicleCounter,_vehicle];
-		
-			// Find Vehicle Type to better control spawns
-			_isAir = _vehicle isKindOf "Air";
-			_isShip = _vehicle isKindOf "Ship";
-		
-			if(_isShip || _isAir) then {
-				if(_isShip) then {
-					// Spawn anywhere on coast on water
-					waitUntil{!isNil "BIS_fnc_findSafePos"};
-					_position = [MarkerPosition,0,DynamicVehicleArea,10,1,2000,1] call BIS_fnc_findSafePos;
-					//diag_log("DEBUG: spawning boat near coast " + str(_position));
-				} else {
-					// Spawn air anywhere that is flat
-					waitUntil{!isNil "BIS_fnc_findSafePos"};
-					_position = [MarkerPosition,0,DynamicVehicleArea,10,0,2000,0] call BIS_fnc_findSafePos;
-					//diag_log("DEBUG: spawning air anywhere flat " + str(_position));
-				};
+			// Spawn around buildings and 50% near roads
+			if((random 1) > 0.5) then {
 			
+				waitUntil{!isNil "BIS_fnc_selectRandom"};
+				_position = RoadList call BIS_fnc_selectRandom;
+			
+				_position = _position modelToWorld [0,0,0];
+			
+				waitUntil{!isNil "BIS_fnc_findSafePos"};
+				_position = [_position,0,10,10,0,2000,0] call BIS_fnc_findSafePos;
+			
+				//diag_log("DEBUG: spawning near road " + str(_position));
 			
 			} else {
-				// Spawn around buildings and 50% near roads
-				if((random 1) > 0.5) then {
-				
-					waitUntil{!isNil "BIS_fnc_selectRandom"};
-					_position = RoadList call BIS_fnc_selectRandom;
-				
-					_position = _position modelToWorld [0,0,0];
-				
-					waitUntil{!isNil "BIS_fnc_findSafePos"};
-					_position = [_position,0,10,10,0,2000,0] call BIS_fnc_findSafePos;
-				
-					//diag_log("DEBUG: spawning near road " + str(_position));
-				
-				} else {
-				
-					waitUntil{!isNil "BIS_fnc_selectRandom"};
-					_position = BuildingList call BIS_fnc_selectRandom;
-				
-					_position = _position modelToWorld [0,0,0];
-				
-					waitUntil{!isNil "BIS_fnc_findSafePos"};
-					_position = [_position,0,40,5,0,2000,0] call BIS_fnc_findSafePos;
-				
-					//diag_log("DEBUG: spawning around buildings " + str(_position));
 			
-				};
-			};
-			// only proceed if two params otherwise BIS_fnc_findSafePos failed and may spawn in air
-			if ((count _position) == 2) then { 
+				waitUntil{!isNil "BIS_fnc_selectRandom"};
+				_position = BuildingList call BIS_fnc_selectRandom;
+			
+				_position = _position modelToWorld [0,0,0];
+			
+				waitUntil{!isNil "BIS_fnc_findSafePos"};
+				_position = [_position,0,40,5,0,2000,0] call BIS_fnc_findSafePos;
+			
+				//diag_log("DEBUG: spawning around buildings " + str(_position));
 		
-				_dir = round(random 180);
+			};
+		};
+		// only proceed if two params otherwise BIS_fnc_findSafePos failed and may spawn in air
+		if ((count _position) == 2) then { 
+	
+			_dir = round(random 180);
+		
+			_istoomany = _position nearObjects ["AllVehicles",50];
+			if((count _istoomany) > 0) exitWith { diag_log("DEBUG: Too many vehicles at " + str(_position)); };
+		
+			//place vehicle 
+			_veh = createVehicle [_vehicle, _position, [], 0, "CAN_COLLIDE"];
+			_veh setdir _dir;
+			_veh setpos _position;		
 			
-				_istoomany = _position nearObjects ["AllVehicles",50];
-				if((count _istoomany) > 0) exitWith { diag_log("DEBUG: Too many vehicles at " + str(_position)); };
-			
-				//place vehicle 
-				_veh = createVehicle [_vehicle, _position, [], 0, "CAN_COLLIDE"];
-				_veh setdir _dir;
-				_veh setpos _position;		
-				
-				if(DZEdebug) then {
-					_marker = createMarker [str(_position) , _position];
-					_marker setMarkerShape "ICON";
-					_marker setMarkerType "DOT";
-					_marker setMarkerText _vehicle;
-				};	
-			
-				// Get position with ground
-				_objPosition = getPosATL _veh;
-			
-				clearWeaponCargoGlobal  _veh;
-				clearMagazineCargoGlobal  _veh;
-				// _veh setVehicleAmmo DZE_vehicleAmmo;
+			if(DZEdebug) then {
+				_marker = createMarker [str(_position) , _position];
+				_marker setMarkerShape "ICON";
+				_marker setMarkerType "DOT";
+				_marker setMarkerText _vehicle;
+			};	
+		
+			// Get position with ground
+			_objPosition = getPosATL _veh;
+		
+			clearWeaponCargoGlobal  _veh;
+			clearMagazineCargoGlobal  _veh;
+			// _veh setVehicleAmmo DZE_vehicleAmmo;
 
-				// Add 0-3 loots to vehicle using random cfgloots 
-				_num = floor(random 4);
-				_allCfgLoots = ["trash","civilian","food","generic","medical","military","policeman","hunter","worker","clothes","militaryclothes","specialclothes","trash"];
-				
-				for "_x" from 1 to _num do {
-					_iClass = _allCfgLoots call BIS_fnc_selectRandom;
+			// Add 0-3 loots to vehicle using random cfgloots 
+			_num = floor(random 4);
+			_allCfgLoots = ["trash","civilian","food","generic","medical","military","policeman","hunter","worker","clothes","militaryclothes","specialclothes","trash"];
+			
+			for "_x" from 1 to _num do {
+				_iClass = _allCfgLoots call BIS_fnc_selectRandom;
 
-					_itemTypes = [] + ((getArray (configFile >> "cfgLoot" >> _iClass)) select 0);
-					_index = dayz_CLBase find _iClass;
-					_weights = dayz_CLChances select _index;
-					_cntWeights = count _weights;
-					
-					_index = floor(random _cntWeights);
-					_index = _weights select _index;
-					_itemType = _itemTypes select _index;
-					_veh addMagazineCargoGlobal [_itemType,1];
-					//diag_log("DEBUG: spawed loot inside vehicle " + str(_itemType));
+				_itemTypes = [];
+				if (DZE_MissionLootTable) then {
+					_itemTypes = ((getArray (missionConfigFile >> "cfgLoot" >> _iClass)) select 0);
+				} else {
+					_itemTypes = ((getArray (configFile >> "cfgLoot" >> _iClass)) select 0);
 				};
 
-				[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
+				_index = dayz_CLBase find _iClass;
+				_weights = dayz_CLChances select _index;
+				_cntWeights = count _weights;
+				
+				_index = floor(random _cntWeights);
+				_index = _weights select _index;
+				_itemType = _itemTypes select _index;
+				_veh addMagazineCargoGlobal [_itemType,1];
+				//diag_log("DEBUG: spawed loot inside vehicle " + str(_itemType));
 			};
+
+			[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
 		};
 	};
 };
@@ -410,17 +432,11 @@ spawn_roadblocks = {
 				_marker setMarkerType "DOT";
 				_marker setMarkerText str(_spawnveh);
 			};
-			
-			// fill array with classes and positions [class,pos,dir]
-			// DZE_LocalRoadBlocks set [count DZE_LocalRoadBlocks,[_spawnveh,_position,round(random 360)]];
-			
-			//diag_log("DEBUG: Spawning a crashed " + _spawnveh + " with " + _spawnloot + " at " + str(_position));
-			
+
 			_veh = createVehicle [_spawnveh,_position, [], 0, "CAN_COLLIDE"];
 			_veh enableSimulation false;
 
-			// Randomize placement a bit
-			_veh setDir round(random 360);
+			_veh setDir round(random 360); // Randomize placement a bit
 			_veh setpos _position;
 
 			_veh setVariable ["ObjectID","1",true];
@@ -444,7 +460,6 @@ spawn_mineveins = {
 			_position = (_positions call BIS_fnc_selectRandom) select 0;
 
 			// Get position with ground
-			
 			_istoomany = _position nearObjects ["All",10];
 		
 			if((count _istoomany) > 0) exitWith { diag_log("DEBUG VEIN: Too many objects at " + str(_position)); };
@@ -701,7 +716,7 @@ dayz_removePlayerOnDisconnect = {
 
 server_timeSync = {
 	//Send request
-	private ["_year","_month","_day","_hour","_minute","_date","_key","_result","_outcome"];
+	private ["_hour","_minute","_date","_key","_result","_outcome"];
     _key = "CHILD:307:";
 	_result = _key call server_hiveReadWrite;
 	_outcome = _result select 0;
@@ -709,13 +724,8 @@ server_timeSync = {
 		_date = _result select 1; 
 		
 		if(dayz_fullMoonNights) then {
-			//date setup
-			//_year = _date select 0;
-			//_month = _date select 1;
-			//_day = _date select 2;
 			_hour = _date select 3;
 			_minute = _date select 4;
-		
 			//Force full moon nights
 			_date = [2013,8,3,_hour,_minute];
 		};
@@ -730,10 +740,6 @@ server_timeSync = {
 // must spawn these 
 server_spawncleanDead = {
 	private ["_deathTime","_delQtyZ","_delQtyP","_qty","_allDead"];
-	
-	if(!isNil "DZE_DYN_cleandead") exitWith { };
-	DZE_DYN_cleandead = true;
-
 	_allDead = allDead;
 	_delQtyZ = 0;
 	_delQtyP = 0;
@@ -742,10 +748,9 @@ server_spawncleanDead = {
 			if (_x isKindOf "zZombie_Base") then
 			{
 				_x call dayz_perform_purge;
-				sleep 0.025;
+				sleep 0.05;
 				_delQtyZ = _delQtyZ + 1;
 			} else {
-
 				if (_x isKindOf "CAManBase") then {
 					_deathTime = _x getVariable ["processedDeath", diag_tickTime];
 					if (diag_tickTime - _deathTime > 1800) then {
@@ -756,30 +761,40 @@ server_spawncleanDead = {
 				};
 			};
 		};
-		sleep 0.001;
+		sleep 0.025;
 	} forEach _allDead;
 	if (_delQtyZ > 0 or _delQtyP > 0) then {
 		_qty = count _allDead;
 		diag_log (format["CLEANUP: Deleted %1 players and %2 zombies out of %3 dead",_delQtyP,_delQtyZ,_qty]);
 	};
-	DZE_DYN_cleandead = nil;
 };
-
-server_spawnCleanNull = {
-	private ["_delQtyNull"];
-	_delQtyNull = 0;
+server_cleanupGroups = {
+	if (DZE_DYN_AntiStuck3rd > 3) then { DZE_DYN_GroupCleanup = nil; DZE_DYN_AntiStuck3rd = 0; };
+	if(!isNil "DZE_DYN_GroupCleanup") exitWith {  DZE_DYN_AntiStuck3rd = DZE_DYN_AntiStuck3rd + 1;};
+	DZE_DYN_GroupCleanup = true;
 	{
-		if (isNull _x) then {
-			//diag_log (format["CLEANUP: Purge performed on null OBJ: %1",_x]);
-			_x call dayz_perform_purge;
-			sleep 1;
-			_delQtyNull = _delQtyNull + 1;
+		if (count units _x == 0) then {
+			deleteGroup _x;
 		};
 		sleep 0.001;
-	} forEach (allMissionObjects "");
-	if (_delQtyNull > 0) then {
-		diag_log (format["CLEANUP: Deleted %1 null objects",_delQtyNull]);
-	};
+	} forEach allGroups;
+	DZE_DYN_GroupCleanup = nil;
+};
+
+server_checkHackers = {
+	if (DZE_DYN_AntiStuck2nd > 3) then { DZE_DYN_HackerCheck = nil; DZE_DYN_AntiStuck2nd = 0; };
+	if(!isNil "DZE_DYN_HackerCheck") exitWith {  DZE_DYN_AntiStuck2nd = DZE_DYN_AntiStuck2nd + 1;};
+	DZE_DYN_HackerCheck = true;
+	{
+		if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle)) then {
+			diag_log ("CLEANUP: KILLING A HACKER " + (name _x) + " " + str(_x) + " IN " + (typeOf vehicle _x));
+			(vehicle _x) setDamage 1;
+			_x setDamage 1;
+			sleep 0.25;
+		};
+		sleep 0.001;
+	} forEach allUnits;
+	DZE_DYN_HackerCheck = nil;
 };
 
 server_spawnCleanFire = {
@@ -801,7 +816,8 @@ server_spawnCleanFire = {
 };
 server_spawnCleanLoot = {
 	private ["_created","_delQty","_nearby","_age","_keep","_qty","_missionObjs","_dateNow"];
-	if(!isNil "DZE_DYN_cleanLoot") exitWith { };
+	if (DZE_DYN_AntiStuck > 3) then { DZE_DYN_cleanLoot = nil; DZE_DYN_AntiStuck = 0; };
+	if(!isNil "DZE_DYN_cleanLoot") exitWith {  DZE_DYN_AntiStuck = DZE_DYN_AntiStuck + 1;};
 	DZE_DYN_cleanLoot = true;
 
 	_missionObjs =  allMissionObjects "ReammoBox";
@@ -837,14 +853,12 @@ server_spawnCleanLoot = {
 
 server_spawnCleanAnimals = {
 	private ["_pos","_delQtyAnimal","_qty","_missonAnimals","_nearby"];
-	if(!isNil "DZE_DYN_cleanAnimals") exitWith { };
-	DZE_DYN_cleanAnimals = true;
 	_missonAnimals = entities "CAAnimalBase";
 	_delQtyAnimal = 0;
 	{
 		if (local _x) then {
 			_x call dayz_perform_purge;
-			sleep 0.025;
+			sleep 0.05;
 			_delQtyAnimal = _delQtyAnimal + 1;
 		} else {
 			if (!alive _x) then {
@@ -853,7 +867,7 @@ server_spawnCleanAnimals = {
 					_nearby = {(isPlayer _x) and (alive _x)} count (_pos nearEntities [["CAManBase","AllVehicles"], 130]);
 					if (_nearby==0) then {
 						_x call dayz_perform_purge;
-						sleep 0.025;
+						sleep 0.05;
 						_delQtyAnimal = _delQtyAnimal + 1;
 					};
 				};
@@ -865,7 +879,6 @@ server_spawnCleanAnimals = {
 		_qty = count _missonAnimals;
 		diag_log (format["CLEANUP: Deleted %1 Animals out of %2",_delQtyAnimal,_qty]);
 	};
-	DZE_DYN_cleanAnimals = nil;
 };
 
 [] execVM "\z\addons\dayz_server\buildings\exec.sqf";
