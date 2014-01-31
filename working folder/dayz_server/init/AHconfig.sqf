@@ -3,8 +3,8 @@
 /* ********************Copr. ©2013 infiSTAR all rights reserved********************* */
 /* *********************************www.infiSTAR.de********************************* */
 /*  Key to open the menu  */ _OpenMenuKey = 0x3C;    /* google DIK_KeyCodes (0x3C is F2) */
-/* ********************************************************************************* */
-/*  Mod EPOCH ?           */ _MEH =  true;   /* true or false */
+/*  Use Admin Login PW ?  */ _UAP =  false;    /* true or false */	/* recommended:  true */
+/*  Admin Login Password  */ _AdminPassword = "default";
 /* ********************************************************************************* */
 /*  LOW ADMIN HERE        */ _LowLevel_List =   ["0","0","0"]; //do not have a , at the end.
 /*  NORMAL ADMIN HERE     */ _NormalLevel_List =["0","0","0"]; //do not have a , at the end.
@@ -14,24 +14,29 @@
 /*  Top esc menu TXT      */ _TopOfESC = 'KoN'; //do not use ' or " in this text.
 /*  Bottom esc menu TXT   */ _LowerTop = 'Knights of Nom'; //do not use ' or " in this text.
 /*  Bottom esc menu TXT2  */ _LowerBottom = 'www.knightsofnom.com'; //do not use ' or " in this text.
-/*  Color esc menu TXT    */ _EscColor = [0,0.3,1,1];
-/* ********************************************************************************* */
+/*  Color esc menu TXT    */ _EscColor = [0.6,0,0,1];
 /*  DebugMonitor TXT      */ _BottomDebug = 'Knights of Nom'; //do not use ' or " in this text.
 /*  DebugMonitor Key      */ _ODK =  0xCF;	/* google DIK_KeyCodes (0xCF is END) */
 /*  Use DebugMonitor      */ _DMS =  true;	/* true or false */	/* starts up with debugmonitor ON if true */
 /*  DebugMonitor Action   */ _DMW = false;	/* true or false */	/* "Debug" option on mousewheel */
-/*  DebugMonitor ITEM     */ _DBI = false;	/* item or false */	/* _DBI = 'your item choice'; */
+/*  Mod EPOCH ?           */ _MEH =  true;   /* true or false */
 /* ********************************************************************************* */
-/*  Use AUTOBAN HACKER    */ _UAB =  true;   /* true or false */	/* recommended:  true */	/* we always used this. */
-/*  Forbid VON Sidechat   */ _VON = false;   /* true or false */	/* recommended: false */	/* talking on sidechat will put out a warning and kick if continue */
+/*  Enable BadKey Kick    */ _BKK =  true;    /* true or false */	/* If people press a forbidden Key twice, they get kicked! */
+/*  Badkey: F1 - F12 ?    */ _BFK =  true;    /* true or false */
+/*  Enter, Backspace      */ _BDK =  false;    /* true or false */
+/* ** */
+/*  HACKED BOX Check ?    */ _CHB =  false;    /* true or false */	/* recommended:  true */	/* some epoch player might want to turn this one off */
+/*  Max Cargo Count ?     */ _MCC = 600;
+/* ** */
 /*  Use vehicle check?    */ _UVC = false;   /* true or false */	/* recommended: false */	/* using _ALLOWED_Vehicles and _FORBIDDEN_Vehicles lists */
 /*  Vehicle WHITELIST     */ _UVW = false;   /* true or false */	/* recommended: false */	/* if false - _ALLOWED_Vehicles won't not be used */
-/* ********************************************************************************* */
+/* ** */
+/*  Use AUTOBAN HACKER    */ _UAB =  true;   /* true or false */	/* recommended:  true */	/* we always used this. */
+/*  Forbid VON Sidechat   */ _VON =  false;   /* true or false */	/* recommended: false */	/* talking on sidechat will put out a warning and kick if continue */
 /*  Use FileScan ?        */ _UFS =  true;   /* true or false */	/* recommended:  true */	/* spams the rpt but often finds hackers */
 /*  Use cut-scene ?       */ _UCS =  true;   /* true or false */	/* recommended:  true */	/* dynamicText ~ often colored, animated or used in credits */
 /*  Use SafeZones ?       */ _USZ =  true;   /* true or false */	/* recommended:  true */	/* if you have a zone where people get godmode/anti zombie aggro (most Epoch server do have this!) */
-/*  HACKED BOX Check ?    */ _CHB =  true;   /* true or false */	/* recommended:  true */	/* some epoch player might want to turn this one off */
-/*  Check CMDMenus ?      */ _CCM =  true;   /* true or false */	/* recommended:  true */	/* only disable this if you know what you are doing. */
+/*  Check CMDMenus ?      */ _CCM = true;   /* true or false */	/* recommended:  true */	/* only disable this if you know what you are doing. */
 /*  BLOCK ALL CMDMenus    */ _BCM = false;   /* true or false */	/* recommended:  true */	/* we don't need commandingMenus. so have this true. */
 /*  Check Actions ?       */ _CSA = false;   /* true or false */	/* recommended:  true */	/* R3F vehicle towing can't be whitelisted so we need to turn this off */
 /* ********************************************************************************* */
