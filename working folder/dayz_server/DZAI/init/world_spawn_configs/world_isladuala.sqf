@@ -1,5 +1,5 @@
 /*
-	Isladuala static/dynamic trigger configuration 
+	Isladuala static spawn configuration 
 	
 	Last updated: 11:08 PM 7/5/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_isladuala.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [4945.3438, 4919.6616];
 	"DZAI_centerMarker" setMarkerSize [4000, 4000];
 };
@@ -594,4 +594,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_isladuala.sqf"
 #include "custom_spawns\cust_spawns_isladuala.sqf"
 
-diag_log "Isladuala map configuration loaded.";
+diag_log "Isladuala static spawn configuration loaded.";

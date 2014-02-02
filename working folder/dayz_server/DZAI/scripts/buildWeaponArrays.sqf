@@ -28,15 +28,20 @@ _aiWeaponBanList = ["Crossbow_DZ","Crossbow","MeleeHatchet","MeleeCrowbar","Mele
 
 //Add user-specified banned weapons to DZAI weapon banlist.
 for "_i" from 0 to ((count _unwantedWeapons) - 1) do {
-	_aiWeaponBanList set [(count _aiWeaponBanList),(_unwantedWeapons select _i)];
+	if (!((_unwantedWeapons select _i) in _aiWeaponBanList)) then {
+		_aiWeaponBanList set [(count _aiWeaponBanList),(_unwantedWeapons select _i)];
+	};
 };
 //diag_log format ["DEBUG :: List of weapons to be removed from DZAI classname tables: %1",_aiWeaponBanList];
 
 //Compatibility with Namalsk's selectable loot table feature.
 if (isNil "dayzNam_buildingLoot") then {
 	_cfgBuildingLoot = "cfgBuildingLoot";
-	if (((toLower worldName) == "trinity")&&{(DZAI_modName != "epoch")}) then {
+	/*if (((toLower worldName) == "trinity")&&{(DZAI_modName != "epoch")}) then {
 		//Fix for Trinity Island's Barracks loot table.
+		_bldgClasses set [2,["Barracks"]];
+	};*/
+	if ((!isClass (_lootConfigFile >> _cfgBuildingLoot >> "MilitarySpecial")) && {(isClass _lootConfigFile >> _cfgBuildingLoot >> "Barracks")}) then {
 		_bldgClasses set [2,["Barracks"]];
 	};
 } else {

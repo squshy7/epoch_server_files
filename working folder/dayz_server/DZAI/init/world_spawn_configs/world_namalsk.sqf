@@ -1,5 +1,5 @@
 /*
-	Namalsk static/dynamic trigger configuration 
+	Namalsk static spawn configuration 
 	
 	Last updated: 11:11 PM 7/5/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_namalsk.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [5880.1313, 8889.1045];
 	"DZAI_centerMarker" setMarkerSize [3000, 3000];
 };
@@ -234,4 +234,4 @@ _nul = [] spawn {
 	} forEach _bsLeader;
 };
 
-diag_log "Namalsk map configuration loaded.";
+diag_log "Namalsk static spawn configuration loaded.";

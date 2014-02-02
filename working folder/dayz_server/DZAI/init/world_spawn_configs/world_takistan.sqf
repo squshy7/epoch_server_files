@@ -1,5 +1,5 @@
 /*
-	Takistan static/dynamic trigger configuration 
+	Takistan static spawn configuration 
 	
 	Last updated: 11:58 PM 6/6/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_takistan.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [6368.2764, 6624.2744];
 	"DZAI_centerMarker" setMarkerSize [6000, 6000];
 };
@@ -491,4 +491,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_takistan.sqf"
 #include "custom_spawns\cust_spawns_takistan.sqf"
 
-diag_log "Takistan map configuration loaded.";
+diag_log "Takistan static spawn configuration loaded.";

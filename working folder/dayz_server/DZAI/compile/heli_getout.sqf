@@ -46,7 +46,7 @@ if (!surfaceIsWater _vehPos) then {
 				deleteWaypoint _x;
 			} forEach (waypoints _unitGroup);
 			
-			0 = [_unitGroup,_vehPos,75,DZAI_debugMarkers] spawn DZAI_BIN_taskPatrol;
+			0 = [_unitGroup,_vehPos,75] spawn DZAI_BIN_taskPatrol;
 			
 			_unitGroup allowFleeing 0;
 

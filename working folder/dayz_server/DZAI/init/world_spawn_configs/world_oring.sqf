@@ -1,5 +1,5 @@
 /*
-	Oring static/dynamic trigger configuration 
+	Oring static spawn configuration 
 	
 	Last updated: 11:57 PM 6/6/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_oring.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [5191.1069, 5409.1938];
 	"DZAI_centerMarker" setMarkerSize [4750, 4750];
 };
@@ -282,4 +282,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_oring"
 #include "custom_spawns\cust_spawns_oring"
 
-diag_log "Oring map configuration loaded.";
+diag_log "Oring static spawn configuration loaded.";

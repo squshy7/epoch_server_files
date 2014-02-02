@@ -1,5 +1,5 @@
 /*
-	Sahrani static/dynamic trigger configuration 
+	Sahrani static spawn configuration 
 	
 	Last updated: 11:57 PM 6/6/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_sara.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [12693.104, 11544.386, 0.036790848];
 	"DZAI_centerMarker" setMarkerSize [6250, 6250];
 };
@@ -546,4 +546,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_sara.sqf"
 #include "custom_spawns\cust_spawns_sara.sqf"
 
-diag_log "Sahrani map configuration loaded.";
+diag_log "Sahrani static spawn configuration loaded.";

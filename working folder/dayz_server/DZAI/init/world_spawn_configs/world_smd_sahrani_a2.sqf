@@ -1,5 +1,5 @@
 /*
-	Sahrani static/dynamic trigger configuration 
+	Sahrani static spawn configuration 
 	
 	Last updated: 11:57 PM 6/6/2013
 	

@@ -1,5 +1,5 @@
 /*
-	Taviana static/dynamic trigger configuration 
+	Taviana static spawn configuration 
 	
 	Last updated: 11:58 PM 6/6/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_tavi.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [10887.825, 11084.657, 1.5322094];
 	"DZAI_centerMarker" setMarkerSize [8500, 8500];
 };
@@ -635,4 +635,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_tavi.sqf"
 #include "custom_spawns\cust_spawns_tavi.sqf"
 
-diag_log "Taviana map configuration loaded.";
+diag_log "Taviana static spawn configuration loaded.";

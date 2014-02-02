@@ -1,5 +1,5 @@
 /*
-	Utes static/dynamic trigger configuration 
+	Utes static spawn configuration 
 	
 	Last updated: 11:44 AM 6/7/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_utes.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [3519.8037, 3703.0649];
 	"DZAI_centerMarker" setMarkerSize [1000, 1000];
 };
@@ -67,4 +67,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_utes.sqf"
 #include "custom_spawns\cust_spawns_utes.sqf"
 
-diag_log "Utes map configuration loaded.";
+diag_log "Utes static spawn configuration loaded.";

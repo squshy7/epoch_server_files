@@ -1,5 +1,5 @@
 /*
-	Trinity Island static/dynamic trigger configuration 
+	Trinity Island static spawn configuration 
 	
 	Last updated: 11:44 AM 6/7/2013
 	
@@ -8,7 +8,7 @@
 #include "spawn_markers\markers_trinity.sqf"	//Load manual spawn point definitions file.
 #include "spawn_areas\areas_trinity.sqf"		//Load spawn area definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [7183.8403, 7067.4727];
 	"DZAI_centerMarker" setMarkerSize [5250, 5250];
 };
@@ -75,4 +75,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_trinity.sqf"
 #include "custom_spawns\cust_spawns_trinity.sqf"
 
-diag_log "Trinity Island map configuration loaded.";
+diag_log "Trinity Island static spawn configuration loaded.";

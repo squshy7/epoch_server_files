@@ -1,5 +1,5 @@
 /*
-	Chernarus static/dynamic trigger configuration 
+	Chernarus static spawn configuration 
 	
 	Last updated: 3:37 PM 12/24/2013
 	
@@ -8,7 +8,7 @@
 #include "spawn_markers\markers_chernarus.sqf"	//Load manual spawn point definitions file.
 #include "spawn_areas\areas_chernarus.sqf"		//Load spawn area definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [7652.9634, 7870.8076];
 	"DZAI_centerMarker" setMarkerSize [5500, 5500];
 };
@@ -95,4 +95,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_chernarus.sqf"
 #include "custom_spawns\cust_spawns_chernarus.sqf"
 
-diag_log "Chernarus map configuration loaded.";
+diag_log "Chernarus static spawn configuration loaded.";

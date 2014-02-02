@@ -53,7 +53,7 @@ if (_patrolDist > 1) then {
 			//diag_log format ["DEBUG :: Counted %1 spawn positions.",count _spawnPositions];
 			_nul = [_unitGroup,_spawnPositions] spawn DZAI_bldgPatrol;
 		} else {
-			0 = [_unitGroup,(getPosATL _trigger),_patrolDist,DZAI_debugMarkers] spawn DZAI_BIN_taskPatrol;
+			0 = [_unitGroup,(getPosATL _trigger),_patrolDist] spawn DZAI_BIN_taskPatrol;
 		};
 	};
 };

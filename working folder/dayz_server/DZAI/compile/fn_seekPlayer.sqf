@@ -1,7 +1,7 @@
 /*
 	DZAI_dyn_huntPlayer
 	
-	Description: Used for dynamically spawned AI. Creates a MOVE waypoint directing AI to a random player's position, then uses BIN_taskPatrol to create a circular patrol path around player's position.
+	Description: Used for dynamically spawned AI. Creates a MOVE waypoint directing AI to a random player's position, then uses BIN_taskPatrol to create a circular patrol path around initial spawn position.
 	
 	Last updated: 2:12 AM 1/11/2014
 */
@@ -96,7 +96,7 @@ if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Group %1 has exited
 //Begin patrol phase
 _waypoint setWaypointStatements ["true","if ((random 1) < 0.50) then { group this setCurrentWaypoint [(group this), (floor (random (count (waypoints (group this)))))];};"];
 //_patrolCenter = if (!(isNull _targetPlayer)) then {getPosATL _targetPlayer} else {getPosATL (leader _unitGroup)};
-0 = [_unitGroup,_triggerPos,_patrolDist,DZAI_debugMarkers] spawn DZAI_BIN_taskPatrol;
+0 = [_unitGroup,_triggerPos,_patrolDist] spawn DZAI_BIN_taskPatrol;
 _unitGroup setVariable ["seekActive",false];
 
 sleep 5;
@@ -105,7 +105,7 @@ if (DZAI_radioMsgs) then {
 	_leader = (leader _unitGroup);
 	if (((_unitGroup getVariable ["GroupSize",0]) > 1) && {!(_leader getVariable ["unconscious",false])} && {!(isNull _targetPlayer)}) then {
 		private ["_nearbyUnits","_radioSpeech","_radioText"];
-		_nearbyUnits = (getPosATL _leader) nearEntities ["CAManBase",_transmitRange];
+		_nearbyUnits = (getPosATL _targetPlayer) nearEntities ["CAManBase",_transmitRange];
 		{
 			if ((isPlayer _x)&&{(_x hasWeapon "ItemRadio")}) then {
 			//if (isPlayer _x) then {

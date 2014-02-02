@@ -91,7 +91,7 @@ while {(alive _unit)&&{(!(isNull _unit))}} do {
 			} else {
 				private ["_lowblood","_brokenbones"];
 				_lowblood = ((_health select 0) < 7200);
-				_brokenbones = (_health select 3);
+				_brokenbones = (_health select 2);
 				if ((_lowblood or _brokenbones) && {((time - _lastBandage) > 60)}) then {
 					_needsHeal = true;
 				};

@@ -8,3 +8,8 @@ Do not edit the <mapname>_classnames.sqf files! They are only used to direct DZA
 Inside each mapname folder, there is a default.sqf file. This config file is read if other mods for the map aren't detected.
 
 Example: If running vanilla DayZ, /Chernarus/default.sqf will be read. If running DayZ Overwatch, /Chernarus/dayz_overwatch will be read instead.
+
+Load order of classname config files:
+
+1. default/default_classnames.sqf
+2. <mapname>/default.sqf OR <mapname>/dayz_<modname>.sqf OR epoch/dayz_epoch.sqf (if running Epoch)
