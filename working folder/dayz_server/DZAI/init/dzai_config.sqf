@@ -14,9 +14,6 @@ diag_log "[DZAI] Reading DZAI configuration file.";
 //Enable or disable event logging to arma2oaserver.rpt. Debug level setting. 0: Off, 1: Basic Debug, 2: Extended Debug. (Default: 0)
 DZAI_debugLevel = 0;
 
-//Enable or disable debug markers. 0: Off, 1: Basic markers (Track AI position, locate patrol waypoints, locate dynamically-spawned triggers), 2: Extended markers (Basic markers + Static trigger markers and refreshing dynamic trigger markers) (Default: 0)										
-DZAI_debugMarkers = 0;	
-
 //Frequency of server monitor update to RPT log in seconds. The monitor periodically reports number of max/current AI units and dynamically spawned triggers into RPT log. (Default: 300, 0 = Disabled)										
 DZAI_monitorRate = 300;
 
@@ -42,7 +39,6 @@ DZAI_readOverrideFile = true;
 	"default"				Force default settings
 	"2017"					DayZ 2017/Namalsk 2017	(Can't be automatically detected, must manually set DZAI_modName = "2017" to enable)
 	"epoch"					DayZ Epoch 				(Automatically detected - no need to edit)
-	"civilian"				DayZ Civilian 			(Can't be automatically detected, must manually set DZAI_modName = "civilian" to enable)
 	"overwatch"				DayZ Overwatch 			(Automatically detected - no need to edit)
 	"huntinggrounds"		DayZ Hunting Grounds 	(Automatically detected - no need to edit)
 	
@@ -91,7 +87,7 @@ DZAI_radioMsgs = true;
 DZAI_useRadioAddon = false;
 
 
-/*	AI Spawning Settings (Static AI spawns)
+/*	Static AI Spawning Settings
 --------------------------------------------------------------------------------------------------------------------*/	
 
 //Enable or disable static AI spawns. If enabled, AI spawn points will be generated in cities, towns, and other predefined areas. Does not affect custom-defined spawns (Default: true).
@@ -114,9 +110,6 @@ DZAI_dynAISpawns = true;
 //Array of area blacklist markers. Players within marker areas will not be targeted for dynamic AI spawns (Example: ["BlacklistArea1","BlacklistArea2","BlacklistArea3"])
 //Epoch: DZAI will automatically set up 200m-radius blacklist areas around each trader area.
 DZAI_dynAreaBlacklist = [];
-
-//Time to wait before force-despawning trigger area after all spawned units have been killed.(Default: 300)									
-DZAI_dynRemoveDeadWait = 300;
 
 //Time to wait before despawning all AI units in dynamic trigger area when no players are present. (Default: 120)
 DZAI_dynDespawnWait = 120;

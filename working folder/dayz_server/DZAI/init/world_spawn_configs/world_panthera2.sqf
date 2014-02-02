@@ -1,5 +1,5 @@
 /*
-	Panthera static/dynamic trigger configuration 
+	Panthera static spawn configuration 
 	
 	Last updated: 11:57 PM 6/6/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_panthera2.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [5343.6953, 4366.2534];
 	"DZAI_centerMarker" setMarkerSize [3500, 3500];
 };
@@ -402,4 +402,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_panthera2.sqf"
 #include "custom_spawns\cust_spawns_panthera2.sqf"
 
-diag_log "Panthera map configuration loaded.";
+diag_log "Panthera static spawn configuration loaded.";

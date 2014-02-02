@@ -1,5 +1,5 @@
 /*
-	Fallujah static/dynamic trigger configuration 
+	Fallujah static spawn configuration 
 	
 	Last updated: 11:08 PM 7/5/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_fallujah.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [5139.8008, 4092.6797];
 	"DZAI_centerMarker" setMarkerSize [4000, 4000];
 };
@@ -297,4 +297,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_fallujah.sqf"
 #include "custom_spawns\cust_spawns_fallujah.sqf"
 
-diag_log "Fallujah map configuration loaded.";
+diag_log "Fallujah static spawn configuration loaded.";

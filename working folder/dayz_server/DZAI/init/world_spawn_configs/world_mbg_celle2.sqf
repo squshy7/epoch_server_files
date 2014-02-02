@@ -1,5 +1,5 @@
 /*
-	Celle static/dynamic trigger configuration 
+	Celle static spawn configuration 
 	
 	Last updated: 11:57 PM 6/6/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_mbg_celle2.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [6163.52, 6220.3984];
 	"DZAI_centerMarker" setMarkerSize [6000, 6000];
 };
@@ -386,4 +386,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_mbg_celle2.sqf"
 #include "custom_spawns\cust_spawns_mbg_celle2.sqf"
 
-diag_log "Celle map configuration loaded.";
+diag_log "Celle static spawn configuration loaded.";

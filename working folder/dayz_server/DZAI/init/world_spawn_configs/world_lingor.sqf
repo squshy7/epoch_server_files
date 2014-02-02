@@ -1,5 +1,5 @@
 /*
-	Lingor static/dynamic trigger configuration 
+	Lingor static spawn configuration 
 	
 	Last updated: 12:19 AM 7/23/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_lingor.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [5166.5581, 5108.8301];
 	"DZAI_centerMarker" setMarkerSize [4500, 4500];
 };
@@ -612,4 +612,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_lingor.sqf"
 #include "custom_spawns\cust_spawns_lingor.sqf"
 
-diag_log "Lingor map configuration loaded.";
+diag_log "Lingor static spawn configuration loaded.";

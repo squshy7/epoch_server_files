@@ -1,16 +1,11 @@
 /*
 	Namalsk Classname Configuration
 	
-	Last updated: 10:54 AM 9/14/2013
+	Last updated: 6:30 PM 1/24/2014
 	
 */
 
-private ["_newItems"];
 
-DZAI_gradeChances0 = [0.90,0.10,0.00,0.00];
-DZAI_gradeChances1 = [0.65,0.30,0.05,0.00];
-DZAI_gradeChances2 = [0.30,0.45,0.15,0.00];
-DZAI_gradeChances3 = [0.25,0.55,0.20,0.00];
 //Reduce gadget probabilities
 DZAI_gadgets0 set [0,["binocular",0.50]];
 DZAI_gadgets0 set [1,["NVGoggles",0.000]];	//Reduce probability of functional NVGs

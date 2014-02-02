@@ -1,5 +1,5 @@
 /*
-	Zargabad static/dynamic trigger configuration 
+	Zargabad static spawn configuration 
 	
 	Last updated: 11:44 AM 6/7/2013
 	
@@ -7,7 +7,7 @@
 
 #include "spawn_markers\markers_zargabad.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or (DZAI_maxLandPatrols > 0) or DZAI_dynAISpawns) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [3917.6201, 3800.0376];
 	"DZAI_centerMarker" setMarkerSize [2000, 2000];
 };
@@ -132,4 +132,4 @@ if (DZAI_staticAI) then {
 #include "custom_markers\cust_markers_zargabad.sqf"
 #include "custom_spawns\cust_spawns_zargabad.sqf"
 
-diag_log "Zargabad map configuration loaded.";
+diag_log "Zargabad static spawn configuration loaded.";

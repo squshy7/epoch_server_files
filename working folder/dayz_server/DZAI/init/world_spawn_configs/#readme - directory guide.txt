@@ -2,17 +2,25 @@ Directory Guide:
 
 	(Folders)
 	---------
+
+	Custom Spawns
+	--------------
 	
 	custom_spawns: Custom static spawn definitions.
 
 	custom_markers:	Custom spawn point definitions, area blacklists for dynamic AI spawns.
 	
+
+
+	Preset Static Spawns
+	--------------	
+
 	spawn_areas: Markers defining static spawn areas (currently only used for Chernarus and Trinity Island)*
 	
 	spawn_markers: Markers defining static spawn points
 	
 	
-* 	Static spawn areas to be converted to the new format eventually. 
+	* Static spawn areas to be converted to the new format eventually. 
 	I do all of this by hand, so it will take some time to fully complete.
 
 

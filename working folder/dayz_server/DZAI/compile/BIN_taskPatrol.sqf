@@ -46,8 +46,9 @@ if (isServer) then
 	_grp = _this select 0;
 	_pos = _this select 1;
 	_max_dist = _this select 2;
-	_debug = if ((count _this) > 3) then {_this select 3} else {0};
-	_blacklist = if ((count _this) > 4) then {_blacklist = _this select 4} else {[]};
+	//_debug = if ((count _this) > 3) then {if ((typeName (_this select 3)) != "") then {1} else {0}} else {0};
+	//_blacklist = if ((count _this) > 4) then {_blacklist = _this select 4} else {[]};
+	_debug = !(isNil "DZAI_debugMarkers");
 
 	_grp setBehaviour "AWARE";
 	if (_max_dist > 75) then {_grp setSpeedMode "FULL"} else {_grp setSpeedMode "LIMITED"};
@@ -101,7 +102,7 @@ if (isServer) then
 			_prepos = [_x1, _y1];
 		};
 
-		_wp_pos = [_prepos, 0, _slack, 6, 0, 50 * (pi / 180), 0, _blacklist,[_prepos]] call BIS_fnc_findSafePos;
+		_wp_pos = [_prepos, 0, _slack, 6, 0, 50 * (pi / 180), 0, [],[_prepos]] call BIS_fnc_findSafePos;
 		
 		_a = 0 + (_wp_pos select 0);
 		_b = 0 + (_wp_pos select 1);
@@ -144,7 +145,7 @@ if (isServer) then
 			// When completing waypoint have 33% chance to choose a random next wp
 			_wp setWaypointStatements ["true", _wpStatements];
 			
-			if (_debug > 0) then {
+			if (_debug) then {
 				_markername = str (_wp);
 				if ((getMarkerColor _markername) != "") then {deleteMarker _markername};
 				//diag_log format ["DEBUG :: Created patrol waypoint %1.",_markername];
