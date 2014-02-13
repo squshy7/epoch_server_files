@@ -178,7 +178,6 @@ if (isServer and isNil "sm_done") then {
 			if ((typeOf _object) in dayz_allowedObjects) then {
 				if (DZE_GodModeBase) then {
 					_object addEventHandler ["HandleDamage", {false}];
-					_object setDamage 0;
 				} else {
 					_object addMPEventHandler ["MPKilled",{_this call object_handleServerKilled;}];
 				};
@@ -213,10 +212,7 @@ if (isServer and isNil "sm_done") then {
 						};
 						_isOK = 	isClass(configFile >> "CfgWeapons" >> _x);
 						if (_isOK) then {
-							_block = 	getNumber(configFile >> "CfgWeapons" >> _x >> "stopThis") == 1;
-							if (!_block) then {
-								_object addWeaponCargoGlobal [_x,(_objWpnQty select _countr)];
-							};
+							_object addWeaponCargoGlobal [_x,(_objWpnQty select _countr)];
 						};
 						_countr = _countr + 1;
 					} forEach _objWpnTypes; 
@@ -230,10 +226,7 @@ if (isServer and isNil "sm_done") then {
 						if (_x == "ItemTent") then { _x = "ItemTentOld" };
 						_isOK = 	isClass(configFile >> "CfgMagazines" >> _x);
 						if (_isOK) then {
-							_block = 	getNumber(configFile >> "CfgMagazines" >> _x >> "stopThis") == 1;
-							if (!_block) then {
-								_object addMagazineCargoGlobal [_x,(_objWpnQty select _countr)];
-							};
+							_object addMagazineCargoGlobal [_x,(_objWpnQty select _countr)];
 						};
 						_countr = _countr + 1;
 					} forEach _objWpnTypes;
@@ -245,10 +238,7 @@ if (isServer and isNil "sm_done") then {
 					{
 						_isOK = 	isClass(configFile >> "CfgVehicles" >> _x);
 						if (_isOK) then {
-							_block = 	getNumber(configFile >> "CfgVehicles" >> _x >> "stopThis") == 1;
-							if (!_block) then {
-								_object addBackpackCargoGlobal [_x,(_objWpnQty select _countr)];
-							};
+							_object addBackpackCargoGlobal [_x,(_objWpnQty select _countr)];
 						};
 						_countr = _countr + 1;
 					} forEach _objWpnTypes;
