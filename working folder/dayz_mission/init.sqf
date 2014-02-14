@@ -88,7 +88,7 @@ if (!isDedicated) then {
 	// [] execVM "\z\addons\dayz_code\system\antihack.sqf";
 
 	//Lights
-	[false,12] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
+	//[false,12] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";
 	
 	//Service Points
 	execVM "service_point\service_point.sqf";
