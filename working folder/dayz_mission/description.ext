@@ -148,3 +148,4 @@ class DayZ_loadingScreen
 		};
 	};
 };
+#include "custom\snap_build\points.hpp"
