@@ -16,7 +16,7 @@ DZMSUseNVG = true;
 
 // Do you want AI to use RPG7V's?
 //(Only one unit per group spawn will have one)
-DZMSUseRPG = false;
+DZMSUseRPG = true;
 
 // Do you want AI kills to count as bandit kills?
 DZMSCntBanditKls = true;
@@ -71,7 +71,7 @@ DZMSSaveVehicles = false;
 DZMSChoppers = ["UH1H_DZ","Mi17_DZ"];
 
 //Small Vehicles (Humvees)
-DZMSSmallVic = ["hilux1_civil_3_open_EP1","SUV_TK_CIV_EP1","Ural_INS","HMMWV_DZ","UAZ_Unarmed_UN_EP1"];
+DZMSSmallVic = ["hilux1_civil_3_open_EP1","SUV_TK_CIV_EP1","Ural_CDF","HMMWV_DZ","UAZ_Unarmed_UN_EP1"];
 
 //Large Vehicles (Urals)
 DZMSLargeVic = ["Ural_TK_CIV_EP1"];
