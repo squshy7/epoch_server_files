@@ -13,10 +13,10 @@ switch true do {
         DefaultBackpack = "DZ_GunBag_EP1";
         DefaultBackpackWeapon = "";
         };
-    case ((getPlayerUID player) in ["123456789"])  : //Pro-Donators:
+    case ((getPlayerUID player) in ["158151366","236741958"])  : //Pro-Donators:
         {
-        DefaultMagazines = ["ItemBandage","ItemBandage","ItemMorphine","ItemPainkiller","ItemGoldBar"];
-        DefaultWeapons = ["ItemMap","ItemFlashlight","ItemHatchet_DZE"];
+        DefaultMagazines = ["ItemPainkiller","FoodbeefCooked","17Rnd_9x19_glock17","17Rnd_9x19_glock17","17Rnd_9x19_glock17","15Rnd_W1866_Slug","15Rnd_W1866_Slug","ItemBandage","ItemBandage","ItemWaterbottle"];
+		DefaultWeapons = ["Winchester1866","glock17_EP1","ItemCompass","ItemToolbox","ItemFlashlight","ItemMap","ItemKnife","ItemHatchet_DZE"]; 
         DefaultBackpack = "DZ_Patrol_Pack_EP1";
         DefaultBackpackWeapon = "";
         };
