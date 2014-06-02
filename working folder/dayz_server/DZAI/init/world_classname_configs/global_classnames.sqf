@@ -43,7 +43,7 @@ DZAI_Rifles9 = nil; //weapongrade 9 weapons
 
 //AI skin classnames. DZAI will use any of these classnames for AI spawned. Note: Additional skins may be used on a per-map or per-mod basis - see appropriate folders in \world_classname_configs
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DZAI_BanditTypes = ["Survivor2_DZ", "SurvivorW2_DZ", "Bandit1_DZ", "BanditW1_DZ", "Camo1_DZ", "Sniper1_DZ"]; //List of skins for AI units to use
+DZAI_BanditTypes = ["UN_CDF_Soldier_AT_EP1","UN_CDF_Soldier_EP1"]; //List of skins for AI units to use
 
 
 //AI Backpack types.
