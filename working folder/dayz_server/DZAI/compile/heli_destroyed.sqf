@@ -6,7 +6,7 @@
 		Last updated: 1:49 PM 12/18/2013
 */
 
-private ["_helicopter","_unitGroup","_cleanupTime","_deleteQueue","_units"];
+private ["_helicopter","_unitGroup"];
 _helicopter = _this select 0;
 
 if (_helicopter getVariable ["heli_disabled",false]) exitWith {};
@@ -26,6 +26,6 @@ _helicopter removeAllEventHandlers "Killed";
 deleteGroup _unitGroup;
 DZAI_curHeliPatrols = DZAI_curHeliPatrols - 1;
 
-if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Helicopter patrol destroyed at %1",mapGridPosition _helicopter];};
+if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: AI helicopter patrol destroyed at %1",mapGridPosition _helicopter];};
 0 = ["air"] spawn fnc_respawnHandler;
 [_helicopter,900] call DZAI_deleteObject;

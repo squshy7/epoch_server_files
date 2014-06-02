@@ -25,6 +25,8 @@ if (_unitsAlive == 0) then {
 	if (isPlayer _killer) then {
 		_unitGroup reveal [vehicle _killer,4];
 		_unitGroup setFormDir ([(leader _unitGroup),_killer] call BIS_fnc_dirTo);
+		(units _unitGroup) doTarget (vehicle _killer);
+		(units _unitGroup) doFire (vehicle _killer);
 		if (DZAI_findKiller && {!(_unitGroup getVariable ["seekActive",false])}) then {_unitGroup setBehaviour "AWARE"; 0 = [_trigger,_killer,_unitGroup,150] spawn DZAI_huntKiller} else {_unitGroup setBehaviour "COMBAT"};
 	};
 	if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: AI group %1 killed, %2 units left alive in group. (fnc_dynAIDeath).",_unitGroup,_unitsAlive];};

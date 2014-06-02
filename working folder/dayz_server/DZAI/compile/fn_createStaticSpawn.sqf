@@ -40,13 +40,15 @@ if ((count _positionArray) > 0) then {
 	private ["_spawnPositions"];
 	_spawnPositions = [];
 	{
-		if ((((getMarkerPos _x) select 0) != 0)&&{(((getMarkerPos _x) select 1) != 0)}) then {
+		//if ((((getMarkerPos _x) select 0) != 0)&&{(((getMarkerPos _x) select 1) != 0)}) then {
+		if ((getMarkerColor _x) != "") then {
 			_spawnPositions set [(count _spawnPositions),(getMarkerPos _x)];
 			deleteMarker _x;
 		};
 	} forEach _positionArray;
 	if ((count _spawnPositions) > 0) then {
 		0 = [_trigger,[],_patrolDist,_equipType,_spawnPositions,[_minAI,_addAI]] call DZAI_setTrigVars;
+		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Found marker positions: %1 (spawnBandits).",_spawnPositions];};
 	};
 };
 

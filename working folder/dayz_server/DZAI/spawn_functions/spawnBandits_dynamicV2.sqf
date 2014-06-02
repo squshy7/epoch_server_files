@@ -9,7 +9,7 @@
 */
 
 #define CHANCE_LOW 0.50
-#define CHANCE_HIGH 0.90
+#define CHANCE_HIGH 1.00
 
 private ["_patrolDist","_trigger","_totalAI","_unitGroup","_targetPlayer","_playerPos","_playerDir","_playerCount","_spawnPos","_startTime","_baseDist","_distVariance","_dirVariance","_spawnChance","_vehPlayer"];
 if (!isServer) exitWith {};
@@ -34,10 +34,10 @@ _baseDist = 200;
 _distVariance = 50;
 _vehPlayer = vehicle _targetPlayer;
 if (_vehPlayer isKindOf "Man") then {
-	_dirVariance = if ((random 1) < 0.90) then {100} else {157.5};
+	_dirVariance = 100;
 	//_distVariance = _distVariance + 50;
 } else {
-	_dirVariance = if ((random 1) < 0.85) then {67.5} else {135};
+	_dirVariance = 67.5;
 	_baseDist = _baseDist - 25;
 };
 
@@ -45,8 +45,8 @@ _playerPos = getPosATL _vehPlayer;
 _playerDir = getDir _vehPlayer;
 
 _spawnPos = [_playerPos,(_baseDist + random (_distVariance)),[(_playerDir-_dirVariance),(_playerDir+_dirVariance)],false] call SHK_pos;
-if (({isPlayer _x} count (_spawnPos nearEntities [["CAManBase"],100])) > 0) exitWith {
-	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Cancelling dynamic spawn for target player %1. Reason: Player(s) too close to spawn point.",name _targetPlayer]};
+if ((surfaceIsWater _spawnPos) or {({isPlayer _x} count (_spawnPos nearEntities [["CAManBase","Land"],125])) > 0} or {(_spawnPos in (nearestLocation [_spawnPos,"Strategic"]))}) exitWith {
+	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Canceling dynamic spawn for target player %1.",name _targetPlayer]};
 	_nul = _trigger call DZAI_abortDynSpawn;
 	
 	false
@@ -63,7 +63,7 @@ _totalAI = switch (true) do {
 	case default {1 + floor(random 3)};
 };
 
-if (!isNil "DZAI_debugMarkers") then {
+if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 	private["_marker"];
 	_marker = format["trigger_%1",_trigger];
 	//_marker setMarkerPos _playerPos;

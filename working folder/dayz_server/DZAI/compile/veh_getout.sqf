@@ -12,36 +12,38 @@ private ["_vehicle","_trigger","_vehPos","_unitsAlive","_unitGroup"];
 _vehicle = _this select 0;
 
 //_vehicle removeAllEventHandlers "GetOut";
+if (_vehicle getVariable ["veh_disabled",false]) exitWith {};
+_vehicle setVariable ["veh_disabled",true];
+
+_vehicle removeAllEventHandlers "GetOut";
+_vehicle removeAllEventHandlers "HandleDamage";
 _vehicle removeAllEventHandlers "Killed";
-/*
-_vehicle addEventHandler ["GetIn",{
-	if (isPlayer (_this select 2)) then {
-		(_this select 2) action ["getOut",(_this select 0)]; 
-		0 = [nil,(_this select 2),"loc",rTITLETEXT,"Players are not permitted to enter AI vehicles!","PLAIN DOWN",5] call RE;
-		(_this select 0) setVehicleLock "LOCKED";
-	};
-}];*/
 
 _unitGroup = _vehicle getVariable ["unitGroup",(group (_this select 2))];
 _vehPos = getPosATL _vehicle;
 
-//Convert vehicle units to ground units
-{
-	if (alive _x) then {
-		private ["_health"];
-		0 = [_x, 3] spawn DZAI_autoRearm_unit;
-		_x setVariable ["unconscious",false];
-		_health = _x getVariable ["unithealth",[12000,0,false]];
-		_health set [1,0];
-		_health set [2,false];
-		_x setHit["legs",0];
-		if (!canMove _vehicle) then {
+_nul = [_unitGroup,_vehicle] spawn {
+	_unitGroup = _this select 0;
+	_vehicle = _this select 1;
+	
+	//Convert vehicle units to ground units
+	{
+		if (alive _x) then {
+			private ["_health"];
+			0 = [_x, 3] spawn DZAI_autoRearm_unit;
+			_x setVariable ["unconscious",false];
+			_health = _x getVariable ["unithealth",[12000,0,false]];
+			_health set [1,0];
+			_health set [2,false];
+			_x setHit["legs",0];
 			if (_x != (gunner _vehicle)) then {
 				unassignVehicle _x;
+				_x action ["eject",vehicle _x];
 			};
 		};
-	};
-} forEach (units _unitGroup);
+		sleep 0.1;
+	} forEach (units _unitGroup);
+};
 
 {
 	deleteWaypoint _x;
@@ -49,7 +51,8 @@ _vehPos = getPosATL _vehicle;
 
 0 = [_unitGroup,_vehPos,75] spawn DZAI_BIN_taskPatrol;
 _unitsAlive = {alive _x} count (units _unitGroup);
-DZAI_numAIUnits = DZAI_numAIUnits + _unitsAlive;
+//DZAI_numAIUnits = DZAI_numAIUnits + _unitsAlive;
+(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
 _unitGroup allowFleeing 0;
 
 //Create area trigger

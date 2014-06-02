@@ -99,7 +99,7 @@ for "_i" from 1 to _amount do {
 	};
 
 	//Add eventhandlers
-	_vehicle addEventHandler ["Killed",{_this call DZAI_vehDespawn; (_this select 0) removeAllEventHandlers "Killed";}];
+	_vehicle addEventHandler ["Killed",{_this call DZAI_vehDestroyed; (_this select 0) removeAllEventHandlers "Killed";}];
 	_vehicle addEventHandler ["GetOut",{_this call DZAI_vehGetOut; (_this select 0) removeAllEventHandlers "GetOut";}];
 	_vehicle addEventHandler ["HandleDamage",{_this call DZAI_vHandleDamage}];
 	_vehicle setVariable ["crewCount",_crewCount];

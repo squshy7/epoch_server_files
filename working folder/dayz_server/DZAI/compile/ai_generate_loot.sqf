@@ -25,6 +25,9 @@ if (_unit getVariable ["CanGivePistol",true]) then {
 //Add consumables, medical items, and miscellaneous items
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//Clear backpack cargo in case there are items
+clearMagazineCargoGlobal _unit;
+
 //Add one guaranteed Bandage to inventory
 _unit addMagazine "ItemBandage";
 
@@ -102,7 +105,9 @@ if (_weapongrade > 0) then {
 			//diag_log format ["DEBUG :: %1 chance to add bar.",_chance];
 			if ((random 1) < _chance) then {
 				_itemBar = ((DZAI_metalBars select _index) select 0);
-				_unit addMagazine _itemBar;
+				if ([_itemBar,"magazine"] call DZAI_checkClassname) then {
+					_unit addMagazine _itemBar;
+				};
 				//diag_log format ["DEBUG :: Added bar %1 as loot to AI corpse.",_itemBar];
 			};
 		};
@@ -122,7 +127,9 @@ for "_i" from 0 to ((count _toolsArray) - 1) do {
 	//diag_log format ["DEBUG :: %1 chance to add tool.",_chance];
 	if ((random 1) < _chance) then {
 		_tool = ((_toolsArray select _i) select 0);
-		_unit addWeapon _tool;
+		if ([_tool,"weapon"] call DZAI_checkClassname) then {
+			_unit addWeapon _tool;
+		};
 		//diag_log format ["DEBUG :: Added tool %1 as loot to AI corpse.",_tool];
 	};
 };
