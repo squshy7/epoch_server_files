@@ -68,7 +68,7 @@ DZMSSaveVehicles = false;
 // Adjust to your liking.
 
 //Armed Choppers (Huey)
-DZMSChoppers = ["UH1H_DZ","Mi17_DZ"];
+DZMSChoppers = ["UH1H_DZE","Mi17_DZE"];
 
 //Small Vehicles (Humvees)
 DZMSSmallVic = ["hilux1_civil_3_open_EP1","SUV_TK_CIV_EP1","Ural_CDF","HMMWV_DZ","UAZ_Unarmed_UN_EP1"];
