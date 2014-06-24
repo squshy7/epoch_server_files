@@ -1,31 +1,18 @@
-private ["_unitGroup","_nearUnits","_detectBase","_detectFactor","_detectRange","_heli"];
+private ["_unitGroup","_detected","_detectBase","_detectFactor","_detectRange","_heli"];
 _unitGroup = _this select 0;
 
 _heli = vehicle (leader _unitGroup);
-_detectRange = if (_unitGroup getVariable ["DetectPlayersWide",false]) then {_unitGroup setVariable ["DetectPlayersWide",false]; 350} else {250};
-_nearUnits = (waypointPosition [_unitGroup,(currentWaypoint _unitGroup)]) nearEntities [["AllVehicles","CAManBase"],_detectRange];
-if ((count _nearUnits) > 0) then {
-	private ["_nearPlayerUnits"];
-	_nearPlayerUnits = [];
-	{
-		if (isPlayer _x) then {
-			_nearPlayerUnits set [count _nearPlayerUnits,_x];
+_detectRange = if (_unitGroup getVariable ["DetectPlayersWide",false]) then {_unitGroup setVariable ["DetectPlayersWide",false]; 400} else {275};
+_detected = (waypointPosition [_unitGroup,(currentWaypoint _unitGroup)]) nearEntities [["Land","CAManBase"],_detectRange];
+
+private ["_nearPlayerUnits","_heliAimPos","_playerAimPos"];
+{
+	if (isPlayer _x) then {
+		_heliAimPos = aimPos _heli;
+		_playerAimPos = aimPos _x;
+		if (!(terrainIntersectASL [_heliAimPos,_playerAimPos]) && {!(lineIntersects [_heliAimPos,_playerAimPos,_heli,_x])}) then {
+			_unitGroup reveal [_x,2.5];
 		};
-	} forEach _nearUnits;
-	
-	if ((count _nearPlayerUnits) > 0) then {
-		{
-			if (isPlayer _x) then {
-				private ["_heliAimPos","_playerAimPos"];
-				_heliAimPos = aimPos _heli;
-				_playerAimPos = aimPos _x;
-				if !(terrainIntersectASL [_heliAimPos,_playerAimPos]) then {
-					if !(lineIntersects [_heliAimPos,_playerAimPos,_heli,_x]) then {
-						_unitGroup reveal [_x,2.5];
-					};
-				};
-			};
-			sleep 0.1;
-		} forEach _nearPlayerUnits;
 	};
-};
+	sleep 0.1;
+} forEach _detected;

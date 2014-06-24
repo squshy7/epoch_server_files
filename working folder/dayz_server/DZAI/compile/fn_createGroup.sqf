@@ -4,38 +4,37 @@
 	Description: Spawns a group of AI units. Used for spawning of DZAI's static, dynamic, and custom AI units.
 	
 	_totalAI = Number of AI units to spawn in the group
-	_unitGroup: Group to spawn AI unit.
 	_spawnPos: Position to create AI unit.
 	_trigger: The trigger object responsible for spawning the AI unit.
 	_weapongrade: weapongrade to be used for generating equipment. Influences weapon quality and skill level.
 	
-	Last updated: 9:57 AM 1/12/2014
+	Last updated: 6:20 PM 3/28/2014
 	
 */
 private ["_totalAI","_spawnPos","_unitGroup","_trigger","_attempts","_baseDist","_dummy","_weapongrade"];
 if (!isServer) exitWith {};
 	
 _totalAI = _this select 0;
-//_unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getFreeSide)} else {_this select 1};
 _spawnPos = _this select 2;
 _trigger = _this select 3;
 _weapongrade = _this select 4;
 
 _pos = [];
 _attempts = 0;
-_baseDist = 50;
+_baseDist = 25;
 
 while {((count _pos) < 1) && {(_attempts < 3)}} do {
 	_pos = _spawnPos findEmptyPosition [0.5,_baseDist,"Misc_cargo_cont_small_EP1"];
 	if ((count _pos) > 1) then {
 		_pos = _pos isFlatEmpty [0,0,0.75,5,0,false,ObjNull];
-	} else {
-		_baseDist = (_baseDist + 50);	_attempts = (_attempts + 1);
+	}; 
+	if ((count _pos) < 1) then {
+		_baseDist = (_baseDist + 25);	_attempts = (_attempts + 1);
 	};
 };
 
 if ((count _pos) < 1) then {
-	_pos = [_spawnPos,random (125),random(360),false] call SHK_pos;
+	_pos = [_trigger,random (125),random(360),false] call SHK_pos;
 	_attempts = (_attempts + 1);
 };
 
@@ -52,15 +51,16 @@ for "_i" from 1 to _totalAI do {
 	[_unit] joinSilent _unitGroup;														// Add AI unit to group
 
 	_unit setVariable ["bodyName",(name _unit)];										// Set unit body name
-	_unit setVariable ["unithealth",[12000,0,false]];									// Set unit health (blood, legs health, legs broken)
+	_unit setVariable ["unithealth",[(10000 + (random 2000)),0,false]];					// Set unit health (blood, legs health, legs broken)
 	_unit setVariable ["unconscious",false];											// Set unit consciousness
 
 	if (DZAI_weaponNoise) then {
 		_unit addEventHandler ["Fired", {_this call ai_fired;}];};						// Unit firing causes zombie aggro in the area, like player.
-	if (DZAI_taserAI) then {
-		_unit addEventHandler ["HandleDamage",{_this call DDOPP_taser_handleHit;_this call DZAI_AI_handledamage}];
+	if (isNil "DDOPP_taser_handleHit") then {
+		_unit addEventHandler ["HandleDamage",{_this call DZAI_AI_handledamage}];
 	} else {
-		_unit addEventHandler ["HandleDamage",{_this call DZAI_AI_handledamage}];};
+		_unit addEventHandler ["HandleDamage",{_this call DDOPP_taser_handleHit;_this call DZAI_AI_handledamage}];
+	};
 
 	0 = [_unit, _weapongrade] call DZAI_setupLoadout;									// Assign unit loadout
 	0 = [_unit, _weapongrade] call DZAI_setSkills;										// Set AI skill
@@ -81,6 +81,7 @@ _unitGroup selectLeader ((units _unitGroup) select 0);
 _unitGroup setVariable ["trigger",_trigger];
 _unitGroup setVariable ["GroupSize",_totalAI];
 if (isNull _trigger) then {_unitGroup setVariable ["spawnPos",_spawnPos]};
-DZAI_numAIUnits = DZAI_numAIUnits + _totalAI;
+//DZAI_numAIUnits = DZAI_numAIUnits + _totalAI;
+(DZAI_numAIUnits + _totalAI) call DZAI_updateUnitCount;
 
 _unitGroup

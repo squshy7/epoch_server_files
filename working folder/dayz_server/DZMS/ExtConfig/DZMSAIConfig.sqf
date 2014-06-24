@@ -52,7 +52,7 @@ DZMSSkills2 = [
 
 DZMSSkills3 = [	
 	["aimingAccuracy",0.20,0.25],
-	["aimingShake",0.85,0.95],
+	["aimingShake",0.80,0.90],
 	["aimingSpeed",0.80,0.90],
 	["endurance",0.80,0.90],
 	["spotDistance",0.70,0.85],
@@ -136,7 +136,7 @@ DZMSWeps3 = [
 "FN_FAL",
 "FN_FAL_ANPVS4",
 "Mk_48_DZ",
-"M249_DZ",
+"M249_EP1_DZ",
 "BAF_L85A2_RIS_Holo",
 "G36C",
 "G36C_camo",

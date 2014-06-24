@@ -29,14 +29,16 @@ if (isPlayer _killer) then {
 	0 = [_victim,_weapongrade] spawn DZAI_addLoot;
 	0 = [_killer,_victim,"banditKills"] call DZAI_countKills;
 } else {
-	if (_killer != _victim) then {
+	if (_killer == _victim) then {
+		removeAllWeapons _victim;
+	} else {
 		{
 			_victim removeMagazines _x;
 		} forEach (magazines _victim);
 	};
 };
 
-if !((_victim getVariable ["CanGivePistol",true]) && (_victim getVariable ["unconscious",false])) then {
+if !((_victim getVariable ["CanGivePistol",true]) && {(_victim getVariable ["unconscious",false])}) then {
 	private ["_anim"];
 	_anim = if ((animationState _victim) in ["amovppnemrunsnonwnondf","amovppnemstpsnonwnondnon","amovppnemstpsraswrfldnon","amovppnemsprslowwrfldf","aidlppnemstpsnonwnondnon0s","aidlppnemstpsnonwnondnon01"]) then {"adthppnemstpsraswpstdnon_2"} else {"adthpercmstpslowwrfldnon_4"};
 	_nul = [objNull, _victim, rSWITCHMOVE, _anim] call RE; 

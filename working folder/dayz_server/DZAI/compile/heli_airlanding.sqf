@@ -49,7 +49,8 @@ _weapongrade = DZAI_heliEquipType call DZAI_getWeapongrade;
 
 0 = [_unitGroup,_heliPos,75] spawn DZAI_BIN_taskPatrol;
 _unitsAlive = {alive _x} count (units _unitGroup);
-DZAI_numAIUnits = DZAI_numAIUnits + _unitsAlive;
+//DZAI_numAIUnits = DZAI_numAIUnits + _unitsAlive;
+(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
 _unitGroup allowFleeing 0;
 
 //Create area trigger

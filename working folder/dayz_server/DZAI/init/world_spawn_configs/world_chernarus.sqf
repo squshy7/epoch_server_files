@@ -6,21 +6,18 @@
 */
 
 #include "spawn_markers\markers_chernarus.sqf"	//Load manual spawn point definitions file.
-#include "spawn_areas\areas_chernarus.sqf"		//Load spawn area definitions file.
 
 if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	"DZAI_centerMarker" setMarkerPos [7652.9634, 7870.8076];
 	"DZAI_centerMarker" setMarkerSize [5500, 5500];
 };
 
-if (DZAI_verifyTables) then {
-	waitUntil {sleep 0.1; !isNil "DZAI_classnamesVerified"};	//Wait for DZAI to finish verifying classname arrays.
-} else {
-	waitUntil {sleep 0.1; !isNil "DZAI_weaponsInitialized"};	//Wait for DZAI to finish building weapon classname arrays.
-};
+waitUntil {sleep 0.1; !isNil "DZAI_classnamesVerified"};	//Wait for DZAI to finish verifying classname arrays or finish building classname arrays if verification is disabled.
 
 if (DZAI_staticAI) then {
-	//marker name, [minimum AI, max additional AI], [markers for manual spawn points] (leave blank to generate spawn points), equipType (optional, required if AI group number is defined), number of AI groups (optional)
+	#include "spawn_areas\areas_chernarus.sqf"		//Load spawn area definitions file.
+	
+	//marker name, [minimum AI, max additional AI], [markers for manual spawn points] (leave as empty array to use nearby buildings as spawn points), equipType (optional, required if number of AI groups is defined), number of AI groups (optional)
 	["DZAI_Kamenka",[0,1],[],0] call DZAI_static_spawn;
 	["DZAI_Komarovo",[0,1],[],0] call DZAI_static_spawn;
 	["DZAI_Balota",[0,1],[],0] call DZAI_static_spawn;

@@ -2,13 +2,14 @@
 /* *******************Developer : infiSTAR (infiSTAR23@gmail.com)******************* */
 /* ******************Copyright © 2014 infiSTAR all rights reserved****************** */
 /* *********************************www.infiSTAR.de********************************* */
+/*  infiSTAR.de .dll path */  infiSTAR_DLL_PATH = "";    /* "" == empty == arma2oa directory */
 /*  Key to open the menu  */ _OpenMenuKey = 0x3C;    /* google DIK_KeyCodes (0x3C is F2) */
 /*  LOW ADMIN HERE        */ _LowLevel_List =   ["0","0","0"]; //do not have a , at the end.
 /*  NORMAL ADMIN HERE     */ _NormalLevel_List =["160276422","160246982","0"]; //do not have a , at the end.
 /*  SUPER ADMIN HERE      */ _SuperLevel_List = ["113806150","114320838","114331270"]; //do not have a , at the end.
 /*  BANNED PLAYER HERE    */ _BLOCKED =         ["0","0","0"]; //do not have a , at the end.
 /* ********************************************************************************* */
-/*  Top esc menu TXT      */ _TopOfESC = "KoN"; //do not use " in this text.
+/*  Top esc menu TXT      */ _TopOfESC = "KOFN"; //do not use " in this text.
 /*  Bottom esc menu TXT   */ _LowerTop = "Knights of Nom"; //do not use " in this text.
 /*  Bottom esc menu TXT2  */ _LowerBottom = "www.knightsofnom.com"; //do not use " in this text.
 /*  Color esc menu TXT    */ _EscColor = [0.6,0,0,1];
@@ -22,9 +23,11 @@
 /*  Enable BadKey Kick    */ _BKK =  true;	/* true or false */	/* recommended:  true */	/* If people press a forbidden Key twice, they get kicked! */
 /*  Forbid VON Sidechat   */ _VON =  false;   /* true or false */	/* recommended:  true */	/* talking on sidechat will put out a warning and kick if continue */
 
-/*  Break Functions ?     */  BHF =  true;   /* true or false */	/* recommended:  true */	/* break some known functions used by hacks! */
+/*  Allow RE functions    */ _ARF =  true;   /* true or false */	/* recommended:  true */	/* e.g. white text for killmessages/combatlogging */
+/*  Break Functions ?     */ _BHF =  true;   /* true or false */	/* recommended:  true */	/* break some known functions used by hacks! */
 /*  Use vehicle check?    */ _UVC = false;	/* true or false */	/* recommended: false */	/* using _ALLOWED_Vehicles and _FORBIDDEN_Vehicles lists */
 /*  Vehicle WHITELIST     */ _UVW = false;   /* true or false */	/* recommended: false */	/* if false - _ALLOWED_Vehicles won't not be used */
+/*  Vehicle Tradercheck   */ _VTC =  true;   /* true or false */	/* recommended:  true */	/* checks if a player is near a trader when 'purchasing' a vehicle */
 
 /*  Use FileScan ?        */ _UFS =  true;   /* true or false */	/* recommended:  true */	/* spams the rpt but often finds hackers */
 /*  Use Anti Teleport?    */ _UAT =  true;	/* true or false */	/* recommended:  true */	/* true = teleports them back, false = only logging */
@@ -36,7 +39,7 @@
 
 /*  Check CMDMenus ?      */ _CCM = true;   /* true or false */	/* recommended:  true */	/* only disable this if you know what you are doing. */
 /*  BLOCK ALL CMDMenus    */ _BCM = false;   /* true or false */	/* recommended:  true */	/* we don't need commandingMenus. so have this true. */
-/*  Check Actions ?       */ _CSA = false;   /* true or false */	/* recommended:  true */	/* if you have custom mousewheel actions you can simply disable this */
+/*  Check Actions ?       */ _CSA = false;   /* true or false */	/* recommended: false */	/* this checks mousewheel actions */
 /* ********************************************************************************* */
 /*  Player that have one of the items in _ForbiddenWeapons in their inventory will get punished!  */
 /*  FORBIDDEN Weapons     */ _ForbiddenWeapons =
@@ -103,12 +106,12 @@
 	batteryLevelCheckRavenAct,batteryRechargeRavenAct,mavBaseStationActionName_00,mavBaseStationActionName_001,
 	mavBaseStationActionName_01,mavBaseStationActionName_02,mavBaseStationActionName_03,mavBaseStationActionName_04,
 	s_player_dance,s_player_igniteTent,s_player_clothes,s_player_scrollBandage,
-	STR_R3F_LOG_action_heliporter,STR_R3F_LOG_action_heliport_larguer,
+	STR_R3F_LOG_action_heliporter,STR_R3F_LOG_action_heliport_larguer,s_vehicle_lockUnlock_crtl,
 	STR_R3F_LOG_action_relacher_objet,STR_R3F_LOG_action_deplacer_objet,STR_R3F_LOG_action_remorquer_deplace,
 	STR_R3F_LOG_action_selectionner_objet_remorque,STR_R3F_LOG_action_detacher,STR_R3F_LOG_action_charger_deplace,
 	STR_R3F_LOG_action_selectionner_objet_charge,STR_R3F_LOG_action_remorquer_selection,STR_R3F_LOG_action_charger_selection,
 	STR_R3F_LOG_action_contenu_vehicule,STR_R3F_ARTY_action_ouvrir_dlg_SM
-] + s_player_removeActions + s_player_repairActions + r_player_actions + r_player_actions2 + s_player_parts + s_player_combi + s_player_lockunlock)";
+] + s_player_removeActions + s_player_repairActions + r_player_actions + r_player_actions2 + s_player_parts + s_player_combi + s_player_lockunlock + s_vehicle_lockunlock)";
 /* ********************************************************************************* */
 /* *******************Developer : infiSTAR (infiSTAR23@gmail.com)******************* */
 /* ******************Copyright © 2014 infiSTAR all rights reserved****************** */

@@ -40,7 +40,8 @@ if (!surfaceIsWater _vehPos) then {
 		} forEach _units;
 		
 		_unitsAlive = {alive _x} count _units;
-		DZAI_numAIUnits = DZAI_numAIUnits + _unitsAlive;
+		//DZAI_numAIUnits = DZAI_numAIUnits + _unitsAlive;
+		(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
 		if (_unitsAlive > 0) then {
 			{
 				deleteWaypoint _x;

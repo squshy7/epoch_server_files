@@ -32,7 +32,7 @@ _triggerPos = getPosATL _trigger;
 _locationArray = _trigger getVariable ["locationArray",[]];	
 if ((count _locationArray) == 0) then {
 	_spawnPositions = [];
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		_tMarker = createMarker [str(_trigger), (getPosATL _trigger)];
 		_tMarker setMarkerText "STATIC TRIGGER (ACTIVE)";
 		_tMarker setMarkerType "Defend";
@@ -42,13 +42,13 @@ if ((count _locationArray) == 0) then {
 	};
 	//If no markers specified in position array, then generate spawn points using building positions (search for buildings within 250m. generate a maximum of 150 positions).
 	if ((count _positionArray) == 0) then {
-		private["_nearbldgs","_nearbldgCount","_spawnPoints"];
+		private["_nearbldgs","_spawnPoints"];
 		_spawnPoints = 0;
 		_nearbldgs = _triggerPos nearObjects ["HouseBase",250];
-		_nearbldgCount = count _nearbldgs;
-		if (_nearbldgCount > 0) then {
+		if ((count _nearbldgs) > 0) then {
 			{
-				if (isClass (configFile >> "CfgBuildingLoot" >> (typeOf _x))) then {
+				//if (isClass (configFile >> "CfgBuildingLoot" >> (typeOf _x))) then {
+				if !((typeOf _x) in DZAI_ignoredObjects) then {
 					_spawnPositions set [(count _spawnPositions),(getPosATL _x)];
 					_spawnPoints = _spawnPoints + 1;
 				};
@@ -58,7 +58,7 @@ if ((count _locationArray) == 0) then {
 		if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Spawning AI from building positions (spawnBandits).";};
 	} else {
 		{
-			if ((((getMarkerPos _x) select 0) != 0)&&(((getMarkerPos _x) select 1) != 0)) then {
+			if ((getMarkerColor _x) != "") then {
 				_spawnPositions set [(count _spawnPositions),(getMarkerPos _x)];
 				deleteMarker _x;
 			};
@@ -66,7 +66,7 @@ if ((count _locationArray) == 0) then {
 		if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Spawning AI from marker positions (spawnBandits).";};
 	};
 } else {
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		_tMarker = str (_trigger);
 		if ((getMarkerColor _tMarker) == "") then {
 			_tMarker = createMarker [_tMarker, (getPosATL _trigger)];
@@ -114,12 +114,13 @@ for "_j" from 1 to _numGroups do {
 			_totalSpawned = _totalSpawned + _totalAI;
 			if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Group %1 has group size %2.",_unitGroup,_totalAI];};
 			
-			if ((count _spawnPositions) >= 100) then {
+			/*if ((count _spawnPositions) >= 100) then {
 				//diag_log format ["DEBUG :: Counted %1 spawn positions.",count _spawnPositions];
 				_nul = [_unitGroup,_spawnPositions] spawn DZAI_bldgPatrol;
 			} else {
 				0 = [_unitGroup,_triggerPos,_patrolDist] spawn DZAI_BIN_taskPatrol;
-			};
+			};*/
+			0 = [_unitGroup,_triggerPos,_patrolDist] spawn DZAI_BIN_taskPatrol;
 			
 			_grpArray set [count _grpArray,_unitGroup];
 		} else {

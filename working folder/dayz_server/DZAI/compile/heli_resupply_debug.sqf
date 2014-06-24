@@ -28,7 +28,7 @@ _marker setMarkerBrush "Solid";
 //_marker setMarkerSize [50, 50];
 
 diag_log format ["Helicopter is part of group %1.",_unitGroup];
-_wpmarkername = format ["HeliWP_%1",_helicopter];
+_wpmarkername = format ["[%1,%2]",_unitGroup,_helicopter];
 if ((getMarkerColor _wpmarkername) != "") then {deleteMarker _markername};	//Delete the previous marker if it wasn't deleted for some reason.
 //diag_log format ["Helicopter waypoint name is %1.",_wpmarkername];
 _wpmarker = createMarker[_wpmarkername,(getWPPos [_unitGroup,0])];

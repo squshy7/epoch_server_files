@@ -49,12 +49,7 @@ if (_patrolDist > 1) then {
 	if ((count (waypoints _unitGroup)) > 1) then {
 		_unitGroup setCurrentWaypoint ((waypoints _unitGroup) call BIS_fnc_selectRandom2);
 	} else {
-		if ((count _spawnPositions) >= 100) then {
-			//diag_log format ["DEBUG :: Counted %1 spawn positions.",count _spawnPositions];
-			_nul = [_unitGroup,_spawnPositions] spawn DZAI_bldgPatrol;
-		} else {
-			0 = [_unitGroup,(getPosATL _trigger),_patrolDist] spawn DZAI_BIN_taskPatrol;
-		};
+		_nul = [_unitGroup,(getPosATL _trigger),_patrolDist] spawn DZAI_BIN_taskPatrol;
 	};
 };
 

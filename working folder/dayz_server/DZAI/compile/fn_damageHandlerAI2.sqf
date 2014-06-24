@@ -11,8 +11,8 @@ _source = 		_this select 3;				//The source unit that caused the damage.
 _ammo = 		_this select 4;				//Classname of the projectile that caused inflicted the damage. ("" for unknown, such as falling damage.) 
 
 if ((group _unit) == (group _source)) then {_damage = (_damage/5)};	//Reduce friendly fire and collision damage.
+if (isNil {_unit getVariable "unithealth"}) then {_unit setVariable ["unithealth",[12000,0,false]]};	//Reset initial health stats if not found
 _unithealth = _unit getVariable "unithealth"; 		// Retrieve unit's health statistics
-if (isNil "_unithealth") exitWith {_damage};
 
 _scale = 300;
 if (_damage > 0.4) then {
@@ -22,14 +22,14 @@ if (_damage > 0.4) then {
 			_partdamage = (_unithealth select 1) + (_damage/2);
 			_unithealth set [1,_partdamage];	//Record leg damage internally
 			if ((_partdamage >= 1) && {!(_unithealth select 2)}) then {
+				_nul = _unit spawn {_this setHit["legs",1]};
 				[nil,_unit,rSAY,["z_fracture_1",40]] call RE;
-				_unit setHit["legs",1];
 				_unithealth set [2,true];
 			}; //Break legs when enough damage taken
 		};
 		case "head_hit": {
 			_scale = _scale * 6;
-			if ((_damage > 1.5) && {(_ammo != "")}) then {
+			if (_damage > 1.5) then {
 				_nul = [_unit,_source,"shothead"] call DZAI_unitDeath;
 			};
 		};

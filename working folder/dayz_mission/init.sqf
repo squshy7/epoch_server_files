@@ -29,7 +29,7 @@ MaxDynamicDebris = 100; // Default = 100
 dayz_MapArea = 14000; // Default = 10000
 dayz_maxLocalZombies = 30; // Default = 30 
 
-dayz_paraSpawn = false;
+dayz_paraSpawn = true;
 DZE_requireplot = 0;
 dayz_minpos = -1; 
 dayz_maxpos = 16000;
@@ -95,7 +95,7 @@ if (!isDedicated) then {
 	execVM "service_point\service_point.sqf";
 };
 
-sleep 1; _fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
+_fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
 
 //Start Dynamic Weather
 execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";

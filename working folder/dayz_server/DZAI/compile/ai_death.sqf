@@ -14,9 +14,11 @@ _killer = _this select 1;
 _deathType = if ((count _this) > 2) then {_this select 2} else {"bled"};
 
 if ((isPlayer _killer) && {(_deathType == "shothead")}) then {
-	_headshots = _killer getVariable["headShots",0];
-	_headshots = _headshots + 1;
-	_killer setVariable["headShots",_headshots,true];
+	_nul = _killer spawn {
+		_headshots = _this getVariable["headShots",0];
+		_headshots = _headshots + 1;
+		_this setVariable["headShots",_headshots,true];
+	};
 };
 
 if (_victim getVariable ["deathhandled",false]) exitWith {};
@@ -42,7 +44,7 @@ switch (_unitType) do {
 	{
 	};
 	case default {
-		if (!isNil "DZAI_debugMarkers") then {
+		if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 			if (({alive _x} count (units _unitGroup)) == 0) then {
 				{
 					deleteMarker (str _x);
@@ -70,7 +72,7 @@ if (_launchWeapon in DZAI_launcherTypes) then {
 _victim spawn DZAI_deathFlies;
 _victim setVariable ["bodyName",_victim getVariable ["bodyName","unknown"],true];		//Broadcast the unit's name (was previously a private variable).
 _victim setVariable ["deathType",_deathType,true];
-_victim setVariable ["DZAI_deathTime",time];
+_victim setVariable ["DZAI_deathTime",(time + DZAI_cleanupDelay)];
 _victim setVariable ["unconscious",true];
 
 //diag_log format ["DEBUG :: AI %1 (Group %2) killed by %3",_victim,_unitGroup,_killer];

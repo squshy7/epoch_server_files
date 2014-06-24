@@ -7,7 +7,7 @@
 	
 	Last updated: 12:49 AM 11/19/2013
 */
-private["_unit","_currentWeapon","_weaponMagazine","_needsReload","_nearbyZeds","_marker","_markername","_lastBandage","_bandages","_unitGroup","_needsHeal","_weapongrade","_unitWeapons","_unitMagazines"];
+private["_unit","_needsReload","_nearbyZeds","_marker","_markername","_lastBandage","_bandages","_unitGroup","_needsHeal","_weapongrade","_unitWeapons","_unitMagazines","_loadout"];
 if (!isServer) exitWith {};
 if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: AI resupply script active.";};
 
@@ -25,12 +25,28 @@ _lastBandage = 0;
 _bandages = ((_weapongrade + 1) min 3);
 _needsHeal = false;
 
+/*
 _currentWeapon = currentWeapon _unit;									//Retrieve unit's current weapon
-waitUntil {sleep 0.1; !isNil "_currentWeapon"};
+_startTime = time;
+waitUntil {sleep 0.1; (!isNil "_currentWeapon" or ((time - _startTime) > 15))};
 _weaponMagazine = (getArray (configFile >> "CfgWeapons" >> _currentWeapon >> "magazines") select 0);	//Retrieve ammo used by unit's current weapon
-waitUntil {sleep 0.1; !isNil "_weaponMagazine"};
+_startTime = nil;
+waitUntil {sleep 0.05; !isNil "_weaponMagazine"};
 _unitWeapons = [_currentWeapon]; _currentWeapon = nil;
 _unitMagazines = [_weaponMagazine]; _weaponMagazine = nil;
+*/
+
+waitUntil {sleep 0.1; _loadout = _unit getVariable "loadout"; ((!isNil "_loadout") or {(isNull _unit)})};
+if ((count _loadout) > 0) then {
+	_unitWeapons = [_loadout select 0];
+	_unitMagazines = [_loadout select 1];
+	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Rearm script found weapon %1 and magazine %2 assigned to unit %3.",_loadout select 0,_loadout select 1,_unit];};
+	_unit setVariable ["loadout",nil];
+} else {
+	_unitWeapons = [];
+	_unitMagazines = [];
+	diag_log format ["DZAI Error: No loadout found for unit %1.",_unit];
+};
 
 _unitGroup = (group _unit);
 
@@ -53,15 +69,13 @@ while {(alive _unit)&&{(!(isNull _unit))}} do {
 				_unitGroup reveal [_x,4];
 			};
 		} forEach _nearbyZeds;
-		if (DZAI_passiveAggro) then {
-			if ((count _nearbyZeds) > 0) then {_nul = [_unit,75,false,(getPosATL _unit)] spawn ai_alertzombies;};
-		};
 	};
 	if !(_unit getVariable ["unconscious",false]) then {
 		for "_i" from 0 to ((count _unitWeapons) -1) do {
 			if ((_unit ammo (_unitWeapons select _i) == 0) || {!(((_unitMagazines select _i) in magazines _unit))})  then {		//If active weapon has no ammunition, or AI has no magazines, remove empty magazines and add a new magazine.
 				_unit removeMagazines (_unitMagazines select _i);
 				_unit addMagazine (_unitMagazines select _i);
+				if ((getNumber (configFile >> "CfgMagazines" >> (_unitMagazines select _i) >> "count")) <= 8) then {_unit addMagazine (_unitMagazines select _i)};
 				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: AI ammo depleted, added magazine %1 to AI %2.",(_unitMagazines select _i),_unit];};
 			};
 		};
@@ -74,23 +88,25 @@ while {(alive _unit)&&{(!(isNull _unit))}} do {
 				_unit disableAI "FSM";
 				_unit playActionNow "Medic";
 				_healTimes = 0;
-				while {(alive _unit) && {(!(_unit getVariable ["unconscious",false]))} && {(_healTimes < 3)}} do {
-					sleep 2;
-					_health set [0,(((_health select 0) + 2000) min 12000)];
-					_healTimes = _healTimes + 1;
-					if ((alive _unit) && {(_healTimes == 3)}) then {
-						_health set [1,0];
-						_health set [2,false];
-						_unit setHit["legs",0];
+				while {(!(_unit getVariable ["unconscious",false])) && {(_healTimes < 3)}} do {
+					sleep 3;
+					if (!(_unit getVariable ["unconscious",false])) then {
+						_health set [0,(((_health select 0) + 2000) min 12000)];
+						_healTimes = _healTimes + 1;
+						if ((alive _unit) && {(_healTimes == 3)}) then {
+							_health set [1,0];
+							_health set [2,false];
+							_unit setHit["legs",0];
+						};
 					};
 				};
-				
-				_unit enableAI "FSM";
 				_lastBandage = time;
 				_needsHeal = false;
+				sleep 1;
+				_unit enableAI "FSM";
 			} else {
 				private ["_lowblood","_brokenbones"];
-				_lowblood = ((_health select 0) < 7200);
+				_lowblood = ((_health select 0) < 5000);
 				_brokenbones = (_health select 2);
 				if ((_lowblood or _brokenbones) && {((time - _lastBandage) > 60)}) then {
 					_needsHeal = true;
@@ -98,7 +114,7 @@ while {(alive _unit)&&{(!(isNull _unit))}} do {
 			};
 		};
 	};
-	sleep DZAI_refreshRate;										//Check again in x seconds.
+	sleep 15;										//Check again in x seconds.
 };
 sleep 0.5;
-if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: AI resupply script deactivated.";};
+if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: AI unit killed/despawned. Stopping rearm script.";};
