@@ -31,6 +31,34 @@ _canDo = (!r_drag_sqf && !r_player_unconscious && !_onLadder);
         s_player_selfBloodbag = -1;
     };
 // ---------------------------------------Krixes Self Bloodbag End------------------------------------
+
+// ---------------------------------------Bike Deploy Script Start------------------------------------
+_weapons = [currentWeapon player] + (weapons player) + (magazines player);
+_isBike = typeOf cursorTarget in ["Old_bike_TK_INS_EP1","Old_bike_TK_CIV_EP1"];
+ 
+//BIKE DEPLOY
+if ("ItemToolbox" in _weapons) then {
+        hasBikeItem = true;
+    } else { hasBikeItem = false;};
+    if((speed player <= 1) && hasBikeItem && _canDo) then {
+        if (s_player_deploybike < 0) then {
+            s_player_deploybike = player addaction[("<t color=""#007ab7"">" + ("Deploy Bike") +"</t>"),"bike\deploy.sqf","",5,false,true,"", ""];
+        };
+    } else {
+        player removeAction s_player_deploybike;
+        s_player_deploybike = -1;
+};
+ 
+//PACK BIKE
+if((_isBike) and _canDo) then {
+if (s_player_deploybike2 < 0) then {
+        s_player_deploybike2 = player addaction[("<t color=""#007ab7"">" + ("Re-Pack Bike") +"</t>"),"bike\pack.sqf","",5,false,true,"", ""];
+    };
+} else {
+    player removeAction s_player_deploybike2;
+    s_player_deploybike2 = -1;
+};
+// --------------------------------------Bike Deploy Script End----------------------------------------
 _nearLight = 	nearestObject [player,"LitObject"];
 _canPickLight = false;
 if (!isNull _nearLight) then {
