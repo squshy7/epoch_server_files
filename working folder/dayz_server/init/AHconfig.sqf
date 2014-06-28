@@ -37,6 +37,8 @@
 /*  HACKED BOX Check ?    */ _CHB =  true;	/* true or false */	/* recommended:  true */	/* some epoch player might want to turn this one off */
 /*  Max Cargo Count ?     */ _MCC =  650;
 
+/*  Close Dialogs ?       */ _CUD =  false;	/* true or false */	/* recommended:  true */	/* Closes custom Dialogs (Menus) */
+/*  Remove Keybinds ?     */ _RCK =  true;	/* true or false */	/* recommended:  true */	/* Removes custom Keybinds and sets back the default ones */
 /*  Check CMDMenus ?      */ _CCM = true;   /* true or false */	/* recommended:  true */	/* only disable this if you know what you are doing. */
 /*  BLOCK ALL CMDMenus    */ _BCM = false;   /* true or false */	/* recommended:  true */	/* we don't need commandingMenus. so have this true. */
 /*  Check Actions ?       */ _CSA = false;   /* true or false */	/* recommended: false */	/* this checks mousewheel actions */
