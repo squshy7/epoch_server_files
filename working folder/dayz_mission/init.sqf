@@ -93,7 +93,7 @@ if (!isDedicated) then {
 	execVM "service_point\service_point.sqf";
 };
 
-_fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
+sleep 1; _fast_roping = [] execVM "=BTC=_fast_roping\=BTC=_fast_roping_init.sqf";
 
 //Start Dynamic Weather
 execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";

@@ -800,7 +800,7 @@ server_cleanupGroups = {
 server_checkHackers = {
 	if (DZE_DYN_AntiStuck2nd > 3) then { DZE_DYN_HackerCheck = nil; DZE_DYN_AntiStuck2nd = 0; };
 	if(!isNil "DZE_DYN_HackerCheck") exitWith {  DZE_DYN_AntiStuck2nd = DZE_DYN_AntiStuck2nd + 1;};
-	DZE_DYN_HackerCheck = true;
+	DZE_DYN_HackerCheck = false;
 	{
 	if (!((isNil "_x") || {(isNull _x)})) then {
 		if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle)) then {

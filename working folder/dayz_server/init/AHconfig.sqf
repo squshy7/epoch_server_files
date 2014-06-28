@@ -6,7 +6,7 @@
 /*  Key to open the menu  */ _OpenMenuKey = 0x3C;    /* google DIK_KeyCodes (0x3C is F2) */
 /*  LOW ADMIN HERE        */ _LowLevel_List =   ["0","0","0"]; //do not have a , at the end.
 /*  NORMAL ADMIN HERE     */ _NormalLevel_List =["160276422","160246982","0"]; //do not have a , at the end.
-/*  SUPER ADMIN HERE      */ _SuperLevel_List = ["113806150","114320838","114331270"]; //do not have a , at the end.
+/*  SUPER ADMIN HERE      */ _SuperLevel_List = ["113806150","114320838","76561198013686688"]; //do not have a , at the end.
 /*  BANNED PLAYER HERE    */ _BLOCKED =         ["0","0","0"]; //do not have a , at the end.
 /* ********************************************************************************* */
 /*  Top esc menu TXT      */ _TopOfESC = "KOFN"; //do not use " in this text.
