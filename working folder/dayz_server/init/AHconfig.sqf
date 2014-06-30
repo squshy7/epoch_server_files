@@ -19,29 +19,46 @@
 /*  DebugMonitor Action   */ _DMW = false;	/* true or false */	/* "Debug" option on mousewheel */
 /*  Mod EPOCH ?           */ _MEH =  true;	/* true or false */
 /* ********************************************************************************* */
-/*  Use AUTOBAN HACKER    */ _UAB =  true;   /* true or false */	/* recommended:  true */	/* temp bans are cleared after a server restart */
+/*  Use AUTOBAN HACKER    */ _UAB =  true;	/* true or false */	/* recommended:  true */	/* temp bans are cleared after a server restart */
 /*  Enable BadKey Kick    */ _BKK =  true;	/* true or false */	/* recommended:  true */	/* If people press a forbidden Key twice, they get kicked! */
-/*  Forbid VON Sidechat   */ _VON =  false;   /* true or false */	/* recommended:  true */	/* talking on sidechat will put out a warning and kick if continue */
+/*  Forbid VON Sidechat   */ _VON =  false;	/* true or false */	/* recommended:  true */	/* talking on sidechat will put out a warning and kick if continue */
 
-/*  Allow RE functions    */ _ARF =  true;   /* true or false */	/* recommended:  true */	/* e.g. white text for killmessages/combatlogging */
-/*  Break Functions ?     */ _BHF =  true;   /* true or false */	/* recommended:  true */	/* break some known functions used by hacks! */
+/*  Allow RE functions    */ _ARF =  true;	/* true or false */	/* recommended:  true */	/* e.g. white text for killmessages/combatlogging */
+/*  Break Functions ?     */ _BHF =  true;	/* true or false */	/* recommended:  true */	/* break some known functions used by hacks! */
 /*  Use vehicle check?    */ _UVC = false;	/* true or false */	/* recommended: false */	/* using _ALLOWED_Vehicles and _FORBIDDEN_Vehicles lists */
-/*  Vehicle WHITELIST     */ _UVW = false;   /* true or false */	/* recommended: false */	/* if false - _ALLOWED_Vehicles won't not be used */
-/*  Vehicle Tradercheck   */ _VTC =  true;   /* true or false */	/* recommended:  true */	/* checks if a player is near a trader when 'purchasing' a vehicle */
+/*  Vehicle WHITELIST     */ _UVW = false;	/* true or false */	/* recommended: false */	/* if false - _ALLOWED_Vehicles won't not be used */
+/*  Vehicle Tradercheck   */ _VTC =  true;	/* true or false */	/* recommended:  true */	/* checks if a player is near a trader when 'purchasing' a vehicle */
 
-/*  Use FileScan ?        */ _UFS =  true;   /* true or false */	/* recommended:  true */	/* spams the rpt but often finds hackers */
+/*  Use FileScan ?        */ _UFS =  true;	/* true or false */	/* recommended:  true */	/* spams the rpt but often finds hackers */
 /*  Use Anti Teleport?    */ _UAT =  true;	/* true or false */	/* recommended:  true */	/* true = teleports them back, false = only logging */
-/*  Use cut-scene ?       */ _UCS =  true;   /* true or false */	/* recommended:  true */	/* dynamicText ~ often colored, animated or used in credits */
+/*  Use cut-scene ?       */ _UCS =  true;	/* true or false */	/* recommended:  true */	/* dynamicText ~ often colored, animated or used in credits */
 
 /*  Remove "itemsAdded"   */ _RAI =  true;	/* true or false */	/* recommended:  true */	/* might remove items from a custom crafting system.. */
 /*  HACKED BOX Check ?    */ _CHB =  true;	/* true or false */	/* recommended:  true */	/* some epoch player might want to turn this one off */
 /*  Max Cargo Count ?     */ _MCC =  650;
 
-/*  Close Dialogs ?       */ _CUD =  false;	/* true or false */	/* recommended:  true */	/* Closes custom Dialogs (Menus) */
+/*  Close Dialogs ?       */ _CUD =  false;	/* true or false */	/* recommended:  true */	/* Closes custom Dialogs (Menus) that are not in _ALLOWED_Dialogs */
 /*  Remove Keybinds ?     */ _RCK =  true;	/* true or false */	/* recommended:  true */	/* Removes custom Keybinds and sets back the default ones */
-/*  Check CMDMenus ?      */ _CCM = true;   /* true or false */	/* recommended:  true */	/* only disable this if you know what you are doing. */
-/*  BLOCK ALL CMDMenus    */ _BCM = false;   /* true or false */	/* recommended:  true */	/* we don't need commandingMenus. so have this true. */
-/*  Check Actions ?       */ _CSA = false;   /* true or false */	/* recommended: false */	/* this checks mousewheel actions */
+/*  Check CMDMenus ?      */ _CCM = true;	/* true or false */	/* recommended:  true */	/* only disable this if you know what you are doing. */
+/*  BLOCK ALL CMDMenus    */ _BCM = false;	/* true or false */	/* recommended:  true */	/* we don't need commandingMenus. so have this true. */
+/*  Check Actions ?       */ _CSA = false;	/* true or false */	/* recommended: false */	/* this checks mousewheel actions */
+/*  Force Terrain Grid ?  */ _FTG =    25;	/* 50, 25, 12.5  */	/* recommended:    25 */	/* if set to 50 grass will be very low for better client FPS */
+/* ********************************************************************************* */
+/*  ALLOWED Custom Dialogs are only used if you have  _CUD =  true;					 */
+/*  If you want install custom scripts using dialog windows, you can add IDD numbers */
+/*  from the custom script's desc.h file included through MPMIssions/description.ext */
+/*  ALLOWED Dialogs       */ _ALLOWED_Dialogs =
+[
+	6900,6901,6902,6903,		// New Player (select Gender and such things)
+	420420,	// Epoch Trader
+	41144,	// Epoch Door Keycode UI
+	-1,		// Epoch Safe/Lockbox Keycode UI
+	106,		// Inventory (Gear)
+	//	129,	// Diary
+	//	65431,65432,65433,65434,65440,65441,65442,	// I don't remember where these are from.
+	666,667,	// Clay Car Radio
+	4444	 	// Radio Communication
+];
 /* ********************************************************************************* */
 /*  Player that have one of the items in _ForbiddenWeapons in their inventory will get punished!  */
 /*  FORBIDDEN Weapons     */ _ForbiddenWeapons =
