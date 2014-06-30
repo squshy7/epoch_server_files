@@ -1,5 +1,5 @@
 switch true do {
-    case ((getPlayerUID player) in ["114320838","114331270","113806150"])  :  //Admins: 
+    case ((getPlayerUID player) in ["114320838","76561198013686688","113806150"])  :  //Admins: 
         {
         DefaultMagazines = ["ItemBandage","ItemBandage","ItemBandage","ItemBandage","15Rnd_9x19_M9SD","15Rnd_9x19_M9SD","ItemMorphine","ItemPainkiller","ItemBloodbag","ItemWaterbottleBoiled","FoodSteakCooked","20Rnd_762x51_SB_SCAR","20Rnd_762x51_SB_SCAR","20Rnd_762x51_SB_SCAR","20Rnd_762x51_SB_SCAR","ItemBriefcase100oz","Skin_CZ_Soldier_Sniper_EP1_DZ"];
         DefaultWeapons = ["SCAR_H_LNG_Sniper_SD","M9SD","Binocular_Vector","NVGoggles","ItemMap","ItemCompass","ItemGPS","ItemWatch","ItemKnife","ItemToolbox","ItemCrowbar","ItemEtool","ItemHatchet_DZE"];
