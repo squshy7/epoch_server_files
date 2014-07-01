@@ -47,18 +47,16 @@
 /*  ALLOWED Custom Dialogs are only used if you have  _CUD =  true;					 */
 /*  If you want install custom scripts using dialog windows, you can add IDD numbers */
 /*  from the custom script's desc.h file included through MPMIssions/description.ext */
-/*  ALLOWED Dialogs       */ _ALLOWED_Dialogs =
-[
-	6900,6901,6902,6903,		// New Player (select Gender and such things)
-	420420,	// Epoch Trader
-	41144,	// Epoch Door Keycode UI
-	-1,		// Epoch Safe/Lockbox Keycode UI
-	106,		// Inventory (Gear)
-	//	129,	// Diary
-	//	65431,65432,65433,65434,65440,65441,65442,	// I don't remember where these are from.
-	666,667,	// Clay Car Radio
-	4444	 	// Radio Communication
-];
+/*  ALLOWED Dialogs       */ _ALLOWED_Dialogs = [-1,106,6900,6901,6902,6903,420420,41144];
+//	-1			Epoch Safe/Lockbox Keycode UI
+//	106		Inventory (Gear)
+//	6900,6901,6902,6903	New Player (select Gender and such things)
+//	420420	Epoch Trader
+//	41144		Epoch Door Keycode UI
+//	129		Diary
+//	666,667	Clay Car Radio
+//	4444		Radio Communication
+//	65431,65432,65433,65434,65440,65441,65442		I don't remember where these are from.
 /* ********************************************************************************* */
 /*  Player that have one of the items in _ForbiddenWeapons in their inventory will get punished!  */
 /*  FORBIDDEN Weapons     */ _ForbiddenWeapons =
