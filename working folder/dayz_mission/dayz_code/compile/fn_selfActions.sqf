@@ -14,24 +14,6 @@ _inVehicle = (_vehicle != player);
 
 _onLadder =		(getNumber (configFile >> "CfgMovesMaleSdr" >> "States" >> (animationState player) >> "onLadder")) == 1;
 _canDo = (!r_drag_sqf && !r_player_unconscious && !_onLadder);
-// ---------------------------------------Krixes Self Bloodbag Start------------------------------------
-
-    _mags = magazines player;
- 
-    // Krixes Self Bloodbag
-    if ("ItemBloodbag" in _mags) then {
-        hasBagItem = true;
-    } else { hasBagItem = false;};
-    if((speed player <= 1) && hasBagItem && _canDo) then {
-        if (s_player_selfBloodbag < 0) then {
-            s_player_selfBloodbag = player addaction[("<t color=""#c70000"">" + ("Self Bloodbag") +"</t>"),"selfbloodbag\player_selfbloodbag.sqf","",5,false,true,"", ""];
-        };
-    } else {
-        player removeAction s_player_selfBloodbag;
-        s_player_selfBloodbag = -1;
-    };
-// ---------------------------------------Krixes Self Bloodbag End------------------------------------
-
 // ---------------------------------------Bike Deploy Script Start------------------------------------
 _weapons = [currentWeapon player] + (weapons player) + (magazines player);
 _isBike = typeOf cursorTarget in ["Old_bike_TK_INS_EP1","Old_bike_TK_CIV_EP1"];
