@@ -104,3 +104,5 @@ execVM "\z\addons\dayz_code\external\DynamicWeatherEffects.sqf";
 
 _nil = [] execVM "safezone\init.sqf";
 execVM "BTK\Cargo Drop\Start.sqf";
+// Heli Lift Only
+_logistic = execVM "=BTC=_Logistic\=BTC=_Logistic_Init.sqf";
