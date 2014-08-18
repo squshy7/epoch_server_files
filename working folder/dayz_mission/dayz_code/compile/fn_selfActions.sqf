@@ -737,7 +737,9 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		s_player_towing = -1;
 	};
 	*/
-
+	
+	// MF-Tow Script by Matt Fairbrass (matt_d_rat)
+	call compile preprocessFileLineNumbers 'custom\mf-tow\init.sqf';
 
     //Sleep
 	if(_isTent && _ownerID == dayz_characterID) then {
