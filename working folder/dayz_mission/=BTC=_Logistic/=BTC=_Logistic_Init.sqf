@@ -49,13 +49,13 @@ BTC_get_liftable_array =
 		case "MH60S"   		  : {_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC"];};		
 		case "BAF_Merlin_HC3_D": {_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC"];};
 		case "MH60S"           : {_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC"];};
-		case "CH_47F_EP1_DZ"  :  {_array = ["LandVehicle","C130"];};
-		case "CH_47F_EP1_DZE"  : {_array = ["LandVehicle","C130"];};
+		case "CH_47F_EP1_DZ"  :  {_array = ["LandVehicle","Plane"];};
+		case "CH_47F_EP1_DZE"  : {_array = ["LandVehicle","Plane"];};
 		case "Mi17_Civilian_DZ": {_array = ["LandVehicle"];};
 		case "Mi17_DZ"         : {_array = ["LandVehicle"];};
 		case "Mi17_DZE"        : {_array = ["LandVehicle"];};
 		case "Mi17_UN_CDF_EP1" : {_array = ["LandVehicle"];};
-		case "CH_47F_EP1"      : {_array = ["LandVehicle","C130"];};
+		case "CH_47F_EP1"      : {_array = ["LandVehicle","Plane"];};
 		
 	};
 	_array

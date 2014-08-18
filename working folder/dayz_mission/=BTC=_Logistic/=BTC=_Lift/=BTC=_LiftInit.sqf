@@ -91,7 +91,7 @@ while {true} do
 			{_x ctrlShow false} foreach _array_hud;
 			BTC_Hud_Shown = false;
 		};
-		if (_cargo isKindOf "Air" && getdammage _cargo != 1) then {
+		if (_cargo isKindOf "Air" && getdammage _cargo != 0) then {
 			_can_lift = false;
 		};
 		if (!isNull _cargo && _can_lift) then {
