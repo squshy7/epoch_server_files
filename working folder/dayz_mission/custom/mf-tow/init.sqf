@@ -10,7 +10,7 @@
 private ["_cursorTarget", "_towableVehicles", "_towableVehiclesTotal"];
 
 // Public variables
-MF_Tow_Base_Path		= "addons\mf-tow"; 		// The base path to the MF-Tow Folder.
+MF_Tow_Base_Path		= "custom\mf-tow"; 		// The base path to the MF-Tow Folder.
 MF_Tow_Distance			= 10;					// Minimum distance (in meters) away from vehicle the tow truck must be to tow.
 MF_Tow_Multi_Towing	 	= false;				// Allow a vehicle which is towing another vehicle already to be towed by another tow. Disabled by default.
 
