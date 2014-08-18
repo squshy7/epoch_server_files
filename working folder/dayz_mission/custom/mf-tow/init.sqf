@@ -32,6 +32,8 @@ MF_Tow_Towable_Array =
 		case "ATV_US_EP1": 						{_array = ["Motorcycle"];};
 		case "hilux1_civil_3_open": 			{_array = ["Motorcycle","Car"];};
 		case "hilux1_civil_3_open_EP1": 		{_array = ["Motorcycle","Car"];};
+		case "UralCivil_DZE": 					{_array = ["Motorcycle","Car"];};
+		case "UralCivil2_DZE": 					{_array = ["Motorcycle","Car"];};
 		case "ArmoredSUV_PMC":					{_array = ["Motorcycle","Car"];};
 		case "ArmoredSUV_PMC_DZ": 				{_array = ["Motorcycle","Car"];};
 		case "ArmoredSUV_PMC_DZE": 				{_array = ["Motorcycle","Car"];};
@@ -39,7 +41,15 @@ MF_Tow_Towable_Array =
 		case "HMMWV_M1151_M2_CZ_DES_EP1_DZE": 	{_array = ["Motorcycle","Car","Truck"];};
 		case "HMMWV_M1151_M2_CZ_DES_EP1": 		{_array = ["Motorcycle","Car","Truck"];};
 		case "tractor": 						{_array = ["Motorcycle","Car","Truck"];};
+		case "V3S_TK_EP1_DZE": 					{_array = ["Motorcycle","Car"];};
+		case "V3S_RA_TK_GUE_EP1_DZE": 			{_array = ["Motorcycle","Car","Truck"];};
+		case "MtvrRefuel_DZ": 					{_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC"];};
 		case "TowingTractor": 					{_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC","Air"];};
+		case "MTVR": 							{_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC","Air"];};
+		case "BTR90_HQ": 						{_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC","Air"];};
+		case "LAV25_HQ": 						{_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC","Air"];};
+		case "BTR90_HQ": 						{_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC","Air"];};		
+		case "M1133_MEV_EP1": 					{_array = ["Motorcycle","Car","Truck","Wheeled_APC","Tracked_APC","Air"];};				
 	};
 	
 	_array
