@@ -29,6 +29,6 @@ if (!_cantsee) then {
 
 	_name_cargo  = getText (configFile >> "cfgVehicles" >> typeof _cargo >> "displayName");
 	vehicle player vehicleChat format ["%1 dropped", _name_cargo];
-	[_chopper, _cargo, "ParachuteWest"] spawn BTC_paradrop;
+	[_chopper, _cargo, "ParachuteMediumEast"] spawn BTC_paradrop;
 
 };
