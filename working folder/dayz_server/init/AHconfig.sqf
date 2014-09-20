@@ -5,8 +5,8 @@
 /*  infiSTAR.de .dll path */  infiSTAR_DLL_PATH = "";    /* "" == empty == arma2oa directory */
 /*  Key to open the menu  */ _OpenMenuKey = 0x3C;    /* google DIK_KeyCodes (0x3C is F2) */
 /*  LOW ADMIN HERE        */ _LAdmins = ["0","0","0"]; //do not have a , at the end.
-/*  NORMAL ADMIN HERE     */ _NAdmins = ["160276422","160246982","0"]; //do not have a , at the end.
-/*  SUPER ADMIN HERE      */ _SAdmins = ["113806150","114320838","76561198013686688"]; //do not have a , at the end.
+/*  NORMAL ADMIN HERE     */ _NAdmins = ["0","0","0"]; //do not have a , at the end.
+/*  SUPER ADMIN HERE      */ _SAdmins = ["76561198013686688","0","0"]; //do not have a , at the end.
 /*  BANNED PLAYER HERE    */ _BLOCKED = ["0","0","0"]; //do not have a , at the end.
 /* ********************************************************************************* */
 /*  Top esc menu TXT      */ _TopOfESC = "KOFN"; //do not use " in this text.
@@ -23,9 +23,9 @@
 /*  Enable BadKey Kick    */ _BKK =  true;	/* true or false */	/* recommended:  true */	/* If people press a forbidden Key twice, they get kicked! */
 /*  Forbid VON Sidechat   */ _VON =  false;	/* true or false */	/* recommended:  true */	/* talking on sidechat will put out a warning and kick if continue */
 
-/*  Allow RE functions    */ _ARF =  true;	/* true or false */	/* recommended:  true */	/* e.g. white text for killmessages/combatlogging */
-/*  Break Functions ?     */ _BHF =  true;	/* true or false */	/* recommended:  true */	/* break some known functions used by hacks! */
+/*  Break Functions ?     */ _BHF = false;	/* true or false */	/* recommended:  true */	/* break some known functions used by hacks! */
 /*  Use vehicle check?    */ _UVC = false;	/* true or false */	/* recommended: false */	/* using _ALLOWED_Vehicles and _FORBIDDEN_Vehicles lists */
+/*  Use zombie check?     */ _UZC = false;	/* true or false */	/* recommended:  true */	/* "Walk Amongst The Dead" or "ESS" needs this set to false */
 /*  Vehicle WHITELIST     */ _UVW = false;	/* true or false */	/* recommended: false */	/* if false - _ALLOWED_Vehicles won't not be used */
 /*  Vehicle Tradercheck   */ _VTC =  true;	/* true or false */	/* recommended:  true */	/* checks if a player is near a trader when 'purchasing' a vehicle */
 /*  Vehicle ValidId ?     */ _UIC =  true;	/* true or false */	/* recommended:  true */	/* checks if ids on a vehicle are valid or not */
@@ -37,7 +37,7 @@
 /*  Use Damage Check ?    */ _UDC =  true;	/* true or false */	/* recommended:  true */	/* try to catch Hacks that change the damage value of weapons */
 
 /*  Remove "itemsAdded"   */ _RAI =  true;	/* true or false */	/* recommended:  true */	/* might remove items from a custom crafting system.. */
-/*  HACKED BOX Check ?    */ _CHB =  true;	/* true or false */	/* recommended:  true */	/* some epoch player might want to turn this one off */
+/*  HACKED BOX Check ?    */ _CHB =  true;	/* true or false */	/* recommended:  true */	/* custom crates might be deleted if "Max Cargo Count" is to low */
 /*  Max Cargo Count ?     */ _MCC =  650;
 
 /*  Close Dialogs ?       */ _CUD =  false;	/* true or false */	/* recommended:  true */	/* Closes custom Dialogs (Menus) that are not in _ALLOWED_Dialogs */
@@ -50,7 +50,7 @@
 /*  ALLOWED Custom Dialogs are only used if you have  _CUD =  true;					 */
 /*  If you want install custom scripts using dialog windows, you can add IDD numbers */
 /*  from the custom script's desc.h file included through MPMIssions/description.ext */
-/*  ALLOWED Dialogs       */ _ALLOWED_Dialogs = [-1,106,2200,6900,6901,6902,6903,420420,41144];
+/*  ALLOWED Dialogs       */ _ALLOWED_Dialogs = [-1,106,2200,6900,6901,6902,6903,420420,41144,711194];
 //	-1			Epoch Safe/Lockbox Keycode UI
 //	106		Inventory (Gear)
 //	2200		Blood Test
@@ -60,7 +60,8 @@
 //	129		Diary
 //	666,667	Clay Car Radio
 //	4444		Radio Communication
-//	65431,65432,65433,65434,65440,65441,65442		I don't remember where these are from.
+//	65431,65432,65433,65434,65440,65441,65442		R3F ARTY Lift/Tow/Transport.
+//	711194	Plot Management	(http://epochmod.com/forum/index.php?/topic/16166-release-plot-management/)
 /* ********************************************************************************* */
 /*  Player that have one of the items in _ForbiddenWeapons in their inventory will get punished!  */
 /*  FORBIDDEN Weapons     */ _ForbiddenWeapons =
@@ -88,7 +89,7 @@
 	"RscDisplaySpawnSelecter","RscWatchMoreDir","#GETIN","RscStatus",
 	"RscCombatMode","RscFormations","RscTeam","RscSelectTeam","RscReply",
 	"RscCallSupport","#ACTION","#CUSTOM_RADIO","RscRadio","RscGroupRootMenu",
-	"BTC_Hud"
+	"BTC_Hud","PlotManagement"
 ];
 /* ********************************************************************************* */
 /*  ALLOWED Actions are only used if you have _CSA =  true;  */
