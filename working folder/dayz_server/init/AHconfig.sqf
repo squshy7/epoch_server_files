@@ -5,7 +5,7 @@
 /*  infiSTAR.de .dll path */  infiSTAR_DLL_PATH = "";    /* "" == empty == arma2oa directory */
 /*  Key to open the menu  */ _OpenMenuKey = 0x3C;    /* google DIK_KeyCodes (0x3C is F2) */
 /*  LOW ADMIN HERE        */ _LAdmins = ["0","0","0"]; //do not have a , at the end.
-/*  NORMAL ADMIN HERE     */ _NAdmins = ["0","0","0"]; //do not have a , at the end.
+/*  NORMAL ADMIN HERE     */ _NAdmins = ["76561197960499750","0","0"]; //do not have a , at the end.
 /*  SUPER ADMIN HERE      */ _SAdmins = ["76561198013686688","0","0"]; //do not have a , at the end.
 /*  BANNED PLAYER HERE    */ _BLOCKED = ["0","0","0"]; //do not have a , at the end.
 /* ********************************************************************************* */
